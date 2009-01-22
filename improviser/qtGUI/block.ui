@@ -1,0 +1,320 @@
+<ui version="4.0" >
+ <class>blockDialog</class>
+ <widget class="QDialog" name="blockDialog" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>575</width>
+    <height>255</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Edit Block</string>
+  </property>
+  <property name="modal" >
+   <bool>true</bool>
+  </property>
+  <widget class="QDialogButtonBox" name="buttonBox" >
+   <property name="geometry" >
+    <rect>
+     <x>220</x>
+     <y>210</y>
+     <width>341</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="orientation" >
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="standardButtons" >
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox" >
+   <property name="geometry" >
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>551</width>
+     <height>191</height>
+    </rect>
+   </property>
+   <property name="statusTip" >
+    <string/>
+   </property>
+   <property name="title" >
+    <string>Default settings</string>
+   </property>
+   <widget class="QLabel" name="label_5" >
+    <property name="geometry" >
+     <rect>
+      <x>300</x>
+      <y>70</y>
+      <width>111</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Default resolution</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="bpm" >
+    <property name="geometry" >
+     <rect>
+      <x>150</x>
+      <y>70</y>
+      <width>121</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="toolTip" >
+     <string>A BPM of 0 means that this block will use the movement's BPM</string>
+    </property>
+    <property name="statusTip" >
+     <string>A BPM of 0 means that this block will use the movement's BPM</string>
+    </property>
+    <property name="minimum" >
+     <number>0</number>
+    </property>
+    <property name="maximum" >
+     <number>1000</number>
+    </property>
+    <property name="value" >
+     <number>0</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6" >
+    <property name="geometry" >
+     <rect>
+      <x>30</x>
+      <y>70</y>
+      <width>111</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Default BPM</string>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="wildness" >
+    <property name="geometry" >
+     <rect>
+      <x>150</x>
+      <y>110</y>
+      <width>121</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="toolTip" >
+     <string>If the wildness is 0, this block will use the movement's wildness</string>
+    </property>
+    <property name="statusTip" >
+     <string>If the wildness is 0, this block will use the movement's wildness</string>
+    </property>
+    <property name="decimals" >
+     <number>5</number>
+    </property>
+    <property name="maximum" >
+     <double>100.000000000000000</double>
+    </property>
+    <property name="singleStep" >
+     <double>0.025000000000000</double>
+    </property>
+    <property name="value" >
+     <double>0.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_7" >
+    <property name="geometry" >
+     <rect>
+      <x>30</x>
+      <y>110</y>
+      <width>111</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Default wildness</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_8" >
+    <property name="geometry" >
+     <rect>
+      <x>300</x>
+      <y>110</y>
+      <width>101</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Default key</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="resolution" >
+    <property name="geometry" >
+     <rect>
+      <x>420</x>
+      <y>70</y>
+      <width>111</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="key" >
+    <property name="geometry" >
+     <rect>
+      <x>420</x>
+      <y>110</y>
+      <width>111</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="duration" >
+    <property name="geometry" >
+     <rect>
+      <x>420</x>
+      <y>150</y>
+      <width>111</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="toolTip" >
+     <string>How many times a block should be played. Set to 0 to use the movement's duration</string>
+    </property>
+    <property name="statusTip" >
+     <string>How many times a block should be played. Set to 0 to use the movement's duration</string>
+    </property>
+    <property name="minimum" >
+     <number>0</number>
+    </property>
+    <property name="maximum" >
+     <number>1000</number>
+    </property>
+    <property name="value" >
+     <number>0</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_9" >
+    <property name="geometry" >
+     <rect>
+      <x>300</x>
+      <y>150</y>
+      <width>101</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Block duration</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="blockcombo" >
+    <property name="geometry" >
+     <rect>
+      <x>150</x>
+      <y>30</y>
+      <width>381</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label" >
+    <property name="geometry" >
+     <rect>
+      <x>30</x>
+      <y>30</y>
+      <width>56</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Block</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="swing" >
+    <property name="geometry" >
+     <rect>
+      <x>150</x>
+      <y>150</y>
+      <width>121</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text" >
+      <string>From movement</string>
+     </property>
+    </item>
+    <item>
+     <property name="text" >
+      <string>No swing</string>
+     </property>
+    </item>
+    <item>
+     <property name="text" >
+      <string>Swing</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="label_2" >
+    <property name="geometry" >
+     <rect>
+      <x>30</x>
+      <y>150</y>
+      <width>56</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Swing</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <tabstops>
+  <tabstop>blockcombo</tabstop>
+  <tabstop>bpm</tabstop>
+  <tabstop>resolution</tabstop>
+  <tabstop>wildness</tabstop>
+  <tabstop>key</tabstop>
+  <tabstop>swing</tabstop>
+  <tabstop>duration</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>blockDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>blockDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

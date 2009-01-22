@@ -1,0 +1,415 @@
+<ui version="4.0" >
+ <class>progressionDialog</class>
+ <widget class="QDialog" name="progressionDialog" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>395</width>
+    <height>468</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Edit Progression</string>
+  </property>
+  <property name="modal" >
+   <bool>true</bool>
+  </property>
+  <widget class="QDialogButtonBox" name="buttonBox" >
+   <property name="geometry" >
+    <rect>
+     <x>120</x>
+     <y>420</y>
+     <width>261</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="orientation" >
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="standardButtons" >
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox" >
+   <property name="geometry" >
+    <rect>
+     <x>10</x>
+     <y>350</y>
+     <width>371</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="title" >
+    <string>Chord</string>
+   </property>
+   <widget class="QComboBox" name="bars" >
+    <property name="enabled" >
+     <bool>false</bool>
+    </property>
+    <property name="geometry" >
+     <rect>
+      <x>240</x>
+      <y>20</y>
+      <width>51</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="toolTip" >
+     <string>Number of bars this progression should last</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="romannumeral" >
+    <property name="geometry" >
+     <rect>
+      <x>70</x>
+      <y>20</y>
+      <width>51</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="toolTip" >
+     <string>Note to build chord on</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="chordsuffix" >
+    <property name="geometry" >
+     <rect>
+      <x>130</x>
+      <y>20</y>
+      <width>61</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="toolTip" >
+     <string>Chord suffix</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2" >
+    <property name="geometry" >
+     <rect>
+      <x>200</x>
+      <y>20</y>
+      <width>41</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="toolTip" >
+     <string>Number of bars this progression should last</string>
+    </property>
+    <property name="text" >
+     <string>Bars:</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="accidentals" >
+    <property name="geometry" >
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>51</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="toolTip" >
+     <string>Accidentals</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="addchord" >
+    <property name="geometry" >
+     <rect>
+      <x>300</x>
+      <y>20</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="toolTip" >
+     <string>Add chord to progression</string>
+    </property>
+    <property name="text" >
+     <string>Add</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_2" >
+   <property name="geometry" >
+    <rect>
+     <x>10</x>
+     <y>190</y>
+     <width>371</width>
+     <height>161</height>
+    </rect>
+   </property>
+   <property name="title" >
+    <string>Progression</string>
+   </property>
+   <widget class="QSpinBox" name="repeat" >
+    <property name="geometry" >
+     <rect>
+      <x>290</x>
+      <y>30</y>
+      <width>61</width>
+      <height>23</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3" >
+    <property name="geometry" >
+     <rect>
+      <x>290</x>
+      <y>10</y>
+      <width>56</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Repeat:</string>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="progression" >
+    <property name="geometry" >
+     <rect>
+      <x>20</x>
+      <y>20</y>
+      <width>251</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="toolTip" >
+     <string>Progression</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="upprogression" >
+    <property name="geometry" >
+     <rect>
+      <x>20</x>
+      <y>120</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Up</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="downprogression" >
+    <property name="geometry" >
+     <rect>
+      <x>90</x>
+      <y>120</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Down</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="removeprogression" >
+    <property name="geometry" >
+     <rect>
+      <x>290</x>
+      <y>60</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Remove</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="clearprogression" >
+    <property name="geometry" >
+     <rect>
+      <x>290</x>
+      <y>90</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Clear</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="addprogression" >
+    <property name="geometry" >
+     <rect>
+      <x>290</x>
+      <y>120</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="toolTip" >
+     <string>Add progression to sequence</string>
+    </property>
+    <property name="text" >
+     <string>Add</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_3" >
+   <property name="geometry" >
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>371</width>
+     <height>181</height>
+    </rect>
+   </property>
+   <property name="title" >
+    <string>Progression sequence</string>
+   </property>
+   <widget class="QListWidget" name="progressionsequence" >
+    <property name="geometry" >
+     <rect>
+      <x>20</x>
+      <y>60</y>
+      <width>261</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="toolTip" >
+     <string>Progression sequence</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="progressionname" >
+    <property name="geometry" >
+     <rect>
+      <x>90</x>
+      <y>30</y>
+      <width>261</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="toolTip" >
+     <string>Name of the progression sequence</string>
+    </property>
+    <property name="statusTip" >
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label" >
+    <property name="geometry" >
+     <rect>
+      <x>20</x>
+      <y>30</y>
+      <width>56</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Name</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="clearsequence" >
+    <property name="geometry" >
+     <rect>
+      <x>290</x>
+      <y>90</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Clear</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="removesequence" >
+    <property name="geometry" >
+     <rect>
+      <x>290</x>
+      <y>60</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Remove</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="upsequence" >
+    <property name="geometry" >
+     <rect>
+      <x>20</x>
+      <y>140</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Up</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="downsequence" >
+    <property name="geometry" >
+     <rect>
+      <x>90</x>
+      <y>140</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Down</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <tabstops>
+  <tabstop>progressionname</tabstop>
+  <tabstop>progressionsequence</tabstop>
+  <tabstop>removesequence</tabstop>
+  <tabstop>clearsequence</tabstop>
+  <tabstop>upsequence</tabstop>
+  <tabstop>downsequence</tabstop>
+  <tabstop>progression</tabstop>
+  <tabstop>repeat</tabstop>
+  <tabstop>removeprogression</tabstop>
+  <tabstop>clearprogression</tabstop>
+  <tabstop>addprogression</tabstop>
+  <tabstop>upprogression</tabstop>
+  <tabstop>downprogression</tabstop>
+  <tabstop>accidentals</tabstop>
+  <tabstop>romannumeral</tabstop>
+  <tabstop>chordsuffix</tabstop>
+  <tabstop>bars</tabstop>
+  <tabstop>addchord</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>progressionDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>progressionDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

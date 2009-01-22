@@ -1,0 +1,360 @@
+<ui version="4.0" >
+ <class>instrumentDialog</class>
+ <widget class="QDialog" name="instrumentDialog" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>415</width>
+    <height>275</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Edit Instrument</string>
+  </property>
+  <property name="modal" >
+   <bool>true</bool>
+  </property>
+  <widget class="QDialogButtonBox" name="buttonBox" >
+   <property name="geometry" >
+    <rect>
+     <x>50</x>
+     <y>220</y>
+     <width>341</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="orientation" >
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="standardButtons" >
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="step" >
+   <property name="geometry" >
+    <rect>
+     <x>320</x>
+     <y>80</y>
+     <width>71</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="maximum" >
+    <number>10000</number>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="stepstart" >
+   <property name="geometry" >
+    <rect>
+     <x>140</x>
+     <y>110</y>
+     <width>71</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="maximum" >
+    <number>10000</number>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="stepend" >
+   <property name="geometry" >
+    <rect>
+     <x>320</x>
+     <y>110</y>
+     <width>71</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="minimum" >
+    <number>-1</number>
+   </property>
+   <property name="maximum" >
+    <number>10000</number>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label" >
+   <property name="geometry" >
+    <rect>
+     <x>20</x>
+     <y>110</y>
+     <width>71</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Step start</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2" >
+   <property name="geometry" >
+    <rect>
+     <x>230</x>
+     <y>110</y>
+     <width>71</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Step end</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3" >
+   <property name="geometry" >
+    <rect>
+     <x>230</x>
+     <y>80</y>
+     <width>56</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Step</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="midi" >
+   <property name="geometry" >
+    <rect>
+     <x>140</x>
+     <y>50</y>
+     <width>251</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4" >
+   <property name="geometry" >
+    <rect>
+     <x>20</x>
+     <y>50</y>
+     <width>111</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>MIDI Instrument</string>
+   </property>
+  </widget>
+  <widget class="QDoubleSpinBox" name="chance" >
+   <property name="geometry" >
+    <rect>
+     <x>140</x>
+     <y>140</y>
+     <width>71</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="singleStep" >
+    <double>0.025000000000000</double>
+   </property>
+   <property name="value" >
+    <double>1.000000000000000</double>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5" >
+   <property name="geometry" >
+    <rect>
+     <x>20</x>
+     <y>140</y>
+     <width>56</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Chance</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_6" >
+   <property name="geometry" >
+    <rect>
+     <x>20</x>
+     <y>80</y>
+     <width>56</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Channel</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_7" >
+   <property name="geometry" >
+    <rect>
+     <x>20</x>
+     <y>170</y>
+     <width>111</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Max note duration</string>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="noteduration" >
+   <property name="geometry" >
+    <rect>
+     <x>140</x>
+     <y>170</y>
+     <width>71</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="minimum" >
+    <number>1</number>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="letring" >
+   <property name="geometry" >
+    <rect>
+     <x>20</x>
+     <y>200</y>
+     <width>83</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Let ring</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_8" >
+   <property name="geometry" >
+    <rect>
+     <x>230</x>
+     <y>140</y>
+     <width>81</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Max velocity</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_9" >
+   <property name="geometry" >
+    <rect>
+     <x>230</x>
+     <y>170</y>
+     <width>81</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Min velocity</string>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="maxvelocity" >
+   <property name="geometry" >
+    <rect>
+     <x>320</x>
+     <y>140</y>
+     <width>71</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="maximum" >
+    <number>128</number>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="minvelocity" >
+   <property name="geometry" >
+    <rect>
+     <x>320</x>
+     <y>170</y>
+     <width>71</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="maximum" >
+    <number>128</number>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_10" >
+   <property name="geometry" >
+    <rect>
+     <x>20</x>
+     <y>20</y>
+     <width>101</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Algorithm</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="algorithm" >
+   <property name="geometry" >
+    <rect>
+     <x>140</x>
+     <y>20</y>
+     <width>251</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="channel" >
+   <property name="geometry" >
+    <rect>
+     <x>140</x>
+     <y>80</y>
+     <width>71</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="minimum" >
+    <number>1</number>
+   </property>
+   <property name="maximum" >
+    <number>16</number>
+   </property>
+  </widget>
+ </widget>
+ <tabstops>
+  <tabstop>algorithm</tabstop>
+  <tabstop>midi</tabstop>
+  <tabstop>channel</tabstop>
+  <tabstop>step</tabstop>
+  <tabstop>stepstart</tabstop>
+  <tabstop>stepend</tabstop>
+  <tabstop>chance</tabstop>
+  <tabstop>maxvelocity</tabstop>
+  <tabstop>noteduration</tabstop>
+  <tabstop>minvelocity</tabstop>
+  <tabstop>letring</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>instrumentDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>instrumentDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
