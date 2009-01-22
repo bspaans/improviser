@@ -1,0 +1,390 @@
+Version 0.8.2.0
+	* qtGUI/MainWindow.py: All upload windows completed.
+
+Version 0.8.1.1
+	* qtGUI/MainWindow.py: Importing and exporting blocks works. Importing and exporting done.
+
+Version 0.8.1.0
+	* qtGUI/qtUImain.py: Finished import, export and upload menu.
+	* qtGUI/MainWindow.py: usability improvement: disable/enable block buttons. Connected new menu items. Importing and exporting instruments works; blocks don't. Uploading anything other than the whole song is not supported yet.
+
+Version 0.8.0.1
+	* qtGUI/qtUImain.py: Added import and export menu and a separate upload menu. Reordered buttons.
+	* qtGUI/MainWindow.py: usability improvement: disable/enable instrument buttons. Connect new menu items.
+
+Version 0.8.0.0
+	* qtGUI/UploadDialog.py: Added upload dialog
+	* qtGUI/PreferencesDialog.py: Updated login label and added an option to disable connecting to the server.
+	* qtGUI/MainWindow.py: Connected upload button and dialog. Uploading songs works!
+
+Version 0.7.9.1
+	* Movements/RandomBlockMovement.py, Movements/RandomProgressionMovement.py: New movements.
+	* qtGUI/MainWindow.py: Update status bar with movements docstring on highlight.
+
+Version 0.7.9.0
+	* Movement/FluentMovement.py: Added the first new movement.
+	* qtGUI/MainWindow.py: Load and save movements
+	* Options.py: Load and save movements + backwards compatibility for older files.
+
+Version 0.7.8.5
+	* qtGUI/qtUImain.py: Added copy buttons to blocks and instruments list.
+	* qtGUI/MainWindow.py: Connect new copy buttons
+
+Version 0.7.8.4
+	* qtGUI/qtUImain.py, qtGUI/instrumentDialog.py, qtGUI/progressionDialog.py, qtGUI/blockDialog.py, qtGUI: Fixed tab ordering.
+
+Version 0.7.8.3
+	* qtGUI/MainWindow.py: Toggle progression buttons when list is empty
+
+Version 0.7.8.2
+	* qtGUI/qtUImain.py: Added import, export and copy buttons to progression list.
+	* qtGUI/MainWindow.py: Connected copy, export and import buttons.
+
+Version 0.7.8.1
+	* qtGUI/preferencesDialog.py: Try loading and saving preferences from file in home directory.
+	* qtGUI/MainWindow.py: Get load and save directory from environ["HOME"]
+
+Version 0.7.8.0
+	* qtImproviser.py: Split file into MainWindow.py, PreferencesDialog.py, BlockDialog.py, ProgressionDialog.py, InstrumentDialog.py in /qtGUI.
+	* qtGUI/preferencesDialog.py: Added placeholders for username and password.
+
+Version 0.7.7.4
+	* qtGUI/qtUImain.py: Added sliders
+	* qtImproviser.py: Connected sliders.
+
+Version 0.7.7.3
+	* qtGUI/progressionDialog.py: Remove update buttons.
+	* qtImproviser.py: Made the progression editor way more intuitive.
+
+Version 0.7.7.2
+	* Instrument.py: Fixed bug. Midi instruments will now get saved correctly again.
+	* qtImproviser.py: Introduced messages boxes to display errors.
+	* Options.py: Throw better error if no progressions are selected.
+
+Version 0.7.7.1
+	* qtImproviser.py: Selecting in combo box automatically adds item and opens editor.
+
+Version 0.7.7.0
+	* qtGUI/preferencesDialog.py: Added preferences dialog
+	* qtImproviser.py: Program now starts with preferences dialog.
+
+Version 0.7.6.4
+	* qtGUI/qtUImain.py: Removed block combo. Double clicking on a list is now the same as clicking the edit button.
+	* qtImproviser.py: Disconnected block combo box
+
+Version 0.7.6.3
+	* qtGUI/blockDialog.py: Added combo box for swing.
+	* qtImproviser.py: Connected combo box
+	* Options.py: Parsing the swing parameter
+
+Version 0.7.6.2
+	* qtImproviser.py: The add block button automatically opens the edit window.
+
+Version 0.7.6.1
+	* qtGUI/qtImproviser.py: The new block editor works.
+	* qtGUI/Options.py: Parse and load the new block parameters
+	* qtGUI/Block.py: Set default values.
+	* qtGUI/Movement.py: Default settings are now set in Options instead of add_block
+
+Version 0.7.6.0
+	* qtGUI/blockDialog.py: Changed some widgets to let the user choose the movement's variables over the block's
+	* qtImproviser.py: Connected block editor. Loading and saving is now possible, but the variables don't affect the simulation yet.
+
+Version 0.7.5.4
+	* ../setup.py: Added classifiers
+	* ../README: Updated.
+
+Version 0.7.5.3
+	* qtGUI/blockDialog.py: Added placeholder for block editor.
+	* Musicians/Drummers/Conga.py and Bongo.py: Added conga and bongo instruments.
+
+Version 0.7.5.2
+	* Musicians/Accompaniment/Strings.py: Removed its own let_ring management which can now be controlled by setting the note length
+	* Musicians/Drummers/Toms.py: Similar to Snare. Plays random toms.
+
+Version 0.7.5.1
+	* qtImproviser.py: Connected author entry and the new button from the menu.
+
+Version 0.7.5.0
+	* qtUImain.py: Moved the movement options to its own tab and added placeholders.
+	* qtImproviser.py: Fixed some bugs.
+	* Musicians/Drummers/DanceBeat.py: Added simple dance beat.
+
+Version 0.7.4.12
+	* qtImproviser.py: Added fix for loading back the chance parameter in to the instrument editor.
+
+Version 0.7.4.11
+	* Options.py: Small fix in loading from file.
+
+Version 0.7.4.10
+	* qtImproviser.py: Added visualization combo box. Need preferences dialog..
+
+Version 0.7.4.9
+	* qtImproviser.py, qtUImain.py: Added driver combo box. Need mingus version 0.3.7.10.
+
+Version 0.7.4.8
+	* Instrument.py: Removed forgotten debugging print statements.
+
+Version 0.7.4.7
+	* Instrument.py, Sequencer.py, Movement.py, Block.py: Fixed a lot of bugs regarding MIDI recording.
+
+Version 0.7.4.6
+	* Instrument.py: Fixed swing midi recording.
+
+Version 0.7.4.5
+	* qtImproviser.py: Update progression list on selection.
+	* progressionDialog.py: Added up, down, update, clear and remove buttons to the chord list
+	* qtImproviser.py: Connected the new buttons. The progression editor is done, for now.
+
+Version 0.7.4.4
+	* qtImproviser.py: Made the loading of progressions backwards compatible.
+	* progressionDialog.py: Improved the progression editor, added up, down, update, clear and remove buttons.
+	* qtImproviser.py: Connected the new buttons.
+
+Version 0.7.4.3
+	* Options.py: Parse the new progression arguments. Editing and loading back progressions now works.
+
+Version 0.7.4.2
+	* qtImproviser.py, Options.py: Connected Progression editor. Can now save back to the list, 
+	but information will not get used, but can be saved and loaded.
+
+Version 0.7.4.1
+	* qtImproviser.py, blockDialog.py: Added the block editor. Also not functioning yet.
+
+Version 0.7.4.0
+	* qtImproviser.py, progressionDialog.py: Added the GUI for the progression editor. Not functioning yet.
+
+Version 0.7.3.1
+	* qtImproviser.py: Added version to title
+
+Version 0.7.3.0
+	* qtImproviser.py: Fixed the responsiveness problem (when playing) by putting the sequencer in a thread. Much better.
+
+Version 0.7.2.3
+	* Sequencer.py, Instrument.py: Fixed bug where the last note of a stopped instrument would keep playing.
+	* qtImproviser.py, qtUImain.py: Added up and down buttons for instrument list allowing for somewhat better organization.
+
+Version 0.7.2.2
+	* qtImproviser.py: Connected instrument dialog, saving the edited instrument to the list works.
+	* Options.py: Parse the new instrument parameter description. Playing the altered instrument works as well.
+
+Version 0.7.2.1
+	* qtImproviser.py: Load an instrument into the editor.
+
+Version 0.7.2.0
+	* instrumentDialog.py: New instrument dialog. Not functioning yet.
+	* qtImproviser.py: Integrated instrumentDialog.py to show up
+
+Version 0.7.1.6
+	* Options.py: Better error handling when passing empty strings.
+	* qtImproviser.py: Update status bar on error.
+
+Version 0.7.1.5
+	* qtImproviser.py: Added and connected clear, up and down buttons to lists.
+
+Version 0.7.1.4
+	* qtImproviser.py: Update window title when loading and saving.
+
+Version 0.7.1.3
+	* Options.py: Squashed final bug in simulating more than one time.
+
+Version 0.7.1.2
+	* qtImproviser.py, Options.py, Instrument.py: Saving and playing MIDI files consecutively.
+
+Version 0.7.1.1
+	* Movement.py: Blocks now receive a copy of the progression, because they are mutable and may need to be reused.
+	Real-time simulations can now be repeated without restarting the app. Saving more than one MIDI is still buggy.
+
+Version 0.7.1.0
+	* qtImproviser.py: Loading and saving works completely.
+
+Version 0.7.0.8
+	* qtImproviser.py: Saving settings
+	* qtImproviser.py: Loading back the first tab, the lists will follow shortly.
+	* Options.py: Saving and loading Improviser option files
+
+Version 0.7.0.7
+	* qtImproviser.py: Added about dialog to see how new windows can be loaded.
+
+Version 0.7.0.6
+	* qtImproviser.py: Removing blocks, instruments and progressions from their list works now.
+
+Version 0.7.0.5
+	* qtImproviser.py: Loading blocks, progressions and instruments from the list works,
+	generating more than one MIDI file and reusing progressions is buggy as hell though.
+
+Version 0.7.0.4 
+	* qtImproviser updates:
+	* The `no audio` checkbox works
+	* Midi files get named after the project name
+	* Adding items to the lists on the other panels now works, but has no influence on the composition.
+	This is my first Qt app, so I'm slowly finding and connecting the right wires. 
+
+
+Version 0.7.0.3
+	* Replaced sys.exit() calls with exceptions in Options.py
+	* Handling exceptions in Improviser and qtImproviser.
+	* qtImproviser sort of works now (ie. it can generate a tune from settings on the first tab.)
+
+Version 0.7.0.2
+	* Forgot to change Improviser.py. I told you I needed some sleep.
+
+Version 0.7.0.1
+	* Most widgets in the first tab are connected and the content generation works, but isn't integrated yet.
+	* Need sleep.
+
+Version 0.7.0.0
+	* Added qtImproviser.
+
+Version 0.6.1.1
+	* Improvided parsing of Instrument 'start', 'end' and 'step' parameters.
+
+Version 0.6.1.0
+	* Cleaned up Instrument.py
+	* Introduced note_length in instrument parameters.
+
+Version 0.6.0.2
+	* When just listing items, the fluidsynth library won't get dynamically linked (speedup)
+
+Version 0.6.0.1
+	* Added the --loop option.
+	* Progressions and blocks can be separated by comma.
+
+Version 0.6.0.0
+	* Implemented Movements
+
+Version 0.5.8.3
+	* Refactored Improviser.py into Options.py. 
+
+Version 0.5.8.2
+	* 'nother fix in swing saving
+
+Version 0.5.8.1
+	* Bug fix in swing saving
+
+Version 0.5.8.0
+	* Now saving swing as well
+
+Version 0.5.7.9
+	* Added support for Arduino devices.
+
+Version 0.5.7.8
+	* Updated README
+	* Changed the default visualization.
+
+Version 0.5.7.7
+	* Updated Improviser to new version of mingus.
+	* You can use --sf2 to set the soundfont.
+	* Changed MIDI saving.
+
+Version 0.5.7.6
+	* More instruments, bands and progressions.
+
+Version 0.5.7.5
+	* More instruments
+
+Version 0.5.7.4
+	* Fixed the note duration in midi files.
+
+Version 0.5.7.3
+	* Optimized saving multiple consequent rests into one single rest.
+
+Version 0.5.7.2
+	* A midi file can now also properly play tracks not starting at beat 0
+
+Version 0.5.7.1
+	* Added switches to disable fluidsynth output and just write the midi
+
+Version 0.5.7.0
+	* Added MIDI file support.
+
+Version 0.5.6.12:
+	* Did some work on JazzDrum and WalkingBass and added more Blocks.
+
+Version 0.5.6.11:
+	* Added a Metronome and some more Blocks.
+
+Version 0.5.6.10:
+	* More Instruments, Blocks and better Bands
+
+Version 0.5.6.9:
+	* Added more Instruments, Bands and a couple of global fixes.
+
+Version 0.5.6.8:
+	* Fix in playing single instrument
+
+Version 0.5.6.7:
+	* Command line arguments for listing and setting instruments.
+
+Version 0.5.6.6:
+	* Fixed bug in Sequencer.play_instruments introduced in 0.5.5.1 and updated some Instruments to use new MIDI instruments
+
+Version 0.5.6.5:
+	* Fixed bug in mingus 0.3.3.3. MIDI instruments will now be set properly using version mingus 0.3.3.4.
+
+Version 0.5.6.4:
+	* Added support for other MIDI instruments and some more progressions.
+
+Version 0.5.6.3:
+	* Resolution command line argument.
+
+Version 0.5.6.2:
+	* Added command line control for swing and instrument selection.
+
+Version 0.5.6.1:
+	* Added a new pygame visualization that chooses one of the pygame frontends randomly each tick. Frontend name is 'mixed'
+
+Version 0.5.6.0:
+	* Added a new pygame visualization. The frontend name is 'lines'
+
+Version 0.5.5.8:
+	* New command line arguments for wildness and duration.
+
+Version 0.5.5.7:
+	* Added a new Jazz progression module. Fixed a bug in get_progressions.
+
+Version 0.5.5.6:
+	* Made the duration a property of Block instead of Sequencer. Code is ready for Structure class, which can combine Blocks.
+
+Version 0.5.5.5:
+	* Fixed handling of resolution. Resolution can now be set to 1,2,4,8,16,etc.
+
+Version 0.5.5.4:
+	* Added more command line options. Check --help to show them.
+
+Version 0.5.5.3:
+	* Added pygame import exception handling.
+
+Version 0.5.5.2:
+	* Added command line options to Improviser. pygame-Improviser.py has been removed.
+
+Version 0.5.5.1:
+	* Refactored Sequencer.py some more. Removed tail recursion from play().
+
+Version 0.5.5.0:
+	* Refactored Sequencer.py and added more functionality to the abstract Block class
+
+Version 0.5.4.5:
+	* Added new progression module Contemporary
+
+Version 0.5.4.4:
+	* Fixed the same typo in SimpleChordInstrument. That's why you shouldn't copy and paste, kids.
+
+Version 0.5.4.3:
+	* Fixed typo in ChordInstrument.py
+
+Version 0.5.4.2:
+	* Forgotten MANIFEST file caused wrong packaging.
+
+Version 0.5.4.1:
+	* Added a README file
+
+Version 0.5.4.0:
+	* Added a new Visualizations module which offers a Visualization class that you can subclass
+	  and plug into a song. 
+	* pygame front-end now works reliably and efficiently and has been added to the new module
+
+Version 0.5.3.7:
+
+	* Improved timing by measuring and substracting the amount of time a tick takes.
+	  GUI integration should be less choppish (or else you will see 'Tick Overflow!')
