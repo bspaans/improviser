@@ -4,9 +4,8 @@
 
   This is the automatic music generation program imaginatively called:
   'Improviser'. It can play and generate music in real-time and save the 
-  result as a MIDI file as well. The program can be controlled from the 
-  command line or using a GUI and is supposed to work on all the 
-  major platforms.
+  result as a MIDI file as well. The program can be controlled using a GUI or 
+  the command line and is supposed to work on all the major platforms.
 
   http://improviser.onderstekop.nl/
   http://pypi.python.org/pypi/improviser/
@@ -25,7 +24,7 @@
   Optional:
  
     * Pygame for the Visualizations - http://www.pygame.org/
-    * Python bindings for Qt4.
+    * Python bindings for Qt4. [Recommended]
 
 ================================================================================
 
@@ -44,9 +43,11 @@
 	qtImproviser.py 
 
   The GUI is not only a front-end for the cli version, but has support for 
-  uploading, exporting and importing as well. It's also way more usuable.
+  uploading, exporting and importing as well; which currently can't be found 
+  in the cli version.
 
 ================================================================================
+
   Command Line Interface:
 
   To start a real-time simulation from the command-line, run:
@@ -54,8 +55,8 @@
 	Improviser.py -e jazz --sf2 soundfont.sf2
 
   This uses the jazz ensemble to play the default progressions with the soundfont
-  you downloaded from internet. You can use
-  the --list or -l switch to list progressions, ensembles, blocks, etc.
+  you downloaded from the internet. You can use the --list or -l switch to list 
+  progressions, ensembles, blocks, etc.
   For instance:
 
 	Improviser.py -le
@@ -67,19 +68,14 @@
 
 	Improviser.py --frontend mixed
 
-  To see more options use the --help switch.
+  To see more options use --help.
 
 ================================================================================
 
   Contact:
 
     If you'd like to get in touch to ask a question or submit a patch, 
-    you should contact the mingus' google group at
-
-	http://groups.google.com/group/mingus-python
-
-    since this application hasn't got its own page yet, but the author 
-    is the same (hi there!).
+    you can best contact me by e-mail: onderstekop@gmail.com
 
 ================================================================================
 
