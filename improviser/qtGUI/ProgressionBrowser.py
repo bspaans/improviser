@@ -13,9 +13,9 @@ OTHER = 10
 class ProgressionBrowser(QtGui.QDialog):
 
 
-	def __init__(self, item, filecollection):
+	def __init__(self, proglist, filecollection):
 		QtGui.QDialog.__init__(self)
-		self.item = item
+		self.progression_list = proglist
 		self.filecollection = filecollection
 		self.ui = Ui_progressionBrowser()
 		self.ui.setupUi(self)
@@ -125,8 +125,11 @@ class ProgressionBrowser(QtGui.QDialog):
 			parts = t.split("  [")
 			name = parts[0]
 			owner = parts[1][:-1]
-			res = self.filecollection.get_Progressions()[owner][name]
-			return res
+			if for_show:
+				return self.filecollection.get_Progressions()[owner][name]
+			else:
+				return self.filecollection.get_Progressions(parse_content = False)[owner][name]
+
 
 
 		return ""
@@ -136,13 +139,14 @@ class ProgressionBrowser(QtGui.QDialog):
 		t = str(self.ui.progressions.item(i).text())
 		if self.state == DEFAULT:
 			prog = self.get_progression(False)
-			self.item.setText("%s %s" % (t, prog))
+			self.progression_list.addItem("%s %s" % (t, prog))
 		elif self.state == ALL:
 			parts = t.split("  [")
 			name = parts[0]
 			owner = parts[1][:-1]
-			res = self.filecollection.get_Progressions()[owner][name]
-			self.item.setText("%s %s" % (name, res))
+			res = self.get_progression(False)
+			for x in res.split(","):
+				self.progression_list.addItem(x)
 
 		self.reject()
 		

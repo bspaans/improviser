@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'progression.ui'
+# Form implementation generated from reading ui file 'improviser/qtGUI/progression.ui'
 #
-# Created: Fri Jan 23 13:53:53 2009
+# Created: Fri Jan 23 19:06:51 2009
 #      by: PyQt4 UI code generator 4.4.3
 #
 # WARNING! All changes made in this file will be lost!

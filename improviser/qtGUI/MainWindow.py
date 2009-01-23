@@ -331,13 +331,9 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 
 	def add_progression(self):
 		
-		self.ui.progressions.addItem("")
-		self.ui.progressions.setCurrentRow(self.ui.progressions.count() - 1)
-		p = ProgressionBrowser(self.ui.progressions.currentItem(), self.filecollection)
+		p = ProgressionBrowser(self.ui.progressions, self.filecollection)
 		p.show()
 		p.exec_()
-		if self.ui.progressions.item(self.ui.progressions.count() - 1).text() == "":
-			self.ui.progressions.takeItem(self.ui.progressions.count() - 1)
 		self.progression_changed()
 
 	def remove_progression(self):

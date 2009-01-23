@@ -40,16 +40,20 @@ class FileCollection:
 				res[x[2]] = {}
 
 			for p in x[5].split(","):
+				if not res[x[2]].has_key(x[3]):
+					res[x[2]][x[3]] = ""
 				if parse_content:
 					params = p.split(" ")
 					name = params[0]
 					params = " ".join(params[1:])[1:-1]
 
-					if not res[x[2]].has_key(x[3]):
-						res[x[2]][x[3]] = ""
 					res[x[2]][x[3]] += params
 				else:
-					res[x[2]][x[3]] = p
+					res[x[2]][x[3]] += p + ", "
+
+			if not parse_content:
+				res[x[2]][x[3]] = res[x[2]][x[3]][:-2]
+
 
 
 		res['Default'] = defaults
