@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'improviser/qtGUI/preferences.ui'
+# Form implementation generated from reading ui file 'preferences.ui'
 #
-# Created: Fri Jan 23 13:00:43 2009
+# Created: Fri Jan 23 13:09:36 2009
 #      by: PyQt4 UI code generator 4.4.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -99,7 +99,7 @@ class Ui_preferencesDialog(object):
         self.label_4.setGeometry(QtCore.QRect(30, 30, 51, 21))
         self.label_4.setObjectName("label_4")
         self.checkupdates = QtGui.QCheckBox(self.groupBox_3)
-        self.checkupdates.setGeometry(QtCore.QRect(30, 70, 211, 21))
+        self.checkupdates.setGeometry(QtCore.QRect(30, 70, 231, 21))
         self.checkupdates.setObjectName("checkupdates")
         self.Files.addTab(self.Files1, "")
         self.verticalLayout.addWidget(self.Files)
@@ -135,6 +135,6 @@ class Ui_preferencesDialog(object):
         self.browsefolder.setText(QtGui.QApplication.translate("preferencesDialog", "Browse", None, QtGui.QApplication.UnicodeUTF8))
         self.label_4.setText(QtGui.QApplication.translate("preferencesDialog", "Folder", None, QtGui.QApplication.UnicodeUTF8))
         self.checkupdates.setToolTip(QtGui.QApplication.translate("preferencesDialog", "Connect to the server and see if there are any new files.", None, QtGui.QApplication.UnicodeUTF8))
-        self.checkupdates.setText(QtGui.QApplication.translate("preferencesDialog", "Check for updates on start up", None, QtGui.QApplication.UnicodeUTF8))
+        self.checkupdates.setText(QtGui.QApplication.translate("preferencesDialog", "Check for new content on start up", None, QtGui.QApplication.UnicodeUTF8))
         self.Files.setTabText(self.Files.indexOf(self.Files1), QtGui.QApplication.translate("preferencesDialog", "Files", None, QtGui.QApplication.UnicodeUTF8))
 

@@ -17,8 +17,9 @@ class PreferencesDialog(QtGui.QDialog):
 
 	def setup(self):
 		h = "/home"
-		if 'HOME' in environ:
-			self.default_folder = environ["HOME"]
+		for x in ['HOMEPATH', 'HOME']:
+			if x in environ:
+				self.default_folder = environ[x]
 
 
 		for x in ['default', 'alsa', 'oss', 'jack', 'portaudio', 'coreaudio', 
