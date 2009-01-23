@@ -333,7 +333,7 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 		
 		self.ui.progressions.addItem("")
 		self.ui.progressions.setCurrentRow(self.ui.progressions.count() - 1)
-		p = ProgressionBrowser(self.ui.progressions.currentItem())
+		p = ProgressionBrowser(self.ui.progressions.currentItem(), self.filecollection)
 		p.show()
 		p.exec_()
 		if self.ui.progressions.item(self.ui.progressions.count() - 1).text() == "":
