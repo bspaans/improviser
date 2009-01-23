@@ -19,9 +19,7 @@ class ProgressionBrowser(QtGui.QDialog):
 
 	def setup(self):
 
-		self.defaults = {"Empty": "",
-				 "Pop": "1*I-IV-V-I",
-				 "Simple": "1*I-V"}
+		self.defaults = {"Empty": ""}
 
 		for x in Options.get_available_progressions():
 			prog = Options.progression_to_string(getattr(Progressions, x))[1:-1]
