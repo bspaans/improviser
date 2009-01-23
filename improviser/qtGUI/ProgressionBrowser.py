@@ -5,6 +5,7 @@ import Progressions
 
 DEFAULT = 1
 OWN = 2
+ALL = 3
 OTHER = 10
 
 class ProgressionBrowser(QtGui.QDialog):
@@ -53,11 +54,26 @@ class ProgressionBrowser(QtGui.QDialog):
 			if i == 0:
 				self.state = DEFAULT
 				self.show_defaults()
+			if i == 1:
+				self.state == OWN
+				self.show_own()
+			if i == 2:
+				self.state == ALL
+				self.show_all()
 
 	def show_defaults(self):
 		for x in self.defaults:
 			self.ui.progressions.addItem(x)
 		self.ui.progressions.setCurrentRow(0)
+
+	def show_own(self):
+		self.show_author(self.username)
+
+	def show_all(self):
+		for x in self.defaults:
+			self.ui.progressions.addItem(x + "  [default]")
+		self.ui.progressions.setCurrentRow(0)
+		
 
 	def show_progression(self):
 		self.ui.progression.clear()
@@ -65,15 +81,19 @@ class ProgressionBrowser(QtGui.QDialog):
 			if x not in ["{", "}", "", " "]:
 				self.ui.progression.addItem(x.replace("*", " "))
 
+	def show_author(self, author):
+		pass
+
 	def get_progression(self, for_show = True):
 		if self.state == DEFAULT:
 			i = self.ui.progressions.currentRow()
 			t = str(self.ui.progressions.item(i).text())
-			if for_show:
-				return self.defaults[t]
-			else:
-				return "{ " + self.defaults[t] + " }"
-		return []
+			if self.defaults.has_key(t):
+				if for_show:
+					return self.defaults[t]
+				else:
+					return "{ " + self.defaults[t] + " }"
+		return ""
 
 	def set_progression(self):
 		i = self.ui.progressions.currentRow()

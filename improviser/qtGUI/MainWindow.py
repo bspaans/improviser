@@ -336,6 +336,8 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 		p = ProgressionBrowser(self.ui.progressions.currentItem())
 		p.show()
 		p.exec_()
+		if self.ui.progressions.item(self.ui.progressions.count() - 1).text() == "":
+			self.ui.progressions.takeItem(self.ui.progressions.count() - 1)
 		self.progression_changed()
 
 	def remove_progression(self):
