@@ -1,3 +1,6 @@
+Version 0.8.2.4:
+	* qtGUI/MainWindow.py, qtGUI/ProgressionBrowser.py: Integrated new progression browser and removed progressioncombo.
+
 Version 0.8.2.3:
 	* qtImproviser.py, qtGUI/MainWindow.py: Using the default folder while loading, saving, importing and exporting.
 

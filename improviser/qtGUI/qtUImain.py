@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'improviser/qtGUI/improviser.ui'
+# Form implementation generated from reading ui file 'improviser.ui'
 #
-# Created: Fri Jan 23 13:07:39 2009
+# Created: Fri Jan 23 14:46:20 2009
 #      by: PyQt4 UI code generator 4.4.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -201,11 +201,8 @@ class Ui_MainWindow(object):
         self.removeprogression.setEnabled(True)
         self.removeprogression.setGeometry(QtCore.QRect(700, 50, 80, 27))
         self.removeprogression.setObjectName("removeprogression")
-        self.progressioncombo = QtGui.QComboBox(self.tab_4)
-        self.progressioncombo.setGeometry(QtCore.QRect(10, 10, 671, 22))
-        self.progressioncombo.setObjectName("progressioncombo")
         self.progressions = QtGui.QListWidget(self.tab_4)
-        self.progressions.setGeometry(QtCore.QRect(10, 40, 671, 311))
+        self.progressions.setGeometry(QtCore.QRect(10, 10, 671, 341))
         self.progressions.setObjectName("progressions")
         self.upprogression = QtGui.QPushButton(self.tab_4)
         self.upprogression.setGeometry(QtCore.QRect(700, 210, 80, 27))
@@ -352,8 +349,7 @@ class Ui_MainWindow(object):
         MainWindow.setTabOrder(self.upinstrument, self.downinstrument)
         MainWindow.setTabOrder(self.downinstrument, self.removeinstrument)
         MainWindow.setTabOrder(self.removeinstrument, self.clearinstruments)
-        MainWindow.setTabOrder(self.clearinstruments, self.progressioncombo)
-        MainWindow.setTabOrder(self.progressioncombo, self.progressions)
+        MainWindow.setTabOrder(self.clearinstruments, self.progressions)
         MainWindow.setTabOrder(self.progressions, self.addprogressionbutton)
         MainWindow.setTabOrder(self.addprogressionbutton, self.editprogression)
         MainWindow.setTabOrder(self.editprogression, self.copyprogression)

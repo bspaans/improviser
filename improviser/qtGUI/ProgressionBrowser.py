@@ -1,6 +1,7 @@
 from PyQt4 import QtCore, QtGui
 from qtGUI.progressionBrowser import Ui_progressionBrowser
 import Options
+import Progressions
 
 DEFAULT = 1
 OWN = 2
@@ -21,6 +22,10 @@ class ProgressionBrowser(QtGui.QDialog):
 				 "Pop": "1*I-IV-V-I",
 				 "Simple": "1*I-V"}
 
+		for x in Options.get_available_progressions():
+			prog = Options.progression_to_string(getattr(Progressions, x))[1:-1]
+			self.defaults[x] = prog
+
 		self.connect(self.ui.update,
 			QtCore.SIGNAL("clicked()"),
 			self.update_database)
@@ -33,6 +38,7 @@ class ProgressionBrowser(QtGui.QDialog):
 		self.connect(self.ui.buttonBox,
 			QtCore.SIGNAL("accepted()"),
 			self.set_progression)
+
 
 		self.state = DEFAULT
 		self.show_defaults()
@@ -56,16 +62,15 @@ class ProgressionBrowser(QtGui.QDialog):
 	def show_progression(self):
 		self.ui.progression.clear()
 		for x in self.get_progression().split(" "):
-			self.ui.progression.addItem(x)
+			if x not in ["{", "}", "", " "]:
+				self.ui.progression.addItem(x.replace("*", " "))
 
 	def get_progression(self, for_show = True):
 		if self.state == DEFAULT:
 			i = self.ui.progressions.currentRow()
 			t = str(self.ui.progressions.item(i).text())
 			if for_show:
-				prog = self.defaults[t]
-				prog = prog.replace("*", " ")
-				return prog
+				return self.defaults[t]
 			else:
 				return "{ " + self.defaults[t] + " }"
 		return []

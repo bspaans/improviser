@@ -8,7 +8,6 @@ from UploadDialog import UploadDialog
 from ProgressionBrowser import ProgressionBrowser
 from os import path, environ
 from mingus.core import diatonic
-import Progressions
 import Options
 import Movements
 
@@ -51,9 +50,6 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 	def fill_combos(self):
 		for x in Options.get_available_instruments():
 			self.ui.instrumentcombo.addItem(x)
-		for x in Options.get_available_progressions():
-			prog = Options.progression_to_string(getattr(Progressions, x))
-			self.ui.progressioncombo.addItem("%s %s" % (x, prog))
 		for x in Options.get_available_movements():
 			self.ui.movement.addItem(x)
 		for x in [1, 2, 4, 8, 16, 32, 64, 128]:
@@ -143,9 +139,6 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 		self.connect(self.ui.instrumentcombo,
 			QtCore.SIGNAL("activated(int)"),
 			lambda x: self.add_instrument())
-		self.connect(self.ui.progressioncombo, 
-			QtCore.SIGNAL("activated(int)"),
-			lambda x: self.add_progression())
 		self.connect(self.ui.bpmslide,
 			QtCore.SIGNAL("sliderMoved(int)"),
 			lambda x: self.ui.bpm.setValue(x * 10))

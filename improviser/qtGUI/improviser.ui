@@ -714,23 +714,13 @@
        <string>Remove</string>
       </property>
      </widget>
-     <widget class="QComboBox" name="progressioncombo" >
+     <widget class="QListWidget" name="progressions" >
       <property name="geometry" >
        <rect>
         <x>10</x>
         <y>10</y>
         <width>671</width>
-        <height>22</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QListWidget" name="progressions" >
-      <property name="geometry" >
-       <rect>
-        <x>10</x>
-        <y>40</y>
-        <width>671</width>
-        <height>311</height>
+        <height>341</height>
        </rect>
       </property>
      </widget>
@@ -1037,7 +1027,6 @@
   <tabstop>downinstrument</tabstop>
   <tabstop>removeinstrument</tabstop>
   <tabstop>clearinstruments</tabstop>
-  <tabstop>progressioncombo</tabstop>
   <tabstop>progressions</tabstop>
   <tabstop>addprogressionbutton</tabstop>
   <tabstop>editprogression</tabstop>
