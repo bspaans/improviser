@@ -50,6 +50,7 @@ class ProgressionBrowser(QtGui.QDialog):
 		if len(d["entries"]) > 0:
 			self.ui.update.setText("Update (%d)" % len(d["entries"]))
 			self.ui.update.setEnabled(True)
+			self.entries = d["entries"]
 		else:
 			self.ui.update.setEnabled(True)
 
@@ -113,4 +114,14 @@ class ProgressionBrowser(QtGui.QDialog):
 		
 	
 	def update_database(self):
-		pass
+		progress = QtGui.QProgressDialog("Downloading progressions...", "Abort", 0, len(self.entries), self)
+		for i, x in enumerate(self.entries):
+			id = x.id[len(Options.UPLOAD_HOME):]
+			print id, x.author, x.title, x.description
+			download = "%s (%d.prg)" % (x.title, id)
+			progress.setLabelText("Downloading %s..." % download)
+			progress.setValue(i)
+
+			if progress.wasCanceled():
+				break
+		progress.setValue(len(self.entries))
