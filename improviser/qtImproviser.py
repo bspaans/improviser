@@ -8,6 +8,8 @@ from sys import argv
 def show_main(params):
 	i = ImproviserMainWindow()
 	i.loggedin = params["login"]
+	i.default_folder = params["default_folder"]
+	i.checkupdates = params["checkupdates"]
 	i.credentials = {"username": params["username"], 
 			 "password": params["password"]}
 

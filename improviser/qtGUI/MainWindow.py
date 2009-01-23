@@ -355,12 +355,9 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 		self.progression_changed()
 
 	def import_progression(self):
-		h = "/home"
-		if 'HOME' in environ:
-			h = environ["HOME"]
 		f = QtGui.QFileDialog()
 		s = f.getOpenFileName(self, "Load progressions.",
-				h, "Progressions (*.prg)")
+				self.default_folder, "Progressions (*.prg)")
 		if s != "":
 			try:
 				fp = open(s, "r")
@@ -375,16 +372,13 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 				fp.close()
 			except Options.OptionError, err:
 				self.set_status("Error: " + str(err))
-		self.progression_changed()
-		self.ui.Tabs.setCurrentIndex(4)
+			self.progression_changed()
+			self.ui.Tabs.setCurrentIndex(4)
 
 	def import_instruments(self):
-		h = "/home"
-		if 'HOME' in environ:
-			h = environ["HOME"]
 		f = QtGui.QFileDialog()
 		s = f.getOpenFileName(self, "Load instruments.",
-				h, "Instruments (*.ins)")
+				self.default_folder, "Instruments (*.ins)")
 		if s != "":
 			try:
 				fp = open(s, "r")
@@ -400,16 +394,13 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 				fp.close()
 			except Options.OptionError, err:
 				self.set_status("Error: " + str(err))
-		self.instrument_changed()
-		self.ui.Tabs.setCurrentIndex(3)
+			self.instrument_changed()
+			self.ui.Tabs.setCurrentIndex(3)
 
 	def import_blocks(self):
-		h = "/home"
-		if 'HOME' in environ:
-			h = environ["HOME"]
 		f = QtGui.QFileDialog()
 		s = f.getOpenFileName(self, "Load blocks.",
-				h, "Blocks (*.blk)")
+				self.default_folder, "Blocks (*.blk)")
 		if s != "":
 			try:
 				fp = open(s, "r")
@@ -425,21 +416,18 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 				fp.close()
 			except Options.OptionError, err:
 				self.set_status("Error: " + str(err))
-		self.block_changed()
-		self.ui.Tabs.setCurrentIndex(2)
+			self.block_changed()
+			self.ui.Tabs.setCurrentIndex(2)
 
 
 	def export_progression(self):
-		h = "/home"
-		if 'HOME' in environ:
-			h = environ["HOME"]
 		prog = self.get_progressions()
 		if prog == "":
 			return 
 		
 		f = QtGui.QFileDialog()
 		s = str(f.getSaveFileName(self, "Save progressions.",
-				h, "Progressions (*.prg)"))
+				self.default_folder, "Progressions (*.prg)"))
 		if s != "":
 			if s[-4:].lower() != ".prg":
 				filename = s + ".prg"
@@ -453,16 +441,13 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 				self.set_status("Error: Couldn't open file for writing")
 
 	def export_instruments(self):
-		h = "/home"
-		if 'HOME' in environ:
-			h = environ["HOME"]
 		instr = self.get_instruments()
 		if instr == "":
 			return 
 		
 		f = QtGui.QFileDialog()
 		s = str(f.getSaveFileName(self, "Save instruments.",
-				h, "Instruments (*.ins)"))
+				self.default_folder, "Instruments (*.ins)"))
 		if s != "":
 			if s[-4:].lower() != ".ins":
 				filename = s + ".ins"
@@ -476,16 +461,13 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 				self.set_status("Error: Couldn't open file for writing")
 
 	def export_blocks(self):
-		h = "/home"
-		if 'HOME' in environ:
-			h = environ["HOME"]
 		blocks = self.get_blocks()
 		if blocks == "":
 			return 
 		
 		f = QtGui.QFileDialog()
 		s = str(f.getSaveFileName(self, "Save blocks.",
-				h, "Blocks (*.blk)"))
+				self.default_folder, "Blocks (*.blk)"))
 		if s != "":
 			if s[-4:].lower() != ".blk":
 				filename = s + ".blk"
@@ -661,12 +643,9 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 		w.exec_()
 
 	def load_dialog(self):
-		h = "/home"
-		if 'HOME' in environ:
-			h = environ["HOME"]
 		f = QtGui.QFileDialog()
 		s = f.getOpenFileName(self, "Load improviser file.",
-				h, "Improviser files (*.imp)")
+				self.default_folder, "Improviser files (*.imp)")
 		if s != "":
 			try:
 				o = Options.load_options_from_file(s, OptionClass())
@@ -688,12 +667,9 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 				self.set_status("Error: Couldn't open file for writing")
 
 	def save_dialog(self):
-		h = "/home"
-		if 'HOME' in environ:
-			h = environ["HOME"]
 		f = QtGui.QFileDialog()
 		s = str(f.getSaveFileName(self, "Save improviser file.",
-				h, "Improviser files (*.imp)"))
+				self.default_folder, "Improviser files (*.imp)"))
 		if s != "":
 			if s[-4:].lower() != ".imp":
 				filename = s + ".imp"

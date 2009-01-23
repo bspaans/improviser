@@ -1,3 +1,6 @@
+Version 0.8.2.3:
+	* qtImproviser.py, qtGUI/MainWindow.py: Using the default folder while loading, saving, importing and exporting.
+
 Version 0.8.2.2:
 	* qtGUI/PreferencesDialog.py: Moved the frames into tabs. Added options for dialogs that are yet to come.
 

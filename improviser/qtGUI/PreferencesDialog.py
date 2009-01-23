@@ -16,6 +16,11 @@ class PreferencesDialog(QtGui.QDialog):
 		self.try_load_from_file()
 
 	def setup(self):
+		h = "/home"
+		if 'HOME' in environ:
+			self.default_folder = environ["HOME"]
+
+
 		for x in ['default', 'alsa', 'oss', 'jack', 'portaudio', 'coreaudio', 
 				'sndmgr', 'Direct Sound']:
 			self.ui.driver.addItem(x)
@@ -72,6 +77,7 @@ class PreferencesDialog(QtGui.QDialog):
 								self.ui.checkupdates.setChecked(True)
 						elif key == "folder":
 							self.ui.folder.setText(":".join(parts[1:]))
+							self.default_folder = ":".join(parts[1:])
 						elif key == "user":
 							self.ui.username.setText(":".join(parts[1:]))
 						elif key == "pass":
@@ -157,7 +163,9 @@ class PreferencesDialog(QtGui.QDialog):
 		no_fluidsynth = int(self.ui.no_fluidsynth.isChecked())
 		self.try_save_file()
 
-		params = { "username": str(self.ui.username.text()),
+		params = { "default_folder": self.default_folder,
+			   "checkupdates": self.ui.checkupdates.isChecked(),
+			   "username": str(self.ui.username.text()),
 			   "password": str(self.ui.password.text()),
 			   "login": self.login() }
 
@@ -176,25 +184,20 @@ class PreferencesDialog(QtGui.QDialog):
 				self.reject()
 
 	def load_dialog(self):
-		h = "/home"
-		if 'HOME' in environ:
-			h = environ["HOME"]
 		f = QtGui.QFileDialog()
 		s = f.getOpenFileName(self, "Load soundfont.",
-				h, "Soundfont (*.sf2)")
+				self.default_folder, "Soundfont (*.sf2)")
 		if s != "":
 			self.ui.soundfont.setText(s)
 
 	def load_folder_dialog(self):
-		h = "/home"
-		if 'HOME' in environ:
-			h = environ["HOME"]
 		f = QtGui.QFileDialog()
 		f.setFileMode(QtGui.QFileDialog.DirectoryOnly)
-		s = f.getExistingDirectory(self, "Select folder.", h)
+		s = f.getExistingDirectory(self, "Select folder.", self.default_folder)
 
 		if s != "":
 			self.ui.folder.setText(s)
+			self.default_folder = s
 
 
 
