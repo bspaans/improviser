@@ -5,6 +5,7 @@ from ProgressionDialog import ProgressionDialog
 from InstrumentDialog import InstrumentDialog
 from BlockDialog import BlockDialog
 from UploadDialog import UploadDialog
+from ProgressionBrowser import ProgressionBrowser
 from os import path, environ
 from mingus.core import diatonic
 import Progressions
@@ -336,10 +337,12 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 		self.block_changed()
 
 	def add_progression(self):
-		self.ui.progressions.addItem(
-			self.ui.progressioncombo.currentText())
-		self.ui.progressions.setCurrentRow(int(self.ui.progressions.count()) - 1)
-		self.edit_progression()
+		
+		self.ui.progressions.addItem("")
+		self.ui.progressions.setCurrentRow(self.ui.progressions.count() - 1)
+		p = ProgressionBrowser(self.ui.progressions.currentItem())
+		p.show()
+		p.exec_()
 		self.progression_changed()
 
 	def remove_progression(self):

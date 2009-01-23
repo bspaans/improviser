@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'upload.ui'
+# Form implementation generated from reading ui file 'improviser/qtGUI/upload.ui'
 #
-# Created: Wed Jan 21 05:23:27 2009
+# Created: Fri Jan 23 13:07:40 2009
 #      by: PyQt4 UI code generator 4.4.3
 #
 # WARNING! All changes made in this file will be lost!

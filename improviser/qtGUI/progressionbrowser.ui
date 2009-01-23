@@ -1,6 +1,6 @@
 <ui version="4.0" >
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog" >
+ <class>progressionBrowser</class>
+ <widget class="QDialog" name="progressionBrowser" >
   <property name="geometry" >
    <rect>
     <x>0</x>
@@ -44,7 +44,12 @@
       <number>6</number>
      </property>
      <item>
-      <widget class="QListWidget" name="listWidget" >
+      <widget class="QListWidget" name="authors" >
+       <item>
+        <property name="text" >
+         <string>Default progressions</string>
+        </property>
+       </item>
        <item>
         <property name="text" >
          <string>Own progressions</string>
@@ -58,22 +63,15 @@
       </widget>
      </item>
      <item>
-      <widget class="QListView" name="listView_2" />
+      <widget class="QListWidget" name="progressions" />
      </item>
      <item>
-      <widget class="QListView" name="listView" >
-       <property name="maximumSize" >
-        <size>
-         <width>351</width>
-         <height>16777215</height>
-        </size>
-       </property>
-      </widget>
+      <widget class="QListWidget" name="progression" />
      </item>
     </layout>
    </widget>
   </widget>
-  <widget class="QPushButton" name="pushButton" >
+  <widget class="QPushButton" name="update" >
    <property name="geometry" >
     <rect>
      <x>10</x>
@@ -107,24 +105,8 @@
  <connections>
   <connection>
    <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>Dialog</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>Dialog</receiver>
+   <receiver>progressionBrowser</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel" >
