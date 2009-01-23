@@ -480,6 +480,8 @@ def load_fluidsynth(options):
 	if not options.no_fluidsynth:
 		try:
 			from mingus.midi import fluidsynth
+		except ImportError, msg:
+			raise OptionError, msg
 		except:
 			raise OptionError, "Couldn't load the FluidSynth bindings in mingus. Are you sure FluidSyth has been installed?"
 		if hasattr(options, 'driver'):
