@@ -28,6 +28,10 @@ class PreferencesDialog(QtGui.QDialog):
 			QtCore.SIGNAL("clicked()"),
 			self.load_dialog)
 
+		self.connect(self.ui.browsefolder,
+			QtCore.SIGNAL("clicked()"),
+			self.load_folder_dialog)
+
 		self.connect(self.ui.no_fluidsynth,
 			QtCore.SIGNAL("stateChanged(int)"),
 			lambda x: self.ui.browsebutton.setEnabled(not(x)) or \
@@ -63,6 +67,11 @@ class PreferencesDialog(QtGui.QDialog):
 								self.ui.username.setEnabled(False)
 								self.ui.password.setEnabled(False)
 								self.ui.nologin.setChecked(True)
+						elif key == "checkupdates":
+							if parts[1] == "1":
+								self.ui.checkupdates.setChecked(True)
+						elif key == "folder":
+							self.ui.folder.setText(":".join(parts[1:]))
 						elif key == "user":
 							self.ui.username.setText(":".join(parts[1:]))
 						elif key == "pass":
@@ -82,6 +91,8 @@ class PreferencesDialog(QtGui.QDialog):
 				fp.write("user:%s\n" % self.ui.username.text())
 				fp.write("pass:%s\n" % self.ui.password.text())
 				fp.write("nologin:%d\n" % self.ui.nologin.isChecked())
+				fp.write("folder:%s\n" % self.ui.folder.text())
+				fp.write("checkupdates:%d\n" % self.ui.checkupdates.isChecked())
 				fp.close()
 			except:
 				pass
@@ -173,6 +184,18 @@ class PreferencesDialog(QtGui.QDialog):
 				h, "Soundfont (*.sf2)")
 		if s != "":
 			self.ui.soundfont.setText(s)
+
+	def load_folder_dialog(self):
+		h = "/home"
+		if 'HOME' in environ:
+			h = environ["HOME"]
+		f = QtGui.QFileDialog()
+		f.setFileMode(QtGui.QFileDialog.DirectoryOnly)
+		s = f.getExistingDirectory(self, "Select folder.", h)
+
+		if s != "":
+			self.ui.folder.setText(s)
+
 
 
 def combo_index_by_text(combo, text):

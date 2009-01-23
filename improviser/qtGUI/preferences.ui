@@ -1,232 +1,352 @@
 <ui version="4.0" >
  <class>preferencesDialog</class>
  <widget class="QDialog" name="preferencesDialog" >
+  <property name="windowModality" >
+   <enum>Qt::WindowModal</enum>
+  </property>
   <property name="geometry" >
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>417</width>
-    <height>473</height>
+    <width>461</width>
+    <height>339</height>
    </rect>
+  </property>
+  <property name="sizePolicy" >
+   <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle" >
    <string>Preferences</string>
   </property>
+  <property name="sizeGripEnabled" >
+   <bool>false</bool>
+  </property>
   <property name="modal" >
    <bool>true</bool>
   </property>
-  <widget class="QDialogButtonBox" name="buttonBox" >
-   <property name="geometry" >
-    <rect>
-     <x>140</x>
-     <y>430</y>
-     <width>261</width>
-     <height>32</height>
-    </rect>
-   </property>
-   <property name="orientation" >
-    <enum>Qt::Horizontal</enum>
-   </property>
-   <property name="standardButtons" >
-    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-   </property>
-  </widget>
-  <widget class="QGroupBox" name="groupBox" >
+  <widget class="QWidget" name="verticalLayoutWidget" >
    <property name="geometry" >
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>391</width>
-     <height>161</height>
+     <width>441</width>
+     <height>321</height>
     </rect>
    </property>
-   <property name="title" >
-    <string>Audio</string>
-   </property>
-   <widget class="QCheckBox" name="no_fluidsynth" >
-    <property name="geometry" >
-     <rect>
-      <x>30</x>
-      <y>110</y>
-      <width>83</width>
-      <height>22</height>
-     </rect>
+   <layout class="QVBoxLayout" name="verticalLayout" >
+    <property name="sizeConstraint" >
+     <enum>QLayout::SetDefaultConstraint</enum>
     </property>
-    <property name="statusTip" >
-     <string>Disable audio output. Only write midi file.</string>
+    <property name="leftMargin" >
+     <number>0</number>
     </property>
-    <property name="text" >
-     <string>No audio</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="browsebutton" >
-    <property name="geometry" >
-     <rect>
-      <x>290</x>
-      <y>30</y>
-      <width>80</width>
-      <height>27</height>
-     </rect>
-    </property>
-    <property name="text" >
-     <string>Browse</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_9" >
-    <property name="geometry" >
-     <rect>
-      <x>30</x>
-      <y>30</y>
-      <width>81</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="statusTip" >
-     <string>The location of the soundfont to use</string>
-    </property>
-    <property name="text" >
-     <string>Soundfont</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_10" >
-    <property name="geometry" >
-     <rect>
-      <x>30</x>
-      <y>70</y>
-      <width>81</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text" >
-     <string>Audio driver</string>
-    </property>
-   </widget>
-   <widget class="QComboBox" name="driver" >
-    <property name="geometry" >
-     <rect>
-      <x>130</x>
-      <y>70</y>
-      <width>231</width>
-      <height>22</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="soundfont" >
-    <property name="enabled" >
-     <bool>false</bool>
-    </property>
-    <property name="geometry" >
-     <rect>
-      <x>130</x>
-      <y>30</y>
-      <width>151</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="statusTip" >
-     <string>The location of the soundfont to use</string>
-    </property>
-    <property name="text" >
-     <string/>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QGroupBox" name="groupBox_2" >
-   <property name="geometry" >
-    <rect>
-     <x>10</x>
-     <y>180</y>
-     <width>391</width>
-     <height>241</height>
-    </rect>
-   </property>
-   <property name="title" >
-    <string>Login</string>
-   </property>
-   <widget class="QLabel" name="label" >
-    <property name="geometry" >
-     <rect>
-      <x>20</x>
-      <y>120</y>
-      <width>71</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text" >
-     <string>Username</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_2" >
-    <property name="geometry" >
-     <rect>
-      <x>20</x>
-      <y>160</y>
-      <width>61</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text" >
-     <string>Password</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_3" >
-    <property name="geometry" >
-     <rect>
-      <x>20</x>
-      <y>30</y>
-      <width>341</width>
-      <height>71</height>
-     </rect>
-    </property>
-    <property name="lineWidth" >
-     <number>1</number>
-    </property>
-    <property name="text" >
-     <string>Login if you want to be able to upload your songs, blocks, instruments and/or progressions to the Improviser site (http://improviser.onderstekop.nl/). Login with a name that hasn't been used to register it.</string>
-    </property>
-    <property name="wordWrap" >
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="username" >
-    <property name="geometry" >
-     <rect>
-      <x>130</x>
-      <y>120</y>
-      <width>221</width>
-      <height>23</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="password" >
-    <property name="geometry" >
-     <rect>
-      <x>130</x>
-      <y>160</y>
-      <width>221</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="inputMask" >
-     <string/>
-    </property>
-    <property name="echoMode" >
-     <enum>QLineEdit::Password</enum>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="nologin" >
-    <property name="geometry" >
-     <rect>
-      <x>20</x>
-      <y>200</y>
-      <width>83</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="text" >
-     <string>Don't login</string>
-    </property>
-   </widget>
+    <item>
+     <widget class="QTabWidget" name="Files" >
+      <property name="tabPosition" >
+       <enum>QTabWidget::West</enum>
+      </property>
+      <property name="currentIndex" >
+       <number>2</number>
+      </property>
+      <widget class="QWidget" name="tab" >
+       <attribute name="title" >
+        <string>Login</string>
+       </attribute>
+       <widget class="QGroupBox" name="groupBox_2" >
+        <property name="geometry" >
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>391</width>
+          <height>231</height>
+         </rect>
+        </property>
+        <property name="title" >
+         <string>Login</string>
+        </property>
+        <widget class="QLabel" name="label" >
+         <property name="geometry" >
+          <rect>
+           <x>20</x>
+           <y>120</y>
+           <width>71</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text" >
+          <string>Username</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_2" >
+         <property name="geometry" >
+          <rect>
+           <x>20</x>
+           <y>160</y>
+           <width>61</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text" >
+          <string>Password</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_3" >
+         <property name="geometry" >
+          <rect>
+           <x>20</x>
+           <y>30</y>
+           <width>341</width>
+           <height>71</height>
+          </rect>
+         </property>
+         <property name="lineWidth" >
+          <number>1</number>
+         </property>
+         <property name="text" >
+          <string>Login if you want to be able to upload your songs, blocks, instruments and/or progressions to the Improviser site (http://improviser.onderstekop.nl/). Login with a name that hasn't been used to register it.</string>
+         </property>
+         <property name="wordWrap" >
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="username" >
+         <property name="geometry" >
+          <rect>
+           <x>130</x>
+           <y>120</y>
+           <width>221</width>
+           <height>23</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="password" >
+         <property name="geometry" >
+          <rect>
+           <x>130</x>
+           <y>160</y>
+           <width>221</width>
+           <height>23</height>
+          </rect>
+         </property>
+         <property name="inputMask" >
+          <string/>
+         </property>
+         <property name="echoMode" >
+          <enum>QLineEdit::Password</enum>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="nologin" >
+         <property name="geometry" >
+          <rect>
+           <x>20</x>
+           <y>200</y>
+           <width>83</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text" >
+          <string>Don't login</string>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_2" >
+       <attribute name="title" >
+        <string>Audio</string>
+       </attribute>
+       <widget class="QGroupBox" name="groupBox" >
+        <property name="geometry" >
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>391</width>
+          <height>141</height>
+         </rect>
+        </property>
+        <property name="title" >
+         <string>Audio</string>
+        </property>
+        <widget class="QCheckBox" name="no_fluidsynth" >
+         <property name="geometry" >
+          <rect>
+           <x>30</x>
+           <y>110</y>
+           <width>83</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="statusTip" >
+          <string>Disable audio output. Only write midi file.</string>
+         </property>
+         <property name="text" >
+          <string>No audio</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="browsebutton" >
+         <property name="geometry" >
+          <rect>
+           <x>290</x>
+           <y>30</y>
+           <width>80</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="text" >
+          <string>Browse</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_9" >
+         <property name="geometry" >
+          <rect>
+           <x>30</x>
+           <y>30</y>
+           <width>81</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="statusTip" >
+          <string>The location of the soundfont to use</string>
+         </property>
+         <property name="text" >
+          <string>Soundfont</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_10" >
+         <property name="geometry" >
+          <rect>
+           <x>30</x>
+           <y>70</y>
+           <width>81</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text" >
+          <string>Audio driver</string>
+         </property>
+        </widget>
+        <widget class="QComboBox" name="driver" >
+         <property name="geometry" >
+          <rect>
+           <x>130</x>
+           <y>70</y>
+           <width>231</width>
+           <height>22</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="soundfont" >
+         <property name="enabled" >
+          <bool>false</bool>
+         </property>
+         <property name="geometry" >
+          <rect>
+           <x>130</x>
+           <y>30</y>
+           <width>151</width>
+           <height>23</height>
+          </rect>
+         </property>
+         <property name="statusTip" >
+          <string>The location of the soundfont to use</string>
+         </property>
+         <property name="text" >
+          <string/>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="Files" >
+       <attribute name="title" >
+        <string>Files</string>
+       </attribute>
+       <widget class="QGroupBox" name="groupBox_3" >
+        <property name="geometry" >
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>391</width>
+          <height>101</height>
+         </rect>
+        </property>
+        <property name="title" >
+         <string>Files</string>
+        </property>
+        <widget class="QPushButton" name="browsefolder" >
+         <property name="geometry" >
+          <rect>
+           <x>290</x>
+           <y>30</y>
+           <width>80</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="text" >
+          <string>Browse</string>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="folder" >
+         <property name="enabled" >
+          <bool>false</bool>
+         </property>
+         <property name="geometry" >
+          <rect>
+           <x>130</x>
+           <y>30</y>
+           <width>151</width>
+           <height>23</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_4" >
+         <property name="geometry" >
+          <rect>
+           <x>30</x>
+           <y>30</y>
+           <width>51</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text" >
+          <string>Folder</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="checkupdates" >
+         <property name="geometry" >
+          <rect>
+           <x>30</x>
+           <y>70</y>
+           <width>211</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="toolTip" >
+          <string>Connect to the server and see if there are any new files.</string>
+         </property>
+         <property name="statusTip" >
+          <string/>
+         </property>
+         <property name="text" >
+          <string>Check for updates on start up</string>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QDialogButtonBox" name="buttonBox" >
+      <property name="orientation" >
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="standardButtons" >
+       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>

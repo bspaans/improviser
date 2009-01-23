@@ -1,3 +1,6 @@
+Version 0.8.2.2:
+	* qtGUI/PreferencesDialog.py: Moved the frames into tabs. Added options for dialogs that are yet to come.
+
 Version 0.8.2.1
 	* Options.py: Improved error message when fluidsynth library can't be loaded.
 	* Arduino.py: Only try to import the serial library when the Arduino is about to be used.
