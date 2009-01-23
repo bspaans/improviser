@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'progressionbrowser.ui'
 #
-# Created: Fri Jan 23 15:45:10 2009
+# Created: Fri Jan 23 16:20:04 2009
 #      by: PyQt4 UI code generator 4.4.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -38,7 +38,7 @@ class Ui_progressionBrowser(object):
         self.progression.setObjectName("progression")
         self.horizontalLayout.addWidget(self.progression)
         self.update = QtGui.QPushButton(progressionBrowser)
-        self.update.setEnabled(False)
+        self.update.setEnabled(True)
         self.update.setGeometry(QtCore.QRect(10, 190, 77, 29))
         self.update.setObjectName("update")
         self.buttonBox = QtGui.QDialogButtonBox(progressionBrowser)

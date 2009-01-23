@@ -2,6 +2,7 @@ from PyQt4 import QtCore, QtGui
 from qtGUI.progressionBrowser import Ui_progressionBrowser
 import Options
 import Progressions
+import feedparser
 
 DEFAULT = 1
 OWN = 2
@@ -42,6 +43,16 @@ class ProgressionBrowser(QtGui.QDialog):
 		self.state = DEFAULT
 		self.show_defaults()
 		self.ui.authors.setCurrentRow(0)
+		self.check_for_updates()
+
+	def check_for_updates(self):
+		d = feedparser.parse(Options.UPLOAD_HOME + "updates.php?type=%d" % Options.UPLOAD_PROGRESSION)
+		if len(d["entries"]) > 0:
+			self.ui.update.setText("Update (%d)" % len(d["entries"]))
+			self.ui.update.setEnabled(True)
+		else:
+			self.ui.update.setEnabled(True)
+
 
 	def show_progressions(self):
 		i = self.ui.authors.currentRow()
@@ -98,6 +109,7 @@ class ProgressionBrowser(QtGui.QDialog):
 		t = str(self.ui.progressions.item(i).text())
 		prog = self.get_progression(False)
 		self.item.setText("%s %s" % (t, prog))
+		self.reject()
 		
 	
 	def update_database(self):
