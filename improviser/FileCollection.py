@@ -71,6 +71,9 @@ class FileCollection:
 		res['Default'] = defaults
 		return res
 
+	def add(self, content_type, id, author, title, description, content):
+		if content_type == Option.UPLOAD_PROGRESSION:
+			return self.add_Progression(id, author, title, description, content)
 
 	def add_Progression(self, id, author, title, description, content):
 		self.progressions.append([id, Options.UPLOAD_PROGRESSION, author, title, description, content])

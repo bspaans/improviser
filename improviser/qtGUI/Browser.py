@@ -1,5 +1,8 @@
 from PyQt4 import QtCore, QtGui
 from qtGUI.browserDialog import Ui_browserDialog
+import feedparser
+import Options
+import urllib
 
 DEFAULT = 1
 OWN = 2
@@ -31,7 +34,7 @@ class Browser(QtGui.QDialog):
 			self.show_item)
 		self.connect(self.ui.buttonBox,
 			QtCore.SIGNAL("accepted()"),
-			self.set_progression)
+			self.set_item)
 
 		self.state = DEFAULT
 		self.show_defaults()
@@ -63,22 +66,46 @@ class Browser(QtGui.QDialog):
 
 	def show_all(self):
 		self.ui.content.clear()
-		prog = self.filecollection.get(self.content_type)
-		for x in prog:
-			for y in prog[x]:
+		p = self.filecollection.get(self.content_type)
+		for x in p:
+			for y in p[x]:
 				self.ui.content.addItem(y + "  [%s]" % (x))
 		self.ui.content.setCurrentRow(0)
 
 	def show_defaults(self):
-		pass
+		self.ui.content.clear()
+		for x in self.filecollection.get(self.content_type, True):
+			self.ui.content.addItem(x)
+		self.ui.content.setCurrentRow(0)
+
+	def show_author(self, author):
+		p = self.filecollection.get(self.content_type)
+		self.ui.content.clear()
+		for x in p[author]:
+			self.ui.content.addItem(x)
+		self.ui.content.setCurrentRow(0)
+
+	def set_state(self):
+		i = self.ui.authors.currentRow()
+		if i == 0:
+			self.state = DEFAULT
+		elif i == 1:
+			self.state = OWN
+		elif i == 2:
+			self.state = ALL
+		else:
+			self.state = OTHER
+
+
 
 	def check_for_updates(self):
 		if str(self.ui.update.text())[:6] == "Update":
 			return self.update_database()
 		try:
 			d = feedparser.parse(Options.UPLOAD_HOME + "updates.php?type=%d&ID=%d" % 
-					(self.content_type, self.filecollection.last_ID[Options.UPLOAD_PROGRESSION]))
+					(self.content_type, self.filecollection.last_ID[self.content_type]))
 		except:
+			q = QtGui.QMessageBox.warning(self, "Error", "An error occured while trying to update the library.", 1,0)
 			return
 		if len(d["entries"]) > 0:
 			self.ui.update.setText("Update (%d)" % len(d["entries"]))
@@ -86,3 +113,30 @@ class Browser(QtGui.QDialog):
 		else:
 			q = QtGui.QMessageBox.information(self, "Update", "There are currently no updates available. Your collection is up to date.", 1,0)
 			self.ui.update.setText("Check for Updates")
+
+	def update_database(self):
+		if not self.filecollection.loggedin:
+			return 
+		progress = QtGui.QProgressDialog("Updating library...", "Abort", 0, len(self.entries), self)
+		for i, x in enumerate(self.entries):
+			id = int(x.id[len(Options.UPLOAD_HOME):])
+			download = "%s (%d.prg)" % (x.title, id)
+			progress.setLabelText("Downloading %s..." % download)
+			print "Downloading %s..." % download
+			progress.setValue(i)
+			try:
+				f = urllib.urlopen(Options.UPLOAD_HOME + "download.php?ID=%d" % id)
+				content = f.read()
+				f.close()
+				self.filecollection.add(self.content_type, id, x.author, x.title, x.description, content)
+			except:
+				pass
+
+			if progress.wasCanceled():
+				break
+		progress.setValue(len(self.entries))
+		self.filecollection.save()
+		q = QtGui.QMessageBox.information(self, "Update", "Added %d new item(s). Your collection is up to date." % (i + 1), 1,0)
+		self.ui.update.setText("Check for Updates")
+		self.show_defaults()
+		self.ui.authors.setCurrentRow(0)
