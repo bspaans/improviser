@@ -27,9 +27,13 @@ class FileCollection:
 	def get_Progressions(self, only_defaults = False, parse_content = True):
 		defaults = {"Empty": ""}
 
+		# Gather default (builtin) progressions.
 		for x in Options.get_available_progressions():
 			prog = Options.progression_to_string(getattr(Progressions, x))[1:-1]
-			defaults[x] = prog
+			if not parse_content:
+				defaults[x] = "%s { %s }" % (x, prog)
+			else:
+				defaults[x] = prog
 
 		if only_defaults:
 			return defaults
@@ -39,18 +43,21 @@ class FileCollection:
 			if not res.has_key(x[2]):
 				res[x[2]] = {}
 
+			# Parse progressions in x[5]
 			for p in x[5].split(","):
 				if not res[x[2]].has_key(x[3]):
 					res[x[2]][x[3]] = ""
 				if parse_content:
 					params = p.split(" ")
 					name = params[0]
+					print name
 					params = " ".join(params[1:])[1:-1]
 
 					res[x[2]][x[3]] += params
 				else:
-					res[x[2]][x[3]] += p + ", "
+					res[x[2]][x[3]] += p + ","
 
+			# Remove comma
 			if not parse_content:
 				res[x[2]][x[3]] = res[x[2]][x[3]][:-2]
 

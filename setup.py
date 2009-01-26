@@ -7,7 +7,7 @@ setup(
 	long_description="Experiments in musical content generation.",
 	author="Bart Spaans",
 	author_email="onderstekop@gmail.com",
-	url="http://www.onderstekop.nl/",
+	url="http://improviser.onderstekop.nl/",
 	packages = ['improviser', 'improviser.Blocks', 'improviser.Musicians',
 		'improviser.Musicians.Bassists', 'improviser.Musicians.Pianists', 
 		'improviser.Musicians.Drummers', 'improviser.Musicians.Accompaniment', 

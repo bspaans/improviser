@@ -100,7 +100,7 @@ class ProgressionBrowser(QtGui.QDialog):
 
 	def show_progression(self):
 		self.ui.progression.clear()
-		for x in self.get_progression().split(" "):
+		for x in self.get_progression().split():
 			if x not in ["{", "}", "", " "]:
 				self.ui.progression.addItem(x.replace("*", " "))
 
