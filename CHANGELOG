@@ -1,3 +1,9 @@
+Version 0.8.5.1:
+	* qtGUI/MainWindow.py: Added layouts and resize support (almost complete).
+
+Version 0.8.5.0:
+	* qtGUI/MainWindow.py: Added a GraphicsView showing the order of instruments, blocks and progressions.
+
 Version 0.8.4.0
 	* FileCollection.py: Added support for adding, saving, loading and getting instruments.
 	* qtGUI/ProgressionBrowser.py: Refactored.

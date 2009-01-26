@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>813</width>
-    <height>578</height>
+    <width>809</width>
+    <height>608</height>
    </rect>
   </property>
   <property name="sizePolicy" >
@@ -46,7 +46,7 @@
       <x>0</x>
       <y>0</y>
       <width>801</width>
-      <height>531</height>
+      <height>590</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout" >
@@ -63,21 +63,27 @@
       <number>1</number>
      </property>
      <property name="bottomMargin" >
-      <number>1</number>
+      <number>6</number>
      </property>
      <item>
       <widget class="QTabWidget" name="Tabs" >
        <property name="sizePolicy" >
-        <sizepolicy vsizetype="Minimum" hsizetype="MinimumExpanding" >
+        <sizepolicy vsizetype="Fixed" hsizetype="MinimumExpanding" >
          <horstretch>0</horstretch>
-         <verstretch>2</verstretch>
+         <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="minimumSize" >
+        <size>
+         <width>0</width>
+         <height>325</height>
+        </size>
        </property>
        <property name="tabShape" >
         <enum>QTabWidget::Rounded</enum>
        </property>
        <property name="currentIndex" >
-        <number>0</number>
+        <number>2</number>
        </property>
        <property name="elideMode" >
         <enum>Qt::ElideLeft</enum>
@@ -98,6 +104,9 @@
          <layout class="QFormLayout" name="formLayout" >
           <property name="sizeConstraint" >
            <enum>QLayout::SetMinimumSize</enum>
+          </property>
+          <property name="formAlignment" >
+           <set>Qt::AlignCenter</set>
           </property>
           <item row="1" column="0" >
            <widget class="QLabel" name="label_12" >
@@ -127,6 +136,12 @@
           </item>
           <item row="3" column="0" >
            <widget class="QLabel" name="label_11" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="text" >
              <string>Visualization</string>
             </property>
@@ -825,46 +840,30 @@
       </layout>
      </item>
      <item>
-      <widget class="QGroupBox" name="groupBox" >
+      <widget class="QGraphicsView" name="graphicsView" >
        <property name="sizePolicy" >
         <sizepolicy vsizetype="MinimumExpanding" hsizetype="MinimumExpanding" >
          <horstretch>0</horstretch>
-         <verstretch>1</verstretch>
+         <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="title" >
-        <string/>
+       <property name="alignment" >
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
        </property>
-       <widget class="QGraphicsView" name="graphicsView" >
-        <property name="geometry" >
-         <rect>
-          <x>10</x>
-          <y>20</y>
-          <width>771</width>
-          <height>131</height>
-         </rect>
-        </property>
-        <property name="sizePolicy" >
-         <sizepolicy vsizetype="MinimumExpanding" hsizetype="MinimumExpanding" >
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="alignment" >
-         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-        </property>
-       </widget>
       </widget>
      </item>
     </layout>
    </widget>
+   <zorder>verticalLayoutWidget</zorder>
+   <zorder>groupBox</zorder>
+   <zorder>groupBox</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar" >
    <property name="geometry" >
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>813</width>
+     <width>809</width>
      <height>22</height>
     </rect>
    </property>

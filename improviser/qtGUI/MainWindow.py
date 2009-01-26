@@ -59,7 +59,14 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 			self.ui.visualization.addItem(x)
 				
 
+	def wresize(self):
+		print "resize"
+
 	def connect_widgets(self):
+		self.setCentralWidget(self.ui.verticalLayoutWidget)
+		self.connect(self,
+			QtCore.SIGNAL("resizeEvent(event)"),
+			lambda x: self.wresize())
 		self.connect(self.ui.startbutton, 
 			QtCore.SIGNAL("clicked()"), 
 			self.start_simulation)
