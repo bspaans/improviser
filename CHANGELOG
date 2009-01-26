@@ -1,3 +1,9 @@
+Version 0.8.4.0
+	* FileCollection.py: Added support for adding, saving, loading and getting instruments.
+	* qtGUI/ProgressionBrowser.py: Refactored.
+	* qtGUI/Browser.py: A general purpose collection browser
+	* qtGUI/InstrumentBrowser.py: A fully working instrument browser.
+
 Version 0.8.3.1:
 	* FileCollection.py: Keeps track of last downloaded progressions.
 	* qtGUI/ProgressionBrowser.py: Progression Browser is fully working.
