@@ -86,7 +86,16 @@ class FileCollection:
 				if parse_content:
 					defaults[x] += i.__class__.__name__ + " "
 				else:
-					defaults[x] += i.__class__.__name__ + ","
+					par = ""
+					for p in i.params:
+						r = str(i.params[p])
+						if r == "True":
+							r = "1"
+						elif r == "False":
+							r = "0"
+						par += "%s:%s " % (p, r)
+
+					defaults[x] += "%s { %s}," %  (i.__class__.__name__, par)
 
 
 		if only_defaults:
