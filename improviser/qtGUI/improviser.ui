@@ -520,7 +520,7 @@
       <property name="geometry" >
        <rect>
         <x>700</x>
-        <y>330</y>
+        <y>130</y>
         <width>80</width>
         <height>27</height>
        </rect>
@@ -616,7 +616,7 @@
       <property name="geometry" >
        <rect>
         <x>700</x>
-        <y>330</y>
+        <y>130</y>
         <width>80</width>
         <height>27</height>
        </rect>
@@ -677,6 +677,9 @@
         <width>80</width>
         <height>27</height>
        </rect>
+      </property>
+      <property name="statusTip" >
+       <string>Add progression</string>
       </property>
       <property name="text" >
        <string>Add</string>
@@ -754,7 +757,7 @@
       <property name="geometry" >
        <rect>
         <x>700</x>
-        <y>330</y>
+        <y>130</y>
         <width>80</width>
         <height>27</height>
        </rect>
@@ -781,7 +784,7 @@
    <widget class="QPushButton" name="startbutton" >
     <property name="geometry" >
      <rect>
-      <x>550</x>
+      <x>640</x>
       <y>420</y>
       <width>80</width>
       <height>27</height>
@@ -800,7 +803,7 @@
     </property>
     <property name="geometry" >
      <rect>
-      <x>640</x>
+      <x>730</x>
       <y>420</y>
       <width>80</width>
       <height>27</height>
@@ -811,25 +814,6 @@
     </property>
     <property name="text" >
      <string>Stop</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="uploadbutton" >
-    <property name="enabled" >
-     <bool>false</bool>
-    </property>
-    <property name="geometry" >
-     <rect>
-      <x>730</x>
-      <y>420</y>
-      <width>80</width>
-      <height>27</height>
-     </rect>
-    </property>
-    <property name="statusTip" >
-     <string>Upload song to the Improviser homepage</string>
-    </property>
-    <property name="text" >
-     <string>Upload</string>
     </property>
    </widget>
   </widget>
@@ -1000,7 +984,6 @@
   <tabstop>visualization</tabstop>
   <tabstop>startbutton</tabstop>
   <tabstop>stopbutton</tabstop>
-  <tabstop>uploadbutton</tabstop>
   <tabstop>movement</tabstop>
   <tabstop>loop</tabstop>
   <tabstop>loopslide</tabstop>
@@ -1065,8 +1048,8 @@
      <y>247</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>751</x>
-     <y>120</y>
+     <x>753</x>
+     <y>167</y>
     </hint>
    </hints>
   </connection>
@@ -1081,8 +1064,8 @@
      <y>262</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>751</x>
-     <y>120</y>
+     <x>753</x>
+     <y>167</y>
     </hint>
    </hints>
   </connection>
@@ -1097,8 +1080,8 @@
      <y>262</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>751</x>
-     <y>120</y>
+     <x>753</x>
+     <y>167</y>
     </hint>
    </hints>
   </connection>

@@ -1,115 +1,43 @@
 from PyQt4 import QtCore, QtGui
-from qtGUI.progressionBrowser import Ui_progressionBrowser
 import Options
 import Progressions
 import feedparser
 import urllib
+from Browser import Browser
 
 DEFAULT = 1
 OWN = 2
 ALL = 3
 OTHER = 10
 
-class ProgressionBrowser(QtGui.QDialog):
+class ProgressionBrowser(Browser):
 
 
-	def __init__(self, proglist, filecollection):
-		QtGui.QDialog.__init__(self)
-		self.progression_list = proglist
-		self.filecollection = filecollection
-		self.ui = Ui_progressionBrowser()
-		self.ui.setupUi(self)
-		self.setup()
 
 	def setup(self):
+		Browser.setup(self)
+		[self.ui.authors.addItem(x) for x in self.filecollection.get_Progressions() if x != 'Default']
+		map(lambda x: self.ui.authors.item(x).setFont(QtGui.QFont("", -1, 75)), range(3))
 
-
-		self.connect(self.ui.update,
-			QtCore.SIGNAL("clicked()"),
-			self.check_for_updates)
-		self.connect(self.ui.authors,
-			QtCore.SIGNAL("itemSelectionChanged()"),
-			self.show_progressions)
-		self.connect(self.ui.progressions,
-			QtCore.SIGNAL("itemSelectionChanged()"),
-			self.show_progression)
-		self.connect(self.ui.buttonBox,
-			QtCore.SIGNAL("accepted()"),
-			self.set_progression)
-
-		for x in self.filecollection.get_Progressions():
-			if x != 'Default':
-				self.ui.authors.addItem(x)
-
-
-		self.state = DEFAULT
-		self.show_defaults()
-		self.ui.authors.setCurrentRow(0)
-		if not self.filecollection.loggedin:
-			self.ui.update.setEnabled(False)
-			
-
-	def check_for_updates(self):
-		if str(self.ui.update.text())[:6] == "Update":
-			return self.update_database()
-		try:
-			d = feedparser.parse(Options.UPLOAD_HOME + "updates.php?type=%d&ID=%d" % 
-					(Options.UPLOAD_PROGRESSION, self.filecollection.last_progression))
-		except:
-			return
-		if len(d["entries"]) > 0:
-			self.ui.update.setText("Update (%d)" % len(d["entries"]))
-			self.entries = d["entries"]
-		else:
-			q = QtGui.QMessageBox.information(self, "Update", "There are currently no updates available. Your progressions are up to date.", 1,0)
-			self.ui.update.setText("Check for Updates")
-
-
-	def show_progressions(self):
-		self.set_state()
-		i = self.ui.authors.currentRow()
-		t = str(self.ui.authors.item(i).text())
-		if i >= 0:
-			if i == 0:
-				self.show_defaults()
-			elif i == 1:
-				self.show_own()
-			elif i == 2:
-				self.show_all()
-			else:
-				self.show_author(t)
 
 	def show_defaults(self):
-		self.ui.progressions.clear()
+		self.ui.content.clear()
 		for x in self.filecollection.get_Progressions(True):
-			self.ui.progressions.addItem(x)
-		self.ui.progressions.setCurrentRow(0)
+			self.ui.content.addItem(x)
+		self.ui.content.setCurrentRow(0)
 
-	def show_own(self):
-		self.ui.progressions.clear()
-		self.show_author(self.filecollection.credentials["username"])
-
-	def show_all(self):
-		self.ui.progressions.clear()
-		prog = self.filecollection.get_Progressions()
-		for x in prog:
-			for y in prog[x]:
-				self.ui.progressions.addItem(y + "  [%s]" % (x))
-		self.ui.progressions.setCurrentRow(0)
-		
-
-	def show_progression(self):
-		self.ui.progression.clear()
+	def show_item(self):
+		self.ui.item.clear()
 		for x in self.get_progression(",").split():
 			if x not in ["{", "}", "", " "]:
-				self.ui.progression.addItem(x.replace("*", " "))
+				self.ui.item.addItem(x.replace("*", " "))
 
 	def show_author(self, author):
 		prog = self.filecollection.get_Progressions()
-		self.ui.progressions.clear()
+		self.ui.content.clear()
 		for x in prog[author]:
-			self.ui.progressions.addItem(x)
-		self.ui.progressions.setCurrentRow(0)
+			self.ui.content.addItem(x)
+		self.ui.content.setCurrentRow(0)
 
 
 	def set_state(self):
@@ -125,8 +53,8 @@ class ProgressionBrowser(QtGui.QDialog):
 
 
 	def get_progression(self, for_show = True):
-		i = self.ui.progressions.currentRow()
-		t = str(self.ui.progressions.item(i).text())
+		i = self.ui.content.currentRow()
+		t = str(self.ui.content.item(i).text())
 		if self.state == DEFAULT:
 			defa = self.filecollection.get_Progressions(True)
 			if defa.has_key(t):
@@ -165,16 +93,16 @@ class ProgressionBrowser(QtGui.QDialog):
 		return ""
 
 	def set_progression(self):
-		i = self.ui.progressions.currentRow()
-		t = str(self.ui.progressions.item(i).text())
+		i = self.ui.content.currentRow()
+		t = str(self.ui.content.item(i).text())
 		self.set_state()
 		res = self.get_progression(False)
 		for x in res.split(","):
 			if x not in ["", " ", "{}", "{ }"]:
 				if self.state == DEFAULT:
-					self.progression_list.addItem("%s %s" % (t,x))
+					self.listwidget.addItem("%s %s" % (t,x))
 				else:
-					self.progression_list.addItem(x)
+					self.listwidget.addItem(x)
 
 		self.reject()
 		

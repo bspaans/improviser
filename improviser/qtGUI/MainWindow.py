@@ -190,9 +190,6 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 			self.highlighted_movement)
 
 		if self.loggedin:
-			self.connect(self.ui.uploadbutton,
-				QtCore.SIGNAL("clicked()"),
-				self.upload_song)
 			self.connect(self.ui.uploadsong,
 				QtCore.SIGNAL("activated()"),
 				self.upload_song)
@@ -207,10 +204,8 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 				self.upload_blocks)
 
 
-			self.ui.uploadbutton.setEnabled(True)
 			self.ui.menuUpload.setEnabled(True)
 		else:
-			self.ui.uploadbutton.setEnabled(False)
 			self.ui.menuUpload.setEnabled(False)
 		
 
@@ -331,7 +326,7 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 
 	def add_progression(self):
 		
-		p = ProgressionBrowser(self.ui.progressions, self.filecollection)
+		p = ProgressionBrowser(self.ui.progressions, self.filecollection, Options.UPLOAD_PROGRESSION)
 		p.show()
 		p.exec_()
 		self.progression_changed()

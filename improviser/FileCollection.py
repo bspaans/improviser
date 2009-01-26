@@ -10,11 +10,13 @@ class FileCollection:
 	credentials = {}
 	progressions = []
 	checkupdates = False
-	last_progression = 0
+	last_ID = {}
 
 
 	def __init__(self, folder):
 		self.folder = folder
+		for x in [Options.UPLOAD_PROGRESSION, Options.UPLOAD_SONG, Options.UPLOAD_INSTRUMENTS, Options.UPLOAD_BLOCKS]:
+			self.last_ID[x] = 0
 		self.setup()
 
 	def setup(self):
@@ -24,6 +26,10 @@ class FileCollection:
 		if path.exists(self.folder + "content.xml"):
 			self.load()
 
+
+	def get(self, content_type, only_defaults = False, parse_content = True):
+		if content_type == Options.UPLOAD_PROGRESSION:
+			return self.get_Progressions(only_defaults, parse_content)
 
 	def get_Progressions(self, only_defaults = False, parse_content = True):
 		defaults = {"Empty": ""}
@@ -129,5 +135,5 @@ class FileCollection:
 
 			if content_type == Options.UPLOAD_PROGRESSION:
 				self.progressions.append([id, content_type, author, title, description, content])
-				if id > self.last_progression:
-					self.last_progression = id
+				if id > self.last_ID[Options.UPLOAD_PROGRESSION]:
+					self.last_ID[Options.UPLOAD_PROGRESSION] = id

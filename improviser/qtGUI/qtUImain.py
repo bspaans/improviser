@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'improviser/qtGUI/improviser.ui'
+# Form implementation generated from reading ui file 'improviser.ui'
 #
-# Created: Mon Jan 26 05:09:29 2009
+# Created: Mon Jan 26 06:00:34 2009
 #      by: PyQt4 UI code generator 4.4.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -150,7 +150,7 @@ class Ui_MainWindow(object):
         self.downblock.setGeometry(QtCore.QRect(700, 250, 80, 27))
         self.downblock.setObjectName("downblock")
         self.clearblocks = QtGui.QPushButton(self.tab_3)
-        self.clearblocks.setGeometry(QtCore.QRect(700, 330, 80, 27))
+        self.clearblocks.setGeometry(QtCore.QRect(700, 130, 80, 27))
         self.clearblocks.setObjectName("clearblocks")
         self.copyblock = QtGui.QPushButton(self.tab_3)
         self.copyblock.setGeometry(QtCore.QRect(700, 170, 80, 27))
@@ -176,7 +176,7 @@ class Ui_MainWindow(object):
         self.instruments.setGeometry(QtCore.QRect(10, 40, 671, 311))
         self.instruments.setObjectName("instruments")
         self.clearinstruments = QtGui.QPushButton(self.tab_2)
-        self.clearinstruments.setGeometry(QtCore.QRect(700, 330, 80, 27))
+        self.clearinstruments.setGeometry(QtCore.QRect(700, 130, 80, 27))
         self.clearinstruments.setObjectName("clearinstruments")
         self.upinstrument = QtGui.QPushButton(self.tab_2)
         self.upinstrument.setGeometry(QtCore.QRect(700, 210, 80, 27))
@@ -211,23 +211,19 @@ class Ui_MainWindow(object):
         self.downprogression.setGeometry(QtCore.QRect(700, 250, 80, 27))
         self.downprogression.setObjectName("downprogression")
         self.clearprogressions = QtGui.QPushButton(self.tab_4)
-        self.clearprogressions.setGeometry(QtCore.QRect(700, 330, 80, 27))
+        self.clearprogressions.setGeometry(QtCore.QRect(700, 130, 80, 27))
         self.clearprogressions.setObjectName("clearprogressions")
         self.copyprogression = QtGui.QPushButton(self.tab_4)
         self.copyprogression.setGeometry(QtCore.QRect(700, 170, 80, 27))
         self.copyprogression.setObjectName("copyprogression")
         self.Tabs.addTab(self.tab_4, "")
         self.startbutton = QtGui.QPushButton(self.centralwidget)
-        self.startbutton.setGeometry(QtCore.QRect(550, 420, 80, 27))
+        self.startbutton.setGeometry(QtCore.QRect(640, 420, 80, 27))
         self.startbutton.setObjectName("startbutton")
         self.stopbutton = QtGui.QPushButton(self.centralwidget)
         self.stopbutton.setEnabled(False)
-        self.stopbutton.setGeometry(QtCore.QRect(640, 420, 80, 27))
+        self.stopbutton.setGeometry(QtCore.QRect(730, 420, 80, 27))
         self.stopbutton.setObjectName("stopbutton")
-        self.uploadbutton = QtGui.QPushButton(self.centralwidget)
-        self.uploadbutton.setEnabled(False)
-        self.uploadbutton.setGeometry(QtCore.QRect(730, 420, 80, 27))
-        self.uploadbutton.setObjectName("uploadbutton")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 823, 22))
@@ -322,8 +318,7 @@ class Ui_MainWindow(object):
         MainWindow.setTabOrder(self.author, self.visualization)
         MainWindow.setTabOrder(self.visualization, self.startbutton)
         MainWindow.setTabOrder(self.startbutton, self.stopbutton)
-        MainWindow.setTabOrder(self.stopbutton, self.uploadbutton)
-        MainWindow.setTabOrder(self.uploadbutton, self.movement)
+        MainWindow.setTabOrder(self.stopbutton, self.movement)
         MainWindow.setTabOrder(self.movement, self.loop)
         MainWindow.setTabOrder(self.loop, self.loopslide)
         MainWindow.setTabOrder(self.loopslide, self.bpm)
@@ -396,6 +391,7 @@ class Ui_MainWindow(object):
         self.downinstrument.setText(QtGui.QApplication.translate("MainWindow", "Down", None, QtGui.QApplication.UnicodeUTF8))
         self.copyinstrument.setText(QtGui.QApplication.translate("MainWindow", "Copy", None, QtGui.QApplication.UnicodeUTF8))
         self.Tabs.setTabText(self.Tabs.indexOf(self.tab_2), QtGui.QApplication.translate("MainWindow", "Instruments", None, QtGui.QApplication.UnicodeUTF8))
+        self.addprogressionbutton.setStatusTip(QtGui.QApplication.translate("MainWindow", "Add progression", None, QtGui.QApplication.UnicodeUTF8))
         self.addprogressionbutton.setText(QtGui.QApplication.translate("MainWindow", "Add", None, QtGui.QApplication.UnicodeUTF8))
         self.editprogression.setText(QtGui.QApplication.translate("MainWindow", "Edit", None, QtGui.QApplication.UnicodeUTF8))
         self.removeprogression.setText(QtGui.QApplication.translate("MainWindow", "Remove", None, QtGui.QApplication.UnicodeUTF8))
@@ -408,8 +404,6 @@ class Ui_MainWindow(object):
         self.startbutton.setText(QtGui.QApplication.translate("MainWindow", "Start", None, QtGui.QApplication.UnicodeUTF8))
         self.stopbutton.setStatusTip(QtGui.QApplication.translate("MainWindow", "Stop generating music", None, QtGui.QApplication.UnicodeUTF8))
         self.stopbutton.setText(QtGui.QApplication.translate("MainWindow", "Stop", None, QtGui.QApplication.UnicodeUTF8))
-        self.uploadbutton.setStatusTip(QtGui.QApplication.translate("MainWindow", "Upload song to the Improviser homepage", None, QtGui.QApplication.UnicodeUTF8))
-        self.uploadbutton.setText(QtGui.QApplication.translate("MainWindow", "Upload", None, QtGui.QApplication.UnicodeUTF8))
         self.menu_File.setTitle(QtGui.QApplication.translate("MainWindow", "&File", None, QtGui.QApplication.UnicodeUTF8))
         self.menuImport.setTitle(QtGui.QApplication.translate("MainWindow", "&Import", None, QtGui.QApplication.UnicodeUTF8))
         self.menuExport.setTitle(QtGui.QApplication.translate("MainWindow", "&Export", None, QtGui.QApplication.UnicodeUTF8))
