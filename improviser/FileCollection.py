@@ -3,12 +3,14 @@ import Options
 import xml.dom.minidom as minidom
 from xml.dom.minidom import Document
 import Progressions
+import Bands
 
 class FileCollection:
 
 	folder = ""
 	credentials = {}
 	progressions = []
+	instruments = []
 	checkupdates = False
 	last_ID = {}
 
@@ -30,6 +32,8 @@ class FileCollection:
 	def get(self, content_type, only_defaults = False, parse_content = True):
 		if content_type == Options.UPLOAD_PROGRESSION:
 			return self.get_Progressions(only_defaults, parse_content)
+		elif content_type == Options.UPLOAD_INSTRUMENTS:
+			return self.get_Instruments(only_defaults, parse_content)
 
 	def get_Progressions(self, only_defaults = False, parse_content = True):
 		defaults = {"Empty": ""}
@@ -71,13 +75,60 @@ class FileCollection:
 		res['Default'] = defaults
 		return res
 
+	def get_Instruments(self, only_defaults = False, parse_content = True):
+		defaults = {}
+
+		# Default built in instruments and ensembles
+		for x in Options.get_available_bands():
+			bands = getattr(Bands, x)
+			defaults[x] = ""
+			for i in bands:
+				if parse_content:
+					defaults[x] += i.__class__.__name__ + " "
+				else:
+					defaults[x] += i.__class__.__name__ + ","
+
+
+		if only_defaults:
+			return defaults
+
+		res = {}
+		for x in self.instruments:
+			if not res.has_key(x[2]):
+				res[x[2]] = {}
+
+			# Parse instruments in x[5]
+			for p in x[5].split(","):
+				if not res[x[2]].has_key(x[3]):
+					res[x[2]][x[3]] = ""
+				if parse_content:
+					params = p.split(" ")
+					name = params[0]
+					params = " ".join(params[1:])[1:-1]
+
+					res[x[2]][x[3]] += name + " "
+				else:
+					res[x[2]][x[3]] += p + ","
+
+			# Remove comma
+			if not parse_content:
+				res[x[2]][x[3]] = res[x[2]][x[3]][:-1]
+
+		res['Default'] = defaults
+		return res
+
+
 	def add(self, content_type, id, author, title, description, content):
-		if content_type == Option.UPLOAD_PROGRESSION:
+		if content_type == Options.UPLOAD_PROGRESSION:
 			return self.add_Progression(id, author, title, description, content)
+		elif content_type == Options.UPLOAD_INSTRUMENTS:
+			return self.add_Instrument(id, author, title, description, content)
 
 	def add_Progression(self, id, author, title, description, content):
 		self.progressions.append([id, Options.UPLOAD_PROGRESSION, author, title, description, content])
 
+	def add_Instrument(self, id, author, title, description, content):
+		self.instruments.append([id, Options.UPLOAD_INSTRUMENTS, author, title, description, content])
 	def save(self):
 		if not path.exists(self.folder):
 			#warning Messagebox
@@ -86,7 +137,7 @@ class FileCollection:
 		doc = Document()
 		content = doc.createElement("content")
 		doc.appendChild(content)
-		for x in self.progressions:
+		for x in self.progressions + self.instruments:
 			prog = doc.createElement("item")
 			prog.setAttribute("id", str(x[0]))
 			prog.setAttribute("content_type", str(x[1]))
@@ -140,3 +191,10 @@ class FileCollection:
 				self.progressions.append([id, content_type, author, title, description, content])
 				if id > self.last_ID[Options.UPLOAD_PROGRESSION]:
 					self.last_ID[Options.UPLOAD_PROGRESSION] = id
+
+			elif content_type == Options.UPLOAD_INSTRUMENTS:
+				self.instruments.append([id, content_type, author, title, description, content])
+				if id > self.last_ID[Options.UPLOAD_INSTRUMENTS]:
+					self.last_ID[Options.UPLOAD_INSTRUMENTS] = id
+
+

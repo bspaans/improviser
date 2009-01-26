@@ -6,6 +6,7 @@ from InstrumentDialog import InstrumentDialog
 from BlockDialog import BlockDialog
 from UploadDialog import UploadDialog
 from ProgressionBrowser import ProgressionBrowser
+from InstrumentBrowser import InstrumentBrowser
 from os import path, environ
 from mingus.core import diatonic
 import Options
@@ -245,7 +246,7 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 			return
 		u = UploadDialog(
 			Options.UPLOAD_INSTRUMENTS,
-			self.get_progressions(),
+			self.get_instruments(),
 			self.credentials)
 		u.setWindowTitle("Upload Instruments") 
 		u.ui.uploadname.setText(self.ui.projectname.text())
@@ -258,7 +259,7 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 			return
 		u = UploadDialog(
 			Options.UPLOAD_BLOCKS,
-			self.get_progressions(),
+			self.get_blocks(),
 			self.credentials)
 		u.setWindowTitle("Upload Blocks") 
 		u.ui.uploadname.setText(self.ui.projectname.text())
@@ -539,9 +540,9 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 		
 
 	def add_instrument(self):
-		self.ui.instruments.addItem("RockDrum")
-		self.ui.instruments.setCurrentRow(int(self.ui.instruments.count()) -1)
-		self.edit_instrument()
+		p = InstrumentBrowser(self.ui.instruments, self.filecollection, Options.UPLOAD_INSTRUMENTS)
+		p.show()
+		p.exec_()
 		self.instrument_changed()
 
 	def remove_instrument(self):

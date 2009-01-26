@@ -84,6 +84,8 @@ class Browser(QtGui.QDialog):
 	def show_author(self, author):
 		p = self.filecollection.get(self.content_type)
 		self.ui.content.clear()
+		if not p.has_key(author):
+			return
 		for x in p[author]:
 			self.ui.content.addItem(x)
 		self.ui.content.setCurrentRow(0)
@@ -99,6 +101,73 @@ class Browser(QtGui.QDialog):
 		else:
 			self.state = OTHER
 
+	def get_item(self, for_show = True):
+		i = self.ui.content.currentRow()
+		t = str(self.ui.content.item(i).text())
+		if self.state == DEFAULT:
+			return self.get_default(for_show, t)
+		else:
+			if self.state == ALL:
+				parts = t.split("  [")
+				if len(parts) == 1:
+					return ""
+				name = parts[0]
+				owner = parts[1][:-1]
+			elif self.state == OWN:
+				owner = self.filecollection.credentials["username"]
+				name = t
+			elif self.state == OTHER:
+				owner = self.ui.authors.currentRow()
+				if owner == -1:
+					return ""
+				owner = str(self.ui.authors.item(owner).text())
+				name = t
+			if for_show:
+				try:
+					return self.filecollection.get(self.content_type)[owner][name]
+				except:
+					return ""
+			else:
+				try:
+					return self.filecollection.get(self.content_type, parse_content = False)[owner][name]
+				except:
+					return ""
+
+
+		return ""
+
+	def get_default(self, for_show, item):
+		defa = self.filecollection.get(self.content_type, True)
+		if defa.has_key(item):
+			if for_show:
+				return defa[item]
+			else:
+				return "{ " +defa[item] + " }"
+
+
+	def show_item(self):
+		self.ui.item.clear()
+		for x in self.get_item(",").split():
+			if x not in ["{", "}", "", " "]:
+				self.ui.item.addItem(x.replace("*", " "))
+
+
+	def set_item(self):
+		i = self.ui.content.currentRow()
+		t = str(self.ui.content.item(i).text())
+		self.set_state()
+		res = self.get_item(False)
+		for x in res.split(","):
+			if x not in ["", " ", "{}", "{ }"]:
+				if self.state == DEFAULT:
+					self.add_default_item(t, x)
+				else:
+					self.listwidget.addItem(x)
+
+		self.reject()
+
+	def add_default_item(self, name, content):
+		self.listwidget.addItem("%s %s" % (name, content))
 
 
 	def check_for_updates(self):
@@ -133,7 +202,8 @@ class Browser(QtGui.QDialog):
 				f.close()
 				self.filecollection.add(self.content_type, id, x.author, x.title, x.description, content)
 			except:
-				pass
+				q = QtGui.QMessageBox.warning(self, "Error", "An error occured while download %s." % (download), 1,0)
+				return
 
 			if progress.wasCanceled():
 				break
