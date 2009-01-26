@@ -11,6 +11,7 @@ from os import path, environ
 from mingus.core import diatonic
 import Options
 import Movements
+import math
 
 APP_NAME = "qtImproviser"
 APP_VERSION = "0.8"
@@ -26,6 +27,176 @@ class OptionClass:
 	verbose=True
 	meter = (4,4)
 
+class MovementScene(QtGui.QGraphicsScene):
+
+	IOFFSET = 50
+	BOXSIZE = 25
+
+	def __init__(self, main):
+		QtGui.QGraphicsScene.__init__(self)
+		self.main = main
+		self.ui = main.ui
+
+		# Brushes and pens
+		self.brush = QtGui.QBrush(QtCore.Qt.SolidPattern)
+		self.brush_dont_play = QtGui.QBrush(QtCore.Qt.NoBrush)
+		self.brush_play = QtGui.QBrush(QtCore.Qt.red, QtCore.Qt.SolidPattern)
+		self.brush_percussion = QtGui.QBrush(QtCore.Qt.yellow, QtCore.Qt.SolidPattern)
+		self.box_pen = QtGui.QPen(self.brush, 2, QtCore.Qt.SolidLine, QtCore.Qt.RoundCap, QtCore.Qt.RoundJoin)
+
+	def mousePressEvent(self, ev):
+		self.pressed = ev.scenePos()
+
+	def mouseReleaseEvent(self, ev):
+		if self.pressed == ev.scenePos():
+			x, y = self.get_box_coords(ev)
+			if y >= 0:
+				self.ui.instruments.setCurrentRow(y)
+			if x >= 0 and y >= 0:
+				print x, y
+
+	def get_box_coords(self, ev):
+		x, y = self.pressed.x(), self.pressed.y()
+		x = x - 200
+		y = y - self.IOFFSET
+		boxx = x / self.BOXSIZE
+		boxy = y / self.BOXSIZE
+		x = -1
+		y = -1
+		if boxy - math.floor(boxy) < 0.8:
+			y = int(math.floor(boxy))
+		if boxx - math.floor(boxx) < 0.8:
+			x = int(math.floor(boxx))
+		return (x, y)
+
+	def mouseDoubleClickEvent(self, ev):
+		self.ui.editinstrument.click()
+		self.pressed = []
+
+	def plays(self, params, n):
+		start, end, step = -1, -1, -1
+		if 'start' in params:
+			start = params['start']
+		if 'step' in params:
+			step = params['step']
+		if 'end' in params:
+			end = params['end']
+
+		if start == -1:
+			return True
+		if n < start:
+			return False
+
+		if end == -1 and step == -1:
+			return True
+
+		if step == -1:
+			if n >= start and n < end:
+				return True
+			return False
+
+		if end == -1:
+			n = (n - start) % (step * 2)
+			if n < step:
+				return True
+			return False
+
+		n = (n - start) % (end - start + step)
+		if n < end - start:
+			return True
+		return False
+
+	def get_progressions(self):
+		try:
+			prog = [Options.parse_progression(x) for x in self.main.get_progressions().split(",")]
+			prog_text = [ x.split()[0] for x in self.main.get_progressions().split(",")]
+			return (prog, prog_text)
+		except:
+			return ([], [])
+
+	def get_prog_block_index(self, prog):
+		duration = int(self.ui.duration.value())
+		prog_block_index, blocks, prog_index, offset = [], [], 0, 0
+		if self.ui.blocks.count() > 0 and len(prog) != 0:
+			for x in self.main.get_blocks().split(","):
+				parts = x.split()
+				params = Options.parse_block_params(parts[1:])
+				dur = duration
+				if 'duration' in params:
+					dur = params['duration']
+				for i in range(dur):
+					prog_block_index.append((offset, parts[0], prog_index))
+					prog_offset = 0
+					for itk, tk in enumerate(prog[prog_index]):
+						if itk != 0:
+							offset += (tk[0] - prog_offset) * len(prog[prog_index][itk - 1][1])
+						prog_offset = tk[0]
+				prog_index += 1
+				if prog_index >= len(prog):
+					prog_index =0
+		return (offset, prog_block_index)
+
+	def paint_prog_block_index(self):
+		prog, prog_text = self.get_progressions()
+		end, prog_block_index = self.get_prog_block_index(prog)
+		IOFFSET = self.IOFFSET
+		BOXSIZE = self.BOXSIZE
+
+		if len(prog) <= 0 or self.main.get_instruments() is None:
+			return end
+
+		for i, x in enumerate(prog_block_index):
+			offset, name, prog_index = x
+			blockend = end
+			if i != len(prog_block_index) - 1:
+				blockend = prog_block_index[i + 1][0]
+			if name != 'R':
+				self.addLine(QtCore.QLineF(200 + offset * BOXSIZE, IOFFSET - 10, 
+					195 + blockend * BOXSIZE, IOFFSET - 10), self.box_pen)
+				self.addLine(QtCore.QLineF(200 + offset * BOXSIZE, IOFFSET - 10, 
+					200 + offset * BOXSIZE, IOFFSET - 8), self.box_pen)
+				self.addLine(QtCore.QLineF(195 + blockend * BOXSIZE, IOFFSET - 10, 
+					195 + blockend * BOXSIZE, IOFFSET - 8), self.box_pen)
+				t = self.addText(name[:int((blockend-offset) * 2.5)], 
+					QtGui.QFont("", 12, 80))
+				t.translate(200 + BOXSIZE * offset, 3)
+				if blockend - offset > 2:
+					t = self.addText(prog_text[prog_index], QtGui.QFont("", 8, 40, True))
+					t.translate(200 + BOXSIZE * offset, IOFFSET - 25)
+		return end
+
+
+	def update(self):
+		IOFFSET = self.IOFFSET
+		BOXSIZE = self.BOXSIZE
+			
+		for x in self.items():
+			self.removeItem(x)
+		
+		end = self.paint_prog_block_index()
+	
+
+
+		instr = self.main.get_instruments()
+		if instr is not None:
+			for i, x in enumerate(instr.split(",")):
+				parts = x.split()
+				name = parts[0]
+				params = Options.parse_instrument_params(parts[1:])
+				s = self.addText(name)
+				s.translate(0, i * BOXSIZE + IOFFSET)
+				for n in range(end + 1):
+					if self.plays(params, n):
+						b = self.brush_play
+						if 'channel' in params:
+							if params['channel'] == 9:
+								b = self.brush_percussion
+					else:
+						b = self.brush_dont_play
+					a = self.addRect(QtCore.QRectF(200 + n * BOXSIZE, i * BOXSIZE + IOFFSET, BOXSIZE - BOXSIZE / 5, BOXSIZE - BOXSIZE / 5 ), self.box_pen,b)
+
+		self.ui.graphicsView.setScene(self)
+
 
 class ImproviserMainWindow(QtGui.QMainWindow):
 
@@ -35,9 +206,9 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 
 	def __init__(self):
 		QtGui.QMainWindow.__init__(self)
-		self.scene = QtGui.QGraphicsScene(self)
 		self.ui = Ui_MainWindow()
 		self.ui.setupUi(self)
+		self.scene = MovementScene(self)
 		self.fill_combos()
 		self.set_defaults()
 
@@ -214,121 +385,7 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 		self.update_scene()
 
 	def update_scene(self):
-		def plays(params, n):
-			start, end, step = -1, -1, -1
-			if 'start' in params:
-				start = params['start']
-			if 'step' in params:
-				step = params['step']
-			if 'end' in params:
-				end = params['end']
-
-			if start == -1:
-				return True
-			if n < start:
-				return False
-
-			if end == -1 and step == -1:
-				return True
-
-			if step == -1:
-				if n >= start and n < end:
-					return True
-				return False
-
-			if end == -1:
-				n = (n - start) % (step * 2)
-				if n < step:
-					return True
-				return False
-
-			n = (n - start) % (end - start + step)
-			if n < end - start:
-				return True
-			return False
-
-		IOFFSET = 50
-		BOXSIZE = 25
-			
-		for x in self.scene.items():
-			self.scene.removeItem(x)
-		brush = QtGui.QBrush(QtCore.Qt.SolidPattern)
-		brush_dont_play = QtGui.QBrush(QtCore.Qt.NoBrush)
-		brush_play = QtGui.QBrush(QtCore.Qt.red, QtCore.Qt.SolidPattern)
-		brush_percussion = QtGui.QBrush(QtCore.Qt.yellow, QtCore.Qt.SolidPattern)
-		
-		box_pen = QtGui.QPen(brush, 2, QtCore.Qt.SolidLine, QtCore.Qt.RoundCap, QtCore.Qt.RoundJoin)
-	
-		duration = int(self.ui.duration.value())
-		prog_block_index = []
-		
-		try:
-			prog = [Options.parse_progression(x) for x in self.get_progressions().split(",")]
-			prog_text = [ x.split()[0] for x in self.get_progressions().split(",")]
-		except:
-			prog = []
-
-		blocks = []
-		prog_index = 0
-		offset = 0
-		if self.ui.blocks.count() > 0 and len(prog) != 0:
-			for x in self.get_blocks().split(","):
-				parts = x.split()
-				params = Options.parse_block_params(parts[1:])
-				dur = duration
-				if 'duration' in params:
-					dur = params['duration']
-				for i in range(dur):
-					prog_block_index.append((offset, parts[0], prog_index))
-					prog_offset = 0
-					for itk, tk in enumerate(prog[prog_index]):
-						if itk != 0:
-							offset += (tk[0] - prog_offset) * len(prog[prog_index][itk - 1][1])
-						prog_offset = tk[0]
-				prog_index += 1
-				if prog_index >= len(prog):
-					prog_index =0
-
-		end = offset
-
-		if len(prog) > 0 and self.get_instruments() is not None:
-			for i, x in enumerate(prog_block_index):
-				offset, name, prog_index = x
-				blockend = end
-				if i != len(prog_block_index) - 1:
-					blockend = prog_block_index[i + 1][0]
-				if name != 'R':
-					self.scene.addLine(QtCore.QLineF(200 + offset * BOXSIZE, IOFFSET - 10, 195 + blockend * BOXSIZE, IOFFSET - 10), box_pen)
-					self.scene.addLine(QtCore.QLineF(200 + offset * BOXSIZE, IOFFSET - 10, 200 + offset * BOXSIZE, IOFFSET - 8), box_pen)
-					self.scene.addLine(QtCore.QLineF(195 + blockend * BOXSIZE, IOFFSET - 10, 195 + blockend * BOXSIZE, IOFFSET - 8), box_pen)
-					t = self.scene.addText(name[:int((blockend-offset) * 2.5)], QtGui.QFont("", 12, 80))
-					t.translate(200 + BOXSIZE * offset, 3)
-					if blockend - offset > 2:
-						t = self.scene.addText(prog_text[prog_index], QtGui.QFont("", 8, 40, True))
-						t.translate(200 + BOXSIZE * offset, IOFFSET - 25)
-
-
-		instr = self.get_instruments()
-		if instr is not None:
-			for i, x in enumerate(instr.split(",")):
-				parts = x.split()
-				name = parts[0]
-				params = Options.parse_instrument_params(parts[1:])
-				s = self.scene.addText(name)
-				s.translate(0, i * BOXSIZE + IOFFSET)
-				for n in range(end + 1):
-					if plays(params, n):
-						b = brush_play
-						if 'channel' in params:
-							if params['channel'] == 9:
-								b = brush_percussion
-					else:
-						b = brush_dont_play
-					self.scene.addRect(QtCore.QRectF(200 + n * BOXSIZE, i * BOXSIZE + IOFFSET, BOXSIZE - BOXSIZE / 5, BOXSIZE - BOXSIZE / 5 ), box_pen,b)
-
-		self.ui.graphicsView.setScene(self.scene)
-
-		
+		self.scene.update()
 
 	def highlighted_movement(self, index):
 		m = getattr(Movements, str(self.ui.movement.itemText(index)))
