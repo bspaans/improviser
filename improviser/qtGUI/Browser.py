@@ -143,6 +143,7 @@ class Browser(QtGui.QDialog):
 				return defa[item]
 			else:
 				return "{ " +defa[item] + " }"
+		return ""
 
 
 	def show_item(self):

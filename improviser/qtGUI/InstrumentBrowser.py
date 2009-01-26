@@ -19,6 +19,8 @@ class InstrumentBrowser(Browser):
 		Browser.setup(self)
 
 	def get_default(self, for_show, item):
+		if not self.filecollection.get(self.content_type)["Default"].has_key(item):
+			return ""
 		if for_show:
 			return self.filecollection.get(self.content_type)["Default"][item]
 		else:

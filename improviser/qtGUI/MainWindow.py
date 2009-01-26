@@ -35,7 +35,7 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 
 	def __init__(self):
 		QtGui.QMainWindow.__init__(self)
-
+		self.scene = QtGui.QGraphicsScene(self)
 		self.ui = Ui_MainWindow()
 		self.ui.setupUi(self)
 		self.fill_combos()
@@ -203,6 +203,77 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 			self.ui.menuUpload.setEnabled(True)
 		else:
 			self.ui.menuUpload.setEnabled(False)
+
+		self.update_scene()
+
+	def update_scene(self):
+		def plays(params, n):
+			start, end, step = -1, -1, -1
+			if 'start' in params:
+				start = params['start']
+			if 'step' in params:
+				step = params['step']
+			if 'end' in params:
+				end = params['end']
+
+			if start == -1:
+				return True
+
+			if end == -1 and step == -1:
+				if n >= start:
+					return True
+				return False
+
+			if step == -1:
+				if n >= start and n < end:
+					return True
+				return False
+
+			if n < start:
+				return False
+
+			if end == -1:
+				n = (n - start) % (step * 2)
+				if n < step:
+					return True
+				return False
+
+			n = (n - start) % (end - start + step)
+			if n < end - start:
+				return True
+
+			
+			return False
+
+			
+		brush = QtGui.QBrush(QtCore.Qt.SolidPattern)
+		brush_dont_play = QtGui.QBrush(QtCore.Qt.NoBrush)
+		brush_play = QtGui.QBrush(QtCore.Qt.red, QtCore.Qt.SolidPattern)
+		brush_percussion = QtGui.QBrush(QtCore.Qt.yellow, QtCore.Qt.SolidPattern)
+		
+		box_pen = QtGui.QPen(brush, 2, QtCore.Qt.SolidLine, QtCore.Qt.RoundCap, QtCore.Qt.RoundJoin)
+		
+
+
+		for x in self.scene.items():
+			self.scene.removeItem(x)
+		instr = self.get_instruments()
+		if instr is not None:
+			for i, x in enumerate(instr.split(",")):
+				parts = x.split()
+				name = parts[0]
+				params = Options.parse_instrument_params(parts[1:])
+				s = self.scene.addText(name)
+				s.translate(0, i * 25)
+				for n in range(20):
+					if plays(params, n):
+						b = brush_play
+					else:
+						b = brush_dont_play
+					self.scene.addRect(QtCore.QRectF(200 + n * 25, i * 25, 20, 20), box_pen,b)
+
+		self.ui.graphicsView.setScene(self.scene)
+
 		
 
 	def highlighted_movement(self, index):
@@ -468,18 +539,21 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 
 
 	def progression_changed(self):
+		self.update_scene()
 		if self.ui.progressions.count() == 0:
 			self.enable_progression(False)
 		else:
 			self.enable_progression(True)
 
 	def instrument_changed(self):
+		self.update_scene()
 		if self.ui.instruments.count() == 0:
 			self.enable_instruments(False)
 		else:
 			self.enable_instruments(True)
 		
 	def block_changed(self):
+		self.update_scene()
 		if self.ui.blocks.count() == 0:
 			self.enable_blocks(False)
 		else:

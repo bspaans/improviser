@@ -6,12 +6,12 @@
     <x>0</x>
     <y>0</y>
     <width>813</width>
-    <height>488</height>
+    <height>578</height>
    </rect>
   </property>
   <property name="sizePolicy" >
-   <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
-    <horstretch>70</horstretch>
+   <sizepolicy vsizetype="Minimum" hsizetype="MinimumExpanding" >
+    <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
@@ -46,7 +46,7 @@
       <x>0</x>
       <y>0</y>
       <width>801</width>
-      <height>431</height>
+      <height>531</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout" >
@@ -68,9 +68,9 @@
      <item>
       <widget class="QTabWidget" name="Tabs" >
        <property name="sizePolicy" >
-        <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
-         <horstretch>6</horstretch>
-         <verstretch>5</verstretch>
+        <sizepolicy vsizetype="Minimum" hsizetype="MinimumExpanding" >
+         <horstretch>0</horstretch>
+         <verstretch>2</verstretch>
         </sizepolicy>
        </property>
        <property name="tabShape" >
@@ -235,8 +235,8 @@
         <widget class="QComboBox" name="resolution" >
          <property name="geometry" >
           <rect>
-           <x>150</x>
-           <y>220</y>
+           <x>580</x>
+           <y>60</y>
            <width>141</width>
            <height>22</height>
           </rect>
@@ -245,8 +245,8 @@
         <widget class="QSpinBox" name="duration" >
          <property name="geometry" >
           <rect>
-           <x>150</x>
-           <y>300</y>
+           <x>580</x>
+           <y>140</y>
            <width>141</width>
            <height>23</height>
           </rect>
@@ -267,8 +267,8 @@
         <widget class="QLabel" name="label_7" >
          <property name="geometry" >
           <rect>
-           <x>20</x>
-           <y>300</y>
+           <x>450</x>
+           <y>140</y>
            <width>101</width>
            <height>17</height>
           </rect>
@@ -293,8 +293,8 @@
         <widget class="QCheckBox" name="swing" >
          <property name="geometry" >
           <rect>
-           <x>700</x>
-           <y>340</y>
+           <x>580</x>
+           <y>180</y>
            <width>83</width>
            <height>22</height>
           </rect>
@@ -350,8 +350,8 @@
         <widget class="QComboBox" name="key" >
          <property name="geometry" >
           <rect>
-           <x>150</x>
-           <y>260</y>
+           <x>580</x>
+           <y>100</y>
            <width>141</width>
            <height>22</height>
           </rect>
@@ -360,8 +360,8 @@
         <widget class="QLabel" name="label_6" >
          <property name="geometry" >
           <rect>
-           <x>20</x>
-           <y>260</y>
+           <x>450</x>
+           <y>100</y>
            <width>101</width>
            <height>17</height>
           </rect>
@@ -373,8 +373,8 @@
         <widget class="QLabel" name="label_3" >
          <property name="geometry" >
           <rect>
-           <x>20</x>
-           <y>220</y>
+           <x>450</x>
+           <y>60</y>
            <width>111</width>
            <height>17</height>
           </rect>
@@ -496,7 +496,7 @@
            <x>10</x>
            <y>10</y>
            <width>671</width>
-           <height>341</height>
+           <height>271</height>
           </rect>
          </property>
         </widget>
@@ -608,7 +608,7 @@
            <x>10</x>
            <y>10</y>
            <width>671</width>
-           <height>341</height>
+           <height>271</height>
           </rect>
          </property>
         </widget>
@@ -723,7 +723,7 @@
            <x>10</x>
            <y>10</y>
            <width>671</width>
-           <height>341</height>
+           <height>271</height>
           </rect>
          </property>
         </widget>
@@ -823,6 +823,38 @@
         </widget>
        </item>
       </layout>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupBox" >
+       <property name="sizePolicy" >
+        <sizepolicy vsizetype="MinimumExpanding" hsizetype="MinimumExpanding" >
+         <horstretch>0</horstretch>
+         <verstretch>1</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="title" >
+        <string/>
+       </property>
+       <widget class="QGraphicsView" name="graphicsView" >
+        <property name="geometry" >
+         <rect>
+          <x>10</x>
+          <y>20</y>
+          <width>771</width>
+          <height>131</height>
+         </rect>
+        </property>
+        <property name="sizePolicy" >
+         <sizepolicy vsizetype="MinimumExpanding" hsizetype="MinimumExpanding" >
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="alignment" >
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </widget>
      </item>
     </layout>
    </widget>

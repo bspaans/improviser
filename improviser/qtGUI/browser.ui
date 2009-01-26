@@ -44,10 +44,18 @@
       <number>6</number>
      </property>
      <item>
-      <widget class="QListWidget" name="authors" />
+      <widget class="QListWidget" name="authors" >
+       <property name="sortingEnabled" >
+        <bool>false</bool>
+       </property>
+      </widget>
      </item>
      <item>
-      <widget class="QListWidget" name="content" />
+      <widget class="QListWidget" name="content" >
+       <property name="sortingEnabled" >
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QListWidget" name="item" />

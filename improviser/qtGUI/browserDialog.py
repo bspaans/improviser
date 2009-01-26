@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'browser.ui'
 #
-# Created: Mon Jan 26 06:48:11 2009
+# Created: Mon Jan 26 09:52:10 2009
 #      by: PyQt4 UI code generator 4.4.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -50,5 +50,7 @@ class Ui_browserDialog(object):
 
     def retranslateUi(self, browserDialog):
         browserDialog.setWindowTitle(QtGui.QApplication.translate("browserDialog", "Browser", None, QtGui.QApplication.UnicodeUTF8))
+        self.authors.setSortingEnabled(False)
+        self.content.setSortingEnabled(True)
         self.update.setText(QtGui.QApplication.translate("browserDialog", "Check for Updates", None, QtGui.QApplication.UnicodeUTF8))
 
