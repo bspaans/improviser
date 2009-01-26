@@ -50,7 +50,6 @@ class FileCollection:
 				if parse_content:
 					params = p.split(" ")
 					name = params[0]
-					print name
 					params = " ".join(params[1:])[1:-1]
 
 					res[x[2]][x[3]] += params

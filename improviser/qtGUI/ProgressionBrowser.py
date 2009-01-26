@@ -121,15 +121,22 @@ class ProgressionBrowser(QtGui.QDialog):
 					return defa[t]
 				else:
 					return "{ " +defa[t] + " }"
-		elif self.state == ALL:
-			parts = t.split("  [")
-			name = parts[0]
-			owner = parts[1][:-1]
+		else:
+			if self.state == ALL:
+				parts = t.split("  [")
+				name = parts[0]
+				owner = parts[1][:-1]
+			elif self.state == OWN:
+				owner = self.filecollection.credentials["username"]
+				name = t
+			elif self.state == OTHER:
+				owner = self.ui.authors.currentRow()
+				owner = str(self.ui.authors.item(owner).text())
+				name = t
 			if for_show:
 				return self.filecollection.get_Progressions()[owner][name]
 			else:
 				return self.filecollection.get_Progressions(parse_content = False)[owner][name]
-
 
 
 		return ""
@@ -140,10 +147,7 @@ class ProgressionBrowser(QtGui.QDialog):
 		if self.state == DEFAULT:
 			prog = self.get_progression(False)
 			self.progression_list.addItem("%s %s" % (t, prog))
-		elif self.state == ALL:
-			parts = t.split("  [")
-			name = parts[0]
-			owner = parts[1][:-1]
+		else:
 			res = self.get_progression(False)
 			for x in res.split(","):
 				self.progression_list.addItem(x)
