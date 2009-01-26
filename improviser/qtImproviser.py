@@ -28,7 +28,7 @@ def show_main(params):
 		i.soundfont = params["soundfont"]
 		i.driver = params["driver"]
 	i.connect_widgets()
-	i.show()
+	i.showMaximized()
 
 app = QtGui.QApplication(argv)
 p = PreferencesDialog(show_main)

@@ -245,7 +245,6 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 		print "resize"
 
 	def connect_widgets(self):
-		self.setCentralWidget(self.ui.verticalLayoutWidget)
 		self.connect(self,
 			QtCore.SIGNAL("resizeEvent(event)"),
 			lambda x: self.wresize())
