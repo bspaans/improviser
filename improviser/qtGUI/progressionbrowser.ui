@@ -79,12 +79,12 @@
     <rect>
      <x>10</x>
      <y>190</y>
-     <width>77</width>
+     <width>131</width>
      <height>29</height>
     </rect>
    </property>
    <property name="text" >
-    <string>Update</string>
+    <string>Check for Updates</string>
    </property>
   </widget>
   <widget class="QDialogButtonBox" name="buttonBox" >

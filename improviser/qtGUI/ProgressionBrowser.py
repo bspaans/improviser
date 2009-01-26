@@ -26,7 +26,7 @@ class ProgressionBrowser(QtGui.QDialog):
 
 		self.connect(self.ui.update,
 			QtCore.SIGNAL("clicked()"),
-			self.update_database)
+			self.check_for_updates)
 		self.connect(self.ui.authors,
 			QtCore.SIGNAL("itemSelectionChanged()"),
 			self.show_progressions)
@@ -45,12 +45,13 @@ class ProgressionBrowser(QtGui.QDialog):
 		self.state = DEFAULT
 		self.show_defaults()
 		self.ui.authors.setCurrentRow(0)
-		self.check_for_updates()
-
-	def check_for_updates(self):
 		if not self.filecollection.loggedin:
 			self.ui.update.setEnabled(False)
-			return
+			
+
+	def check_for_updates(self):
+		if str(self.ui.update.text())[:6] == "Update":
+			return self.update_database()
 		try:
 			d = feedparser.parse(Options.UPLOAD_HOME + "updates.php?type=%d&ID=%d" % 
 					(Options.UPLOAD_PROGRESSION, self.filecollection.last_progression))
@@ -58,10 +59,10 @@ class ProgressionBrowser(QtGui.QDialog):
 			return
 		if len(d["entries"]) > 0:
 			self.ui.update.setText("Update (%d)" % len(d["entries"]))
-			self.ui.update.setEnabled(True)
 			self.entries = d["entries"]
 		else:
-			self.ui.update.setEnabled(False)
+			q = QtGui.QMessageBox.information(self, "Update", "There are currently no updates available. Your progressions are up to date.", 1,0)
+			self.ui.update.setText("Check for Updates")
 
 
 	def show_progressions(self):
@@ -170,7 +171,6 @@ class ProgressionBrowser(QtGui.QDialog):
 		res = self.get_progression(False)
 		for x in res.split(","):
 			if x not in ["", " ", "{}", "{ }"]:
-				print x, self.state
 				if self.state == DEFAULT:
 					self.progression_list.addItem("%s %s" % (t,x))
 				else:
@@ -201,4 +201,7 @@ class ProgressionBrowser(QtGui.QDialog):
 				break
 		progress.setValue(len(self.entries))
 		self.filecollection.save()
-		self.ui.update.setEnabled(False)
+		q = QtGui.QMessageBox.information(self, "Update", "Added %d new progression(s). Your progressions are up to date." % (i + 1), 1,0)
+		self.ui.update.setText("Check for Updates")
+		self.show_defaults()
+		self.ui.authors.setCurrentRow(0)

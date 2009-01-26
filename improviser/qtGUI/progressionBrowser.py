@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'progressionbrowser.ui'
 #
-# Created: Fri Jan 23 16:20:04 2009
+# Created: Mon Jan 26 05:23:17 2009
 #      by: PyQt4 UI code generator 4.4.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -39,7 +39,7 @@ class Ui_progressionBrowser(object):
         self.horizontalLayout.addWidget(self.progression)
         self.update = QtGui.QPushButton(progressionBrowser)
         self.update.setEnabled(True)
-        self.update.setGeometry(QtCore.QRect(10, 190, 77, 29))
+        self.update.setGeometry(QtCore.QRect(10, 190, 131, 29))
         self.update.setObjectName("update")
         self.buttonBox = QtGui.QDialogButtonBox(progressionBrowser)
         self.buttonBox.setGeometry(QtCore.QRect(158, 190, 441, 29))
@@ -59,5 +59,5 @@ class Ui_progressionBrowser(object):
         self.authors.item(1).setText(QtGui.QApplication.translate("progressionBrowser", "Own progressions", None, QtGui.QApplication.UnicodeUTF8))
         self.authors.item(2).setText(QtGui.QApplication.translate("progressionBrowser", "All progressions", None, QtGui.QApplication.UnicodeUTF8))
         self.authors.setSortingEnabled(__sortingEnabled)
-        self.update.setText(QtGui.QApplication.translate("progressionBrowser", "Update", None, QtGui.QApplication.UnicodeUTF8))
+        self.update.setText(QtGui.QApplication.translate("progressionBrowser", "Check for Updates", None, QtGui.QApplication.UnicodeUTF8))
 
