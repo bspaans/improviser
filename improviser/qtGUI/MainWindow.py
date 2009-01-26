@@ -39,10 +39,12 @@ class MovementScene(QtGui.QGraphicsScene):
 
 		# Brushes and pens
 		self.brush = QtGui.QBrush(QtCore.Qt.SolidPattern)
-		self.brush_dont_play = QtGui.QBrush(QtCore.Qt.NoBrush)
+		self.brush_dont_play = QtGui.QBrush(QtCore.Qt.white, QtCore.Qt.NoBrush)
 		self.brush_play = QtGui.QBrush(QtCore.Qt.red, QtCore.Qt.SolidPattern)
 		self.brush_percussion = QtGui.QBrush(QtCore.Qt.yellow, QtCore.Qt.SolidPattern)
+		self.brush_selection = QtGui.QBrush(QtGui.QColor(0, 0, 255).light(186), QtCore.Qt.SolidPattern)
 		self.box_pen = QtGui.QPen(self.brush, 2, QtCore.Qt.SolidLine, QtCore.Qt.RoundCap, QtCore.Qt.RoundJoin)
+		self.select_pen = QtGui.QPen(self.brush, 1, QtCore.Qt.SolidLine, QtCore.Qt.RoundCap, QtCore.Qt.RoundJoin)
 
 	def mousePressEvent(self, ev):
 		self.pressed = ev.scenePos()
@@ -52,6 +54,7 @@ class MovementScene(QtGui.QGraphicsScene):
 			x, y = self.get_box_coords(ev)
 			if y >= 0:
 				self.ui.instruments.setCurrentRow(y)
+				self.update()
 			if x >= 0 and y >= 0:
 				print x, y
 
@@ -70,7 +73,11 @@ class MovementScene(QtGui.QGraphicsScene):
 		return (x, y)
 
 	def mouseDoubleClickEvent(self, ev):
-		self.ui.editinstrument.click()
+		if self.pressed == ev.scenePos():
+			x, y = self.get_box_coords(ev)
+			if x >= 0 and y >= 0:
+				self.ui.editinstrument.click()
+		
 		self.pressed = []
 
 	def plays(self, params, n):
@@ -176,6 +183,10 @@ class MovementScene(QtGui.QGraphicsScene):
 		end = self.paint_prog_block_index()
 	
 
+		sel = self.ui.instruments.currentRow()
+		if sel != -1:
+			r = self.addRect(QtCore.QRectF(-1, sel * BOXSIZE + IOFFSET - 1, self.width(), BOXSIZE - BOXSIZE / 5 + 1), self.select_pen, self.brush_selection)
+			r.setZValue(-50)
 
 		instr = self.main.get_instruments()
 		if instr is not None:

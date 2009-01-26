@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'improviser.ui'
 #
-# Created: Mon Jan 26 14:26:59 2009
+# Created: Mon Jan 26 16:21:31 2009
 #      by: PyQt4 UI code generator 4.4.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -359,7 +359,7 @@ class Ui_MainWindow(object):
         self.label_11.setBuddy(self.visualization)
 
         self.retranslateUi(MainWindow)
-        self.Tabs.setCurrentIndex(2)
+        self.Tabs.setCurrentIndex(0)
         QtCore.QObject.connect(self.actionE_xit, QtCore.SIGNAL("activated()"), MainWindow.close)
         QtCore.QObject.connect(self.blocks, QtCore.SIGNAL("doubleClicked(QModelIndex)"), self.editblock.click)
         QtCore.QObject.connect(self.progressions, QtCore.SIGNAL("doubleClicked(QModelIndex)"), self.editprogression.click)
