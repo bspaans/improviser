@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'browser.ui'
 #
-# Created: Mon Jan 26 06:09:42 2009
+# Created: Mon Jan 26 06:48:11 2009
 #      by: PyQt4 UI code generator 4.4.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -27,9 +27,6 @@ class Ui_browserDialog(object):
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.authors = QtGui.QListWidget(self.horizontalLayoutWidget)
         self.authors.setObjectName("authors")
-        QtGui.QListWidgetItem(self.authors)
-        QtGui.QListWidgetItem(self.authors)
-        QtGui.QListWidgetItem(self.authors)
         self.horizontalLayout.addWidget(self.authors)
         self.content = QtGui.QListWidget(self.horizontalLayoutWidget)
         self.content.setObjectName("content")
@@ -53,11 +50,5 @@ class Ui_browserDialog(object):
 
     def retranslateUi(self, browserDialog):
         browserDialog.setWindowTitle(QtGui.QApplication.translate("browserDialog", "Browser", None, QtGui.QApplication.UnicodeUTF8))
-        __sortingEnabled = self.authors.isSortingEnabled()
-        self.authors.setSortingEnabled(False)
-        self.authors.item(0).setText(QtGui.QApplication.translate("browserDialog", "Default progressions", None, QtGui.QApplication.UnicodeUTF8))
-        self.authors.item(1).setText(QtGui.QApplication.translate("browserDialog", "Own progressions", None, QtGui.QApplication.UnicodeUTF8))
-        self.authors.item(2).setText(QtGui.QApplication.translate("browserDialog", "All progressions", None, QtGui.QApplication.UnicodeUTF8))
-        self.authors.setSortingEnabled(__sortingEnabled)
         self.update.setText(QtGui.QApplication.translate("browserDialog", "Check for Updates", None, QtGui.QApplication.UnicodeUTF8))
 

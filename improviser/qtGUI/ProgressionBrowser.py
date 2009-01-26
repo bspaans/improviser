@@ -11,9 +11,12 @@ class ProgressionBrowser(Browser):
 
 
 	def setup(self):
+		self.setWindowTitle("Progression Browser")
+		self.ui.authors.addItem("Default progressions")
+		self.ui.authors.addItem("Own progressions")
+		self.ui.authors.addItem("All progressions")
 		Browser.setup(self)
-		[self.ui.authors.addItem(x) for x in self.filecollection.get_Progressions() if x != 'Default']
-		map(lambda x: self.ui.authors.item(x).setFont(QtGui.QFont("", -1, 75)), range(3))
+
 
 	def show_item(self):
 		self.ui.item.clear()

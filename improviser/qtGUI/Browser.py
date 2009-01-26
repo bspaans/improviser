@@ -41,6 +41,9 @@ class Browser(QtGui.QDialog):
 		self.ui.authors.setCurrentRow(0)
 		if not self.filecollection.loggedin:
 			self.ui.update.setEnabled(False)
+			
+		[self.ui.authors.addItem(x) for x in self.filecollection.get(self.content_type) if x != 'Default']
+		map(lambda x: self.ui.authors.item(x).setFont(QtGui.QFont("", -1, 75)), range(3))
 
 	def show_authors(self):
 		pass
