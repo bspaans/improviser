@@ -218,18 +218,15 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 
 			if start == -1:
 				return True
+			if n < start:
+				return False
 
 			if end == -1 and step == -1:
-				if n >= start:
-					return True
-				return False
+				return True
 
 			if step == -1:
 				if n >= start and n < end:
 					return True
-				return False
-
-			if n < start:
 				return False
 
 			if end == -1:
@@ -241,22 +238,69 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 			n = (n - start) % (end - start + step)
 			if n < end - start:
 				return True
-
-			
 			return False
 
+		IOFFSET = 50
+		BOXSIZE = 25
 			
+		for x in self.scene.items():
+			self.scene.removeItem(x)
 		brush = QtGui.QBrush(QtCore.Qt.SolidPattern)
 		brush_dont_play = QtGui.QBrush(QtCore.Qt.NoBrush)
 		brush_play = QtGui.QBrush(QtCore.Qt.red, QtCore.Qt.SolidPattern)
 		brush_percussion = QtGui.QBrush(QtCore.Qt.yellow, QtCore.Qt.SolidPattern)
 		
 		box_pen = QtGui.QPen(brush, 2, QtCore.Qt.SolidLine, QtCore.Qt.RoundCap, QtCore.Qt.RoundJoin)
+	
+		duration = int(self.ui.duration.value())
+		prog_block_index = []
 		
+		try:
+			prog = [Options.parse_progression(x) for x in self.get_progressions().split(",")]
+			prog_text = [ x.split()[0] for x in self.get_progressions().split(",")]
+		except:
+			prog = []
+
+		blocks = []
+		prog_index = 0
+		offset = 0
+		if self.ui.blocks.count() > 0 and len(prog) != 0:
+			for x in self.get_blocks().split(","):
+				parts = x.split()
+				params = Options.parse_block_params(parts[1:])
+				dur = duration
+				if 'duration' in params:
+					dur = params['duration']
+				for i in range(dur):
+					prog_block_index.append((offset, parts[0], prog_index))
+					prog_offset = 0
+					for itk, tk in enumerate(prog[prog_index]):
+						if itk != 0:
+							offset += (tk[0] - prog_offset) * len(prog[prog_index][itk - 1][1])
+						prog_offset = tk[0]
+				prog_index += 1
+				if prog_index >= len(prog):
+					prog_index =0
+
+		end = offset
+
+		if len(prog) > 0 and self.get_instruments() is not None:
+			for i, x in enumerate(prog_block_index):
+				offset, name, prog_index = x
+				blockend = end
+				if i != len(prog_block_index) - 1:
+					blockend = prog_block_index[i + 1][0]
+				if name != 'R':
+					self.scene.addLine(QtCore.QLineF(200 + offset * BOXSIZE, IOFFSET - 10, 195 + blockend * BOXSIZE, IOFFSET - 10), box_pen)
+					self.scene.addLine(QtCore.QLineF(200 + offset * BOXSIZE, IOFFSET - 10, 200 + offset * BOXSIZE, IOFFSET - 8), box_pen)
+					self.scene.addLine(QtCore.QLineF(195 + blockend * BOXSIZE, IOFFSET - 10, 195 + blockend * BOXSIZE, IOFFSET - 8), box_pen)
+					t = self.scene.addText(name[:int((blockend-offset) * 2.5)], QtGui.QFont("", 12, 80))
+					t.translate(200 + BOXSIZE * offset, 3)
+					if blockend - offset > 2:
+						t = self.scene.addText(prog_text[prog_index], QtGui.QFont("", 8, 40, True))
+						t.translate(200 + BOXSIZE * offset, IOFFSET - 25)
 
 
-		for x in self.scene.items():
-			self.scene.removeItem(x)
 		instr = self.get_instruments()
 		if instr is not None:
 			for i, x in enumerate(instr.split(",")):
@@ -264,13 +308,16 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 				name = parts[0]
 				params = Options.parse_instrument_params(parts[1:])
 				s = self.scene.addText(name)
-				s.translate(0, i * 25)
-				for n in range(20):
+				s.translate(0, i * BOXSIZE + IOFFSET)
+				for n in range(end + 1):
 					if plays(params, n):
 						b = brush_play
+						if 'channel' in params:
+							if params['channel'] == 9:
+								b = brush_percussion
 					else:
 						b = brush_dont_play
-					self.scene.addRect(QtCore.QRectF(200 + n * 25, i * 25, 20, 20), box_pen,b)
+					self.scene.addRect(QtCore.QRectF(200 + n * BOXSIZE, i * BOXSIZE + IOFFSET, BOXSIZE - BOXSIZE / 5, BOXSIZE - BOXSIZE / 5 ), box_pen,b)
 
 		self.ui.graphicsView.setScene(self.scene)
 
@@ -660,6 +707,7 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 		p.load_progression(cur.text())
 		p.show()
 		p.exec_()
+		self.progression_changed()
 
 
 	def get_file_name(self, name, n = 0):
@@ -861,6 +909,12 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 		t = i2.text()
 		i2.setText(i1)
 		cur.setText(t)
+		if lst == self.ui.instruments:
+			self.instrument_changed()
+		elif lst == self.ui.progressions:
+			self.progression_changed()
+		elif lst == self.ui.blocks:
+			self.block_changed()
 
 				
 
