@@ -5,9 +5,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>823</width>
-    <height>499</height>
+    <width>813</width>
+    <height>488</height>
    </rect>
+  </property>
+  <property name="sizePolicy" >
+   <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+    <horstretch>70</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="contextMenuPolicy" >
    <enum>Qt::DefaultContextMenu</enum>
@@ -17,6 +23,9 @@
   </property>
   <property name="statusTip" >
    <string/>
+  </property>
+  <property name="autoFillBackground" >
+   <bool>false</bool>
   </property>
   <property name="locale" >
    <locale country="UnitedKingdom" language="English" />
@@ -31,790 +40,791 @@
    <set>QMainWindow::AllowTabbedDocks|QMainWindow::AnimatedDocks</set>
   </property>
   <widget class="QWidget" name="centralwidget" >
-   <widget class="QTabWidget" name="Tabs" >
+   <widget class="QWidget" name="verticalLayoutWidget" >
     <property name="geometry" >
      <rect>
-      <x>10</x>
-      <y>10</y>
+      <x>0</x>
+      <y>0</y>
       <width>801</width>
-      <height>401</height>
+      <height>431</height>
      </rect>
     </property>
-    <property name="sizePolicy" >
-     <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
-      <horstretch>0</horstretch>
-      <verstretch>0</verstretch>
-     </sizepolicy>
-    </property>
-    <property name="tabShape" >
-     <enum>QTabWidget::Rounded</enum>
-    </property>
-    <property name="currentIndex" >
-     <number>0</number>
-    </property>
-    <property name="elideMode" >
-     <enum>Qt::ElideLeft</enum>
-    </property>
-    <widget class="QWidget" name="tab" >
-     <attribute name="title" >
-      <string>Global</string>
-     </attribute>
-     <widget class="QLabel" name="label_4" >
-      <property name="geometry" >
-       <rect>
-        <x>20</x>
-        <y>20</y>
-        <width>101</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>Project name</string>
-      </property>
-      <property name="buddy" >
-       <cstring>projectname</cstring>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="projectname" >
-      <property name="geometry" >
-       <rect>
-        <x>120</x>
-        <y>20</y>
-        <width>391</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>Untitled</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_11" >
-      <property name="geometry" >
-       <rect>
-        <x>20</x>
-        <y>100</y>
-        <width>91</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>Visualization</string>
-      </property>
-      <property name="buddy" >
-       <cstring>visualization</cstring>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="visualization" >
-      <property name="geometry" >
-       <rect>
-        <x>120</x>
-        <y>100</y>
-        <width>171</width>
-        <height>22</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_12" >
-      <property name="geometry" >
-       <rect>
-        <x>20</x>
-        <y>60</y>
-        <width>56</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>Author</string>
-      </property>
-      <property name="buddy" >
-       <cstring>author</cstring>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="author" >
-      <property name="geometry" >
-       <rect>
-        <x>120</x>
-        <y>60</y>
-        <width>391</width>
-        <height>23</height>
-       </rect>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="tab_5" >
-     <attribute name="title" >
-      <string>Movement</string>
-     </attribute>
-     <widget class="QComboBox" name="movement" >
-      <property name="geometry" >
-       <rect>
-        <x>150</x>
-        <y>20</y>
-        <width>261</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="statusTip" >
-       <string>The movement dictates the order of the blocks, progressions and instruments</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_8" >
-      <property name="geometry" >
-       <rect>
-        <x>20</x>
-        <y>20</y>
-        <width>81</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="statusTip" >
-       <string>The movement dictates the order of the blocks, progressions and instruments</string>
-      </property>
-      <property name="text" >
-       <string>Movement</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_5" >
-      <property name="geometry" >
-       <rect>
-        <x>20</x>
-        <y>60</y>
-        <width>56</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="statusTip" >
-       <string>How many times the movement should be looped</string>
-      </property>
-      <property name="text" >
-       <string>Loop</string>
-      </property>
-     </widget>
-     <widget class="QSpinBox" name="loop" >
-      <property name="geometry" >
-       <rect>
-        <x>150</x>
-        <y>60</y>
-        <width>81</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="statusTip" >
-       <string>How many times the movement should be looped</string>
-      </property>
-      <property name="maximum" >
-       <number>10000</number>
-      </property>
-      <property name="value" >
-       <number>1</number>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label" >
-      <property name="geometry" >
-       <rect>
-        <x>20</x>
-        <y>100</y>
-        <width>111</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>Default BPM</string>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="resolution" >
-      <property name="geometry" >
-       <rect>
-        <x>150</x>
-        <y>220</y>
-        <width>141</width>
-        <height>22</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QSpinBox" name="duration" >
-      <property name="geometry" >
-       <rect>
-        <x>150</x>
-        <y>300</y>
-        <width>141</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="statusTip" >
-       <string>How many times a block should be played</string>
-      </property>
-      <property name="minimum" >
-       <number>1</number>
-      </property>
-      <property name="maximum" >
-       <number>1000</number>
-      </property>
-      <property name="value" >
-       <number>1</number>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_7" >
-      <property name="geometry" >
-       <rect>
-        <x>20</x>
-        <y>300</y>
-        <width>101</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>Block duration</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_2" >
-      <property name="geometry" >
-       <rect>
-        <x>20</x>
-        <y>140</y>
-        <width>111</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>Default wildness</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="swing" >
-      <property name="geometry" >
-       <rect>
-        <x>700</x>
-        <y>340</y>
-        <width>83</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="statusTip" >
-       <string>Swing the notes</string>
-      </property>
-      <property name="text" >
-       <string>Swing</string>
-      </property>
-     </widget>
-     <widget class="QSpinBox" name="bpm" >
-      <property name="geometry" >
-       <rect>
-        <x>150</x>
-        <y>100</y>
-        <width>81</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="minimum" >
-       <number>1</number>
-      </property>
-      <property name="maximum" >
-       <number>1000</number>
-      </property>
-      <property name="value" >
-       <number>120</number>
-      </property>
-     </widget>
-     <widget class="QDoubleSpinBox" name="wildness" >
-      <property name="geometry" >
-       <rect>
-        <x>150</x>
-        <y>140</y>
-        <width>81</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="decimals" >
-       <number>5</number>
-      </property>
-      <property name="maximum" >
-       <double>100.000000000000000</double>
-      </property>
-      <property name="singleStep" >
-       <double>0.025000000000000</double>
-      </property>
-      <property name="value" >
-       <double>0.500000000000000</double>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="key" >
-      <property name="geometry" >
-       <rect>
-        <x>150</x>
-        <y>260</y>
-        <width>141</width>
-        <height>22</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_6" >
-      <property name="geometry" >
-       <rect>
-        <x>20</x>
-        <y>260</y>
-        <width>101</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>Default key</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_3" >
-      <property name="geometry" >
-       <rect>
-        <x>20</x>
-        <y>220</y>
-        <width>111</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>Default resolution</string>
-      </property>
-     </widget>
-     <widget class="QSlider" name="bpmslide" >
-      <property name="geometry" >
-       <rect>
-        <x>250</x>
-        <y>100</y>
-        <width>160</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="pageStep" >
-       <number>10</number>
-      </property>
-      <property name="value" >
-       <number>50</number>
-      </property>
-      <property name="orientation" >
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-     <widget class="QSlider" name="wildslide" >
-      <property name="geometry" >
-       <rect>
-        <x>250</x>
-        <y>140</y>
-        <width>160</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="value" >
-       <number>1</number>
-      </property>
-      <property name="orientation" >
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-     <widget class="QSlider" name="loopslide" >
-      <property name="geometry" >
-       <rect>
-        <x>250</x>
-        <y>60</y>
-        <width>160</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="pageStep" >
-       <number>10</number>
-      </property>
-      <property name="value" >
-       <number>1</number>
-      </property>
-      <property name="orientation" >
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="tab_3" >
-     <attribute name="title" >
-      <string>Blocks</string>
-     </attribute>
-     <widget class="QPushButton" name="addblockbutton" >
-      <property name="geometry" >
-       <rect>
-        <x>700</x>
-        <y>10</y>
-        <width>80</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>Add</string>
-      </property>
-      <property name="shortcut" >
-       <string/>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="removeblock" >
-      <property name="enabled" >
-       <bool>true</bool>
-      </property>
-      <property name="geometry" >
-       <rect>
-        <x>700</x>
-        <y>50</y>
-        <width>80</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>Remove</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="editblock" >
-      <property name="enabled" >
-       <bool>true</bool>
-      </property>
-      <property name="geometry" >
-       <rect>
-        <x>700</x>
-        <y>90</y>
-        <width>80</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>Edit</string>
-      </property>
-     </widget>
-     <widget class="QListWidget" name="blocks" >
-      <property name="geometry" >
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>671</width>
-        <height>341</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="upblock" >
-      <property name="geometry" >
-       <rect>
-        <x>700</x>
-        <y>210</y>
-        <width>80</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>Up</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="downblock" >
-      <property name="geometry" >
-       <rect>
-        <x>700</x>
-        <y>250</y>
-        <width>80</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>Down</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="clearblocks" >
-      <property name="geometry" >
-       <rect>
-        <x>700</x>
-        <y>130</y>
-        <width>80</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>Clear</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="copyblock" >
-      <property name="geometry" >
-       <rect>
-        <x>700</x>
-        <y>170</y>
-        <width>80</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>Copy</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="tab_2" >
-     <attribute name="title" >
-      <string>Instruments</string>
-     </attribute>
-     <widget class="QPushButton" name="addinstrumentbutton" >
-      <property name="geometry" >
-       <rect>
-        <x>700</x>
-        <y>10</y>
-        <width>80</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>Add</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="editinstrument" >
-      <property name="enabled" >
-       <bool>true</bool>
-      </property>
-      <property name="geometry" >
-       <rect>
-        <x>700</x>
-        <y>90</y>
-        <width>80</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>Edit</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="removeinstrument" >
-      <property name="enabled" >
-       <bool>true</bool>
-      </property>
-      <property name="geometry" >
-       <rect>
-        <x>700</x>
-        <y>50</y>
-        <width>80</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>Remove</string>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="instrumentcombo" >
-      <property name="geometry" >
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>671</width>
-        <height>22</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QListWidget" name="instruments" >
-      <property name="geometry" >
-       <rect>
-        <x>10</x>
-        <y>40</y>
-        <width>671</width>
-        <height>311</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="clearinstruments" >
-      <property name="geometry" >
-       <rect>
-        <x>700</x>
-        <y>130</y>
-        <width>80</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>Clear</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="upinstrument" >
-      <property name="geometry" >
-       <rect>
-        <x>700</x>
-        <y>210</y>
-        <width>80</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>Up</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="downinstrument" >
-      <property name="geometry" >
-       <rect>
-        <x>700</x>
-        <y>250</y>
-        <width>80</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>Down</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="copyinstrument" >
-      <property name="geometry" >
-       <rect>
-        <x>700</x>
-        <y>170</y>
-        <width>80</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>Copy</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="tab_4" >
-     <attribute name="title" >
-      <string>Progressions</string>
-     </attribute>
-     <widget class="QPushButton" name="addprogressionbutton" >
-      <property name="geometry" >
-       <rect>
-        <x>700</x>
-        <y>10</y>
-        <width>80</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="statusTip" >
-       <string>Add progression</string>
-      </property>
-      <property name="text" >
-       <string>Add</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="editprogression" >
-      <property name="enabled" >
-       <bool>true</bool>
-      </property>
-      <property name="geometry" >
-       <rect>
-        <x>700</x>
-        <y>90</y>
-        <width>80</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>Edit</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="removeprogression" >
-      <property name="enabled" >
-       <bool>true</bool>
-      </property>
-      <property name="geometry" >
-       <rect>
-        <x>700</x>
-        <y>50</y>
-        <width>80</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>Remove</string>
-      </property>
-     </widget>
-     <widget class="QListWidget" name="progressions" >
-      <property name="geometry" >
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>671</width>
-        <height>341</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="upprogression" >
-      <property name="geometry" >
-       <rect>
-        <x>700</x>
-        <y>210</y>
-        <width>80</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>Up</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="downprogression" >
-      <property name="geometry" >
-       <rect>
-        <x>700</x>
-        <y>250</y>
-        <width>80</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>Down</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="clearprogressions" >
-      <property name="geometry" >
-       <rect>
-        <x>700</x>
-        <y>130</y>
-        <width>80</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>Clear</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="copyprogression" >
-      <property name="geometry" >
-       <rect>
-        <x>700</x>
-        <y>170</y>
-        <width>80</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>Copy</string>
-      </property>
-     </widget>
-    </widget>
-   </widget>
-   <widget class="QPushButton" name="startbutton" >
-    <property name="geometry" >
-     <rect>
-      <x>640</x>
-      <y>420</y>
-      <width>80</width>
-      <height>27</height>
-     </rect>
-    </property>
-    <property name="statusTip" >
-     <string>Start generating music</string>
-    </property>
-    <property name="text" >
-     <string>Start</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="stopbutton" >
-    <property name="enabled" >
-     <bool>false</bool>
-    </property>
-    <property name="geometry" >
-     <rect>
-      <x>730</x>
-      <y>420</y>
-      <width>80</width>
-      <height>27</height>
-     </rect>
-    </property>
-    <property name="statusTip" >
-     <string>Stop generating music</string>
-    </property>
-    <property name="text" >
-     <string>Stop</string>
-    </property>
+    <layout class="QVBoxLayout" name="verticalLayout" >
+     <property name="spacing" >
+      <number>6</number>
+     </property>
+     <property name="sizeConstraint" >
+      <enum>QLayout::SetMaximumSize</enum>
+     </property>
+     <property name="topMargin" >
+      <number>1</number>
+     </property>
+     <property name="rightMargin" >
+      <number>1</number>
+     </property>
+     <property name="bottomMargin" >
+      <number>1</number>
+     </property>
+     <item>
+      <widget class="QTabWidget" name="Tabs" >
+       <property name="sizePolicy" >
+        <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+         <horstretch>6</horstretch>
+         <verstretch>5</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="tabShape" >
+        <enum>QTabWidget::Rounded</enum>
+       </property>
+       <property name="currentIndex" >
+        <number>3</number>
+       </property>
+       <property name="elideMode" >
+        <enum>Qt::ElideLeft</enum>
+       </property>
+       <widget class="QWidget" name="tab" >
+        <attribute name="title" >
+         <string>Global</string>
+        </attribute>
+        <widget class="QWidget" name="formLayoutWidget" >
+         <property name="geometry" >
+          <rect>
+           <x>20</x>
+           <y>20</y>
+           <width>599</width>
+           <height>136</height>
+          </rect>
+         </property>
+         <layout class="QFormLayout" name="formLayout" >
+          <property name="sizeConstraint" >
+           <enum>QLayout::SetMinimumSize</enum>
+          </property>
+          <item row="1" column="0" >
+           <widget class="QLabel" name="label_12" >
+            <property name="text" >
+             <string>Author</string>
+            </property>
+            <property name="buddy" >
+             <cstring>author</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" >
+           <widget class="QLineEdit" name="author" />
+          </item>
+          <item row="0" column="0" >
+           <widget class="QLabel" name="label_4" >
+            <property name="text" >
+             <string>Project name</string>
+            </property>
+            <property name="buddy" >
+             <cstring>projectname</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1" >
+           <widget class="QComboBox" name="visualization" />
+          </item>
+          <item row="3" column="0" >
+           <widget class="QLabel" name="label_11" >
+            <property name="text" >
+             <string>Visualization</string>
+            </property>
+            <property name="buddy" >
+             <cstring>visualization</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" >
+           <widget class="QLineEdit" name="projectname" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
+              <horstretch>20</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text" >
+             <string>Untitled</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="tab_5" >
+        <attribute name="title" >
+         <string>Movement</string>
+        </attribute>
+        <widget class="QComboBox" name="movement" >
+         <property name="geometry" >
+          <rect>
+           <x>150</x>
+           <y>20</y>
+           <width>261</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="statusTip" >
+          <string>The movement dictates the order of the blocks, progressions and instruments</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_8" >
+         <property name="geometry" >
+          <rect>
+           <x>20</x>
+           <y>20</y>
+           <width>81</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="statusTip" >
+          <string>The movement dictates the order of the blocks, progressions and instruments</string>
+         </property>
+         <property name="text" >
+          <string>Movement</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_5" >
+         <property name="geometry" >
+          <rect>
+           <x>20</x>
+           <y>60</y>
+           <width>56</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="statusTip" >
+          <string>How many times the movement should be looped</string>
+         </property>
+         <property name="text" >
+          <string>Loop</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="loop" >
+         <property name="geometry" >
+          <rect>
+           <x>150</x>
+           <y>60</y>
+           <width>81</width>
+           <height>23</height>
+          </rect>
+         </property>
+         <property name="statusTip" >
+          <string>How many times the movement should be looped</string>
+         </property>
+         <property name="maximum" >
+          <number>10000</number>
+         </property>
+         <property name="value" >
+          <number>1</number>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label" >
+         <property name="geometry" >
+          <rect>
+           <x>20</x>
+           <y>100</y>
+           <width>111</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text" >
+          <string>Default BPM</string>
+         </property>
+        </widget>
+        <widget class="QComboBox" name="resolution" >
+         <property name="geometry" >
+          <rect>
+           <x>150</x>
+           <y>220</y>
+           <width>141</width>
+           <height>22</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="duration" >
+         <property name="geometry" >
+          <rect>
+           <x>150</x>
+           <y>300</y>
+           <width>141</width>
+           <height>23</height>
+          </rect>
+         </property>
+         <property name="statusTip" >
+          <string>How many times a block should be played</string>
+         </property>
+         <property name="minimum" >
+          <number>1</number>
+         </property>
+         <property name="maximum" >
+          <number>1000</number>
+         </property>
+         <property name="value" >
+          <number>1</number>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_7" >
+         <property name="geometry" >
+          <rect>
+           <x>20</x>
+           <y>300</y>
+           <width>101</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text" >
+          <string>Block duration</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_2" >
+         <property name="geometry" >
+          <rect>
+           <x>20</x>
+           <y>140</y>
+           <width>111</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text" >
+          <string>Default wildness</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="swing" >
+         <property name="geometry" >
+          <rect>
+           <x>700</x>
+           <y>340</y>
+           <width>83</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="statusTip" >
+          <string>Swing the notes</string>
+         </property>
+         <property name="text" >
+          <string>Swing</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="bpm" >
+         <property name="geometry" >
+          <rect>
+           <x>150</x>
+           <y>100</y>
+           <width>81</width>
+           <height>23</height>
+          </rect>
+         </property>
+         <property name="minimum" >
+          <number>1</number>
+         </property>
+         <property name="maximum" >
+          <number>1000</number>
+         </property>
+         <property name="value" >
+          <number>120</number>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="wildness" >
+         <property name="geometry" >
+          <rect>
+           <x>150</x>
+           <y>140</y>
+           <width>81</width>
+           <height>23</height>
+          </rect>
+         </property>
+         <property name="decimals" >
+          <number>5</number>
+         </property>
+         <property name="maximum" >
+          <double>100.000000000000000</double>
+         </property>
+         <property name="singleStep" >
+          <double>0.025000000000000</double>
+         </property>
+         <property name="value" >
+          <double>0.500000000000000</double>
+         </property>
+        </widget>
+        <widget class="QComboBox" name="key" >
+         <property name="geometry" >
+          <rect>
+           <x>150</x>
+           <y>260</y>
+           <width>141</width>
+           <height>22</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_6" >
+         <property name="geometry" >
+          <rect>
+           <x>20</x>
+           <y>260</y>
+           <width>101</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text" >
+          <string>Default key</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_3" >
+         <property name="geometry" >
+          <rect>
+           <x>20</x>
+           <y>220</y>
+           <width>111</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text" >
+          <string>Default resolution</string>
+         </property>
+        </widget>
+        <widget class="QSlider" name="bpmslide" >
+         <property name="geometry" >
+          <rect>
+           <x>250</x>
+           <y>100</y>
+           <width>160</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="pageStep" >
+          <number>10</number>
+         </property>
+         <property name="value" >
+          <number>50</number>
+         </property>
+         <property name="orientation" >
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+        <widget class="QSlider" name="wildslide" >
+         <property name="geometry" >
+          <rect>
+           <x>250</x>
+           <y>140</y>
+           <width>160</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="value" >
+          <number>1</number>
+         </property>
+         <property name="orientation" >
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+        <widget class="QSlider" name="loopslide" >
+         <property name="geometry" >
+          <rect>
+           <x>250</x>
+           <y>60</y>
+           <width>160</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="pageStep" >
+          <number>10</number>
+         </property>
+         <property name="value" >
+          <number>1</number>
+         </property>
+         <property name="orientation" >
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="tab_3" >
+        <attribute name="title" >
+         <string>Blocks</string>
+        </attribute>
+        <widget class="QPushButton" name="addblockbutton" >
+         <property name="geometry" >
+          <rect>
+           <x>700</x>
+           <y>10</y>
+           <width>80</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="text" >
+          <string>Add</string>
+         </property>
+         <property name="shortcut" >
+          <string/>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="removeblock" >
+         <property name="enabled" >
+          <bool>true</bool>
+         </property>
+         <property name="geometry" >
+          <rect>
+           <x>700</x>
+           <y>50</y>
+           <width>80</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="text" >
+          <string>Remove</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="editblock" >
+         <property name="enabled" >
+          <bool>true</bool>
+         </property>
+         <property name="geometry" >
+          <rect>
+           <x>700</x>
+           <y>90</y>
+           <width>80</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="text" >
+          <string>Edit</string>
+         </property>
+        </widget>
+        <widget class="QListWidget" name="blocks" >
+         <property name="geometry" >
+          <rect>
+           <x>10</x>
+           <y>10</y>
+           <width>671</width>
+           <height>341</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="upblock" >
+         <property name="geometry" >
+          <rect>
+           <x>700</x>
+           <y>210</y>
+           <width>80</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="text" >
+          <string>Up</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="downblock" >
+         <property name="geometry" >
+          <rect>
+           <x>700</x>
+           <y>250</y>
+           <width>80</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="text" >
+          <string>Down</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="clearblocks" >
+         <property name="geometry" >
+          <rect>
+           <x>700</x>
+           <y>130</y>
+           <width>80</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="text" >
+          <string>Clear</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="copyblock" >
+         <property name="geometry" >
+          <rect>
+           <x>700</x>
+           <y>170</y>
+           <width>80</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="text" >
+          <string>Copy</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="tab_2" >
+        <attribute name="title" >
+         <string>Instruments</string>
+        </attribute>
+        <widget class="QPushButton" name="addinstrumentbutton" >
+         <property name="geometry" >
+          <rect>
+           <x>700</x>
+           <y>10</y>
+           <width>80</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="text" >
+          <string>Add</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="editinstrument" >
+         <property name="enabled" >
+          <bool>true</bool>
+         </property>
+         <property name="geometry" >
+          <rect>
+           <x>700</x>
+           <y>90</y>
+           <width>80</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="text" >
+          <string>Edit</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="removeinstrument" >
+         <property name="enabled" >
+          <bool>true</bool>
+         </property>
+         <property name="geometry" >
+          <rect>
+           <x>700</x>
+           <y>50</y>
+           <width>80</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="text" >
+          <string>Remove</string>
+         </property>
+        </widget>
+        <widget class="QListWidget" name="instruments" >
+         <property name="geometry" >
+          <rect>
+           <x>10</x>
+           <y>10</y>
+           <width>671</width>
+           <height>341</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="clearinstruments" >
+         <property name="geometry" >
+          <rect>
+           <x>700</x>
+           <y>130</y>
+           <width>80</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="text" >
+          <string>Clear</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="upinstrument" >
+         <property name="geometry" >
+          <rect>
+           <x>700</x>
+           <y>210</y>
+           <width>80</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="text" >
+          <string>Up</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="downinstrument" >
+         <property name="geometry" >
+          <rect>
+           <x>700</x>
+           <y>250</y>
+           <width>80</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="text" >
+          <string>Down</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="copyinstrument" >
+         <property name="geometry" >
+          <rect>
+           <x>700</x>
+           <y>170</y>
+           <width>80</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="text" >
+          <string>Copy</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="tab_4" >
+        <attribute name="title" >
+         <string>Progressions</string>
+        </attribute>
+        <widget class="QPushButton" name="addprogressionbutton" >
+         <property name="geometry" >
+          <rect>
+           <x>700</x>
+           <y>10</y>
+           <width>80</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="statusTip" >
+          <string>Add progression</string>
+         </property>
+         <property name="text" >
+          <string>Add</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="editprogression" >
+         <property name="enabled" >
+          <bool>true</bool>
+         </property>
+         <property name="geometry" >
+          <rect>
+           <x>700</x>
+           <y>90</y>
+           <width>80</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="text" >
+          <string>Edit</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="removeprogression" >
+         <property name="enabled" >
+          <bool>true</bool>
+         </property>
+         <property name="geometry" >
+          <rect>
+           <x>700</x>
+           <y>50</y>
+           <width>80</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="text" >
+          <string>Remove</string>
+         </property>
+        </widget>
+        <widget class="QListWidget" name="progressions" >
+         <property name="geometry" >
+          <rect>
+           <x>10</x>
+           <y>10</y>
+           <width>671</width>
+           <height>341</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="upprogression" >
+         <property name="geometry" >
+          <rect>
+           <x>700</x>
+           <y>210</y>
+           <width>80</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="text" >
+          <string>Up</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="downprogression" >
+         <property name="geometry" >
+          <rect>
+           <x>700</x>
+           <y>250</y>
+           <width>80</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="text" >
+          <string>Down</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="clearprogressions" >
+         <property name="geometry" >
+          <rect>
+           <x>700</x>
+           <y>130</y>
+           <width>80</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="text" >
+          <string>Clear</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="copyprogression" >
+         <property name="geometry" >
+          <rect>
+           <x>700</x>
+           <y>170</y>
+           <width>80</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="text" >
+          <string>Copy</string>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout" >
+       <property name="sizeConstraint" >
+        <enum>QLayout::SetNoConstraint</enum>
+       </property>
+       <item>
+        <widget class="QPushButton" name="startbutton" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="statusTip" >
+          <string>Start generating music</string>
+         </property>
+         <property name="text" >
+          <string>Start</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="stopbutton" >
+         <property name="enabled" >
+          <bool>false</bool>
+         </property>
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="statusTip" >
+          <string>Stop generating music</string>
+         </property>
+         <property name="text" >
+          <string>Stop</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar" >
@@ -822,7 +832,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>823</width>
+     <width>813</width>
      <height>22</height>
     </rect>
    </property>
@@ -978,12 +988,6 @@
   </action>
  </widget>
  <tabstops>
-  <tabstop>Tabs</tabstop>
-  <tabstop>projectname</tabstop>
-  <tabstop>author</tabstop>
-  <tabstop>visualization</tabstop>
-  <tabstop>startbutton</tabstop>
-  <tabstop>stopbutton</tabstop>
   <tabstop>movement</tabstop>
   <tabstop>loop</tabstop>
   <tabstop>loopslide</tabstop>
@@ -1002,7 +1006,6 @@
   <tabstop>downblock</tabstop>
   <tabstop>removeblock</tabstop>
   <tabstop>clearblocks</tabstop>
-  <tabstop>instrumentcombo</tabstop>
   <tabstop>instruments</tabstop>
   <tabstop>addinstrumentbutton</tabstop>
   <tabstop>editinstrument</tabstop>

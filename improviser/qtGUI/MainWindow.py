@@ -48,8 +48,6 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 
 
 	def fill_combos(self):
-		for x in Options.get_available_instruments():
-			self.ui.instrumentcombo.addItem(x)
 		for x in Options.get_available_movements():
 			self.ui.movement.addItem(x)
 		for x in [1, 2, 4, 8, 16, 32, 64, 128]:
@@ -136,9 +134,6 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 		self.connect(self.ui.actionNew,
 			QtCore.SIGNAL("activated()"),
 			self.set_defaults)
-		self.connect(self.ui.instrumentcombo,
-			QtCore.SIGNAL("activated(int)"),
-			lambda x: self.add_instrument())
 		self.connect(self.ui.bpmslide,
 			QtCore.SIGNAL("sliderMoved(int)"),
 			lambda x: self.ui.bpm.setValue(x * 10))
@@ -544,7 +539,7 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 		
 
 	def add_instrument(self):
-		self.ui.instruments.addItem(self.ui.instrumentcombo.currentText())
+		self.ui.instruments.addItem("RockDrum")
 		self.ui.instruments.setCurrentRow(int(self.ui.instruments.count()) -1)
 		self.edit_instrument()
 		self.instrument_changed()
