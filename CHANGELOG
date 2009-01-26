@@ -1,3 +1,7 @@
+Version 0.8.5.2:
+	* qtGUI/MainWindow.py: Added spacers and enabled clicking and double clicking in the GraphicsView
+	* qtGUI/PreferencesDialog.py: Added spacers
+
 Version 0.8.5.1:
 	* qtGUI/MainWindow.py: Added layouts and resize support (almost complete).
 
