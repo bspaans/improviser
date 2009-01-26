@@ -52,7 +52,8 @@ class ProgressionBrowser(QtGui.QDialog):
 			self.ui.update.setEnabled(False)
 			return
 		try:
-			d = feedparser.parse(Options.UPLOAD_HOME + "updates.php?type=%d" % Options.UPLOAD_PROGRESSION)
+			d = feedparser.parse(Options.UPLOAD_HOME + "updates.php?type=%d&ID=%d" % 
+					(Options.UPLOAD_PROGRESSION, self.filecollection.last_progression))
 		except:
 			return
 		if len(d["entries"]) > 0:
@@ -60,37 +61,35 @@ class ProgressionBrowser(QtGui.QDialog):
 			self.ui.update.setEnabled(True)
 			self.entries = d["entries"]
 		else:
-			self.ui.update.setEnabled(True)
+			self.ui.update.setEnabled(False)
 
 
 	def show_progressions(self):
+		self.set_state()
 		i = self.ui.authors.currentRow()
 		t = str(self.ui.authors.item(i).text())
 		if i >= 0:
-			self.ui.progressions.clear()
-			self.ui.progression.clear()
 			if i == 0:
-				self.state = DEFAULT
 				self.show_defaults()
 			elif i == 1:
-				self.state = OWN
 				self.show_own()
 			elif i == 2:
-				self.state = ALL
 				self.show_all()
 			else:
-				self.state = OTHER
 				self.show_author(t)
 
 	def show_defaults(self):
+		self.ui.progressions.clear()
 		for x in self.filecollection.get_Progressions(True):
 			self.ui.progressions.addItem(x)
 		self.ui.progressions.setCurrentRow(0)
 
 	def show_own(self):
+		self.ui.progressions.clear()
 		self.show_author(self.filecollection.credentials["username"])
 
 	def show_all(self):
+		self.ui.progressions.clear()
 		prog = self.filecollection.get_Progressions()
 		for x in prog:
 			for y in prog[x]:
@@ -100,15 +99,28 @@ class ProgressionBrowser(QtGui.QDialog):
 
 	def show_progression(self):
 		self.ui.progression.clear()
-		for x in self.get_progression().split():
+		for x in self.get_progression(",").split():
 			if x not in ["{", "}", "", " "]:
 				self.ui.progression.addItem(x.replace("*", " "))
 
 	def show_author(self, author):
 		prog = self.filecollection.get_Progressions()
+		self.ui.progressions.clear()
 		for x in prog[author]:
 			self.ui.progressions.addItem(x)
 		self.ui.progressions.setCurrentRow(0)
+
+
+	def set_state(self):
+		i = self.ui.authors.currentRow()
+		if i == 0:
+			self.state = DEFAULT
+		elif i == 1:
+			self.state = OWN
+		elif i == 2:
+			self.state = ALL
+		else:
+			self.state = OTHER
 
 
 	def get_progression(self, for_show = True):
@@ -124,6 +136,8 @@ class ProgressionBrowser(QtGui.QDialog):
 		else:
 			if self.state == ALL:
 				parts = t.split("  [")
+				if len(parts) == 1:
+					return ""
 				name = parts[0]
 				owner = parts[1][:-1]
 			elif self.state == OWN:
@@ -131,12 +145,20 @@ class ProgressionBrowser(QtGui.QDialog):
 				name = t
 			elif self.state == OTHER:
 				owner = self.ui.authors.currentRow()
+				if owner == -1:
+					return ""
 				owner = str(self.ui.authors.item(owner).text())
 				name = t
 			if for_show:
-				return self.filecollection.get_Progressions()[owner][name]
+				try:
+					return self.filecollection.get_Progressions()[owner][name]
+				except:
+					return ""
 			else:
-				return self.filecollection.get_Progressions(parse_content = False)[owner][name]
+				try:
+					return self.filecollection.get_Progressions(parse_content = False)[owner][name]
+				except:
+					return ""
 
 
 		return ""
@@ -144,13 +166,15 @@ class ProgressionBrowser(QtGui.QDialog):
 	def set_progression(self):
 		i = self.ui.progressions.currentRow()
 		t = str(self.ui.progressions.item(i).text())
-		if self.state == DEFAULT:
-			prog = self.get_progression(False)
-			self.progression_list.addItem("%s %s" % (t, prog))
-		else:
-			res = self.get_progression(False)
-			for x in res.split(","):
-				self.progression_list.addItem(x)
+		self.set_state()
+		res = self.get_progression(False)
+		for x in res.split(","):
+			if x not in ["", " ", "{}", "{ }"]:
+				print x, self.state
+				if self.state == DEFAULT:
+					self.progression_list.addItem("%s %s" % (t,x))
+				else:
+					self.progression_list.addItem(x)
 
 		self.reject()
 		
@@ -163,6 +187,7 @@ class ProgressionBrowser(QtGui.QDialog):
 			id = int(x.id[len(Options.UPLOAD_HOME):])
 			download = "%s (%d.prg)" % (x.title, id)
 			progress.setLabelText("Downloading %s..." % download)
+			print "Downloading %s..." % download
 			progress.setValue(i)
 			try:
 				f = urllib.urlopen(Options.UPLOAD_HOME + "download.php?ID=%d" % id)
@@ -176,3 +201,4 @@ class ProgressionBrowser(QtGui.QDialog):
 				break
 		progress.setValue(len(self.entries))
 		self.filecollection.save()
+		self.ui.update.setEnabled(False)

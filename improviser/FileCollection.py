@@ -10,6 +10,7 @@ class FileCollection:
 	credentials = {}
 	progressions = []
 	checkupdates = False
+	last_progression = 0
 
 
 	def __init__(self, folder):
@@ -51,14 +52,13 @@ class FileCollection:
 					params = p.split(" ")
 					name = params[0]
 					params = " ".join(params[1:])[1:-1]
-
 					res[x[2]][x[3]] += params
 				else:
 					res[x[2]][x[3]] += p + ","
 
 			# Remove comma
 			if not parse_content:
-				res[x[2]][x[3]] = res[x[2]][x[3]][:-2]
+				res[x[2]][x[3]] = res[x[2]][x[3]][:-1]
 
 
 
@@ -129,3 +129,5 @@ class FileCollection:
 
 			if content_type == Options.UPLOAD_PROGRESSION:
 				self.progressions.append([id, content_type, author, title, description, content])
+				if id > self.last_progression:
+					self.last_progression = id
