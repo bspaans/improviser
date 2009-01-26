@@ -42,9 +42,10 @@
 
 	qtImproviser.py 
 
-  The GUI is not only a front-end for the cli version, but has support for 
-  uploading, exporting and importing as well; which currently can't be found 
-  in the cli version.
+  This is the preferred way to go, because the GUI is not only a front-end for 
+  the cli version, but has support for up- and downloading and exporting and 
+  importing as well; which currently can't be found in the cli version. It's
+  also easier to control.
 
 ================================================================================
 
