@@ -1,3 +1,7 @@
+Version 0.8.3.1:
+	* FileCollection.py: Keeps track of last downloaded progressions.
+	* qtGUI/ProgressionBrowser.py: Progression Browser is fully working.
+
 Version 0.8.3.0:
 	* FileCollection.py: Added beginning of file collection. Loading and saving to and from xml works.
 	* qtGUI/ProgressionBrowser.py: Progression browser almost working completely.
