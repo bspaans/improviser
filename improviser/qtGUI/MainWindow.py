@@ -78,14 +78,17 @@ class MovementScene(QtGui.QGraphicsScene):
 
 				if x in play:
 					play.remove(x)
-					if x not in stop:
+					if x not in stop and not self.plays(params, x, True):
 						stop.append(x)
 				elif x in stop:
 					stop.remove(x)
 					if x not in play:
 						play.append(x)
 				else:
-					play.append(x)
+					if not self.plays(params, x, True):
+						play.append(x)
+					else:
+						stop.append(x)
 
 				stop = [ str(x) for x in stop ]
 				play = [ str(x) for x in play ]
@@ -128,7 +131,7 @@ class MovementScene(QtGui.QGraphicsScene):
 		
 		self.pressed = []
 
-	def plays(self, params, n):
+	def plays(self, params, n, ignore_arbitrary_bars = False):
 		start, end, step, global_end = -1, -1, -1, -1
 		must_play, must_not_play = [], []
 		if 'start' in params:
@@ -144,11 +147,12 @@ class MovementScene(QtGui.QGraphicsScene):
 		if 'must_not_play' in params:
 			must_not_play = [ int(x) for x in params['must_not_play'].split("-") ]
 
-		if n in must_play:
-			return 2
+		if not ignore_arbitrary_bars:
+			if n in must_play:
+				return 2
 
-		if n in must_not_play:
-			return -1
+			if n in must_not_play:
+				return -1
 
 		if global_end != -1 and n >= global_end:
 			return 0
