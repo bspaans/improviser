@@ -1,3 +1,8 @@
+Version 0.8.6.0:
+	* qtGUI/MainWindow.py, qtGUI/MovementScene.py: Refactored MainWindow, extracted MovementScene	
+	* Instrument.py, Options.py, qtGUI/MovementScene.py: Clicking on a bar in the GraphicsView now toggles play.
+	* qtGUI/MovementScene.py: Added buffering.
+
 Version 0.8.5.5:
 	* qtGUI/MainWindow.py: Added dragging and dropping support in lists
 	* qtGUI/InstrumentDialog.py: Redone GUI (added tabs). Added widgets for note ranges, bar to end on, min and max note duration and max simultaneous notes.

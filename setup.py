@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
 	name="improviser",
-	version="0.8.5.5",
+	version="0.8.6.0",
 	description="Automatic music generation software",
 	long_description="Experiments in musical content generation.",
 	author="Bart Spaans",
