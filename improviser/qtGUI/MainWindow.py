@@ -9,6 +9,7 @@ from ProgressionBrowser import ProgressionBrowser
 from InstrumentBrowser import InstrumentBrowser
 from os import path, environ
 from mingus.core import diatonic
+from mingus.containers.Instrument import MidiInstrument
 import Options
 import Movements
 import math
@@ -29,22 +30,29 @@ class OptionClass:
 
 class MovementScene(QtGui.QGraphicsScene):
 
-	IOFFSET = 50
+	IOFFSETX = 250
+	IOFFSETY = 50
 	BOXSIZE = 25
 
 	def __init__(self, main):
 		QtGui.QGraphicsScene.__init__(self)
 		self.main = main
 		self.ui = main.ui
+		self.midi_instr = MidiInstrument()
 
 		# Brushes and pens
 		self.brush = QtGui.QBrush(QtCore.Qt.SolidPattern)
 		self.brush_dont_play = QtGui.QBrush(QtCore.Qt.white, QtCore.Qt.NoBrush)
 		self.brush_play = QtGui.QBrush(QtCore.Qt.red, QtCore.Qt.SolidPattern)
-		self.brush_percussion = QtGui.QBrush(QtCore.Qt.yellow, QtCore.Qt.SolidPattern)
+		self.brush_must_play = QtGui.QBrush(QtGui.QColor(255, 0, 0).light(60), QtCore.Qt.SolidPattern)
+		self.brush_must_not_play = QtGui.QBrush(QtGui.QColor(250,250,250), QtCore.Qt.SolidPattern)
+		self.brush_percussion = QtGui.QBrush(QtGui.QColor(255,255,0), QtCore.Qt.SolidPattern)
+		self.brush_must_play_percussion = QtGui.QBrush(QtGui.QColor(255, 255, 0).light(80), QtCore.Qt.SolidPattern)
 		self.brush_selection = QtGui.QBrush(QtGui.QColor(0, 0, 255).light(186), QtCore.Qt.SolidPattern)
 		self.box_pen = QtGui.QPen(self.brush, 2, QtCore.Qt.SolidLine, QtCore.Qt.RoundCap, QtCore.Qt.RoundJoin)
 		self.select_pen = QtGui.QPen(self.brush, 1, QtCore.Qt.SolidLine, QtCore.Qt.RoundCap, QtCore.Qt.RoundJoin)
+
+		
 
 	def mousePressEvent(self, ev):
 		self.pressed = ev.scenePos()
@@ -56,12 +64,52 @@ class MovementScene(QtGui.QGraphicsScene):
 				self.ui.instruments.setCurrentRow(y)
 				self.update()
 			if x >= 0 and y >= 0:
-				print x, y
+				instrument = self.ui.instruments.item(y)
+				instr = str(instrument.text()).split()
+				params = Options.parse_instrument_params(instr[1:])
+
+				play, stop = [], []
+				if 'must_not_play' in params:
+					stop = [ int(z) for z in params['must_not_play'].split("-") ]
+
+				if 'must_play' in params:
+					play = [ int(z) for z in params['must_play'].split("-")]
+
+
+				if x in play:
+					play.remove(x)
+					if x not in stop:
+						stop.append(x)
+				elif x in stop:
+					stop.remove(x)
+					if x not in play:
+						play.append(x)
+				else:
+					play.append(x)
+
+				stop = [ str(x) for x in stop ]
+				play = [ str(x) for x in play ]
+
+				if play != []:
+					play.sort()
+					params['must_play'] = "-".join(play)
+				else:
+					if params.has_key('must_play'):
+						del params['must_play']
+				if stop != []:
+					stop.sort()
+					params['must_not_play'] = "-".join(stop)
+				else:
+					if params.has_key('must_not_play'):
+						del params['must_not_play']
+				
+				instrument.setText("%s { %s }" % (instr[0], " ".join([ "%s:%s" % (str(x), str(params[x])) for x in params ]) ))
+				self.update()
 
 	def get_box_coords(self, ev):
 		x, y = self.pressed.x(), self.pressed.y()
-		x = x - 200
-		y = y - self.IOFFSET
+		x = x - self.IOFFSETX
+		y = y - self.IOFFSETY
 		boxx = x / self.BOXSIZE
 		boxy = y / self.BOXSIZE
 		x = -1
@@ -75,13 +123,14 @@ class MovementScene(QtGui.QGraphicsScene):
 	def mouseDoubleClickEvent(self, ev):
 		if self.pressed == ev.scenePos():
 			x, y = self.get_box_coords(ev)
-			if x >= 0 and y >= 0:
+			if y >= 0:
 				self.ui.editinstrument.click()
 		
 		self.pressed = []
 
 	def plays(self, params, n):
 		start, end, step, global_end = -1, -1, -1, -1
+		must_play, must_not_play = [], []
 		if 'start' in params:
 			start = params['start']
 		if 'step' in params:
@@ -90,33 +139,43 @@ class MovementScene(QtGui.QGraphicsScene):
 			end = params['end']
 		if 'global_end' in params:
 			global_end = params['global_end']
+		if 'must_play' in params:
+			must_play = [ int(x) for x in params['must_play'].split("-") ]
+		if 'must_not_play' in params:
+			must_not_play = [ int(x) for x in params['must_not_play'].split("-") ]
+
+		if n in must_play:
+			return 2
+
+		if n in must_not_play:
+			return -1
 
 		if global_end != -1 and n >= global_end:
-			return False
+			return 0
 
 		if start == -1:
-			return True
+			return 1
 		if n < start:
-			return False
+			return 0
 
 		if end == -1 and step == -1:
-			return True
+			return 1
 
 		if step == -1:
 			if n >= start and n < end:
-				return True
-			return False
+				return 1
+			return 0
 
 		if end == -1:
 			n = (n - start) % (step * 2)
 			if n < step:
-				return True
-			return False
+				return 1
+			return 0
 
 		n = (n - start) % (end - start + step)
 		if n < end - start:
-			return True
-		return False
+			return 1
+		return 0
 
 	def get_progressions(self):
 		try:
@@ -155,14 +214,14 @@ class MovementScene(QtGui.QGraphicsScene):
 	def paint_prog_block_index(self):
 		prog, prog_text = self.get_progressions()
 		end, prog_block_index = self.get_prog_block_index(prog)
-		IOFFSET = self.IOFFSET
+		IOFFSETY = self.IOFFSETY
 		BOXSIZE = self.BOXSIZE
 
 		if self.main.get_instruments() is None:
 			return end
 
 		if len(prog) <= 0:
-			self.center_text("No progressions selected.")
+			self.center_text("No progressions have been added.")
 			return end
 
 		for i, x in enumerate(prog_block_index):
@@ -171,23 +230,24 @@ class MovementScene(QtGui.QGraphicsScene):
 			if i != len(prog_block_index) - 1:
 				blockend = prog_block_index[i + 1][0]
 			if name != 'R':
-				self.addLine(QtCore.QLineF(200 + offset * BOXSIZE, IOFFSET - 10, 
-					195 + blockend * BOXSIZE, IOFFSET - 10), self.box_pen)
-				self.addLine(QtCore.QLineF(200 + offset * BOXSIZE, IOFFSET - 10, 
-					200 + offset * BOXSIZE, IOFFSET - 8), self.box_pen)
-				self.addLine(QtCore.QLineF(195 + blockend * BOXSIZE, IOFFSET - 10, 
-					195 + blockend * BOXSIZE, IOFFSET - 8), self.box_pen)
+				self.addLine(QtCore.QLineF(self.IOFFSETX + offset * BOXSIZE, IOFFSETY - 10, 
+					self.IOFFSETX - 5 + blockend * BOXSIZE, IOFFSETY - 10), self.box_pen)
+				self.addLine(QtCore.QLineF(self.IOFFSETX + offset * BOXSIZE, IOFFSETY - 10, 
+					self.IOFFSETX + offset * BOXSIZE, IOFFSETY - 8), self.box_pen)
+				self.addLine(QtCore.QLineF(self.IOFFSETX - 5 + blockend * BOXSIZE, IOFFSETY - 10, 
+					self.IOFFSETX - 5 + blockend * BOXSIZE, IOFFSETY - 8), self.box_pen)
 				t = self.addText(name[:int((blockend-offset) * 2.5)], 
 					QtGui.QFont("", 12, 80))
-				t.translate(200 + BOXSIZE * offset, 3)
-				if blockend - offset > 2:
-					t = self.addText(prog_text[prog_index], QtGui.QFont("", 8, 40, True))
-					t.translate(200 + BOXSIZE * offset, IOFFSET - 25)
+				t.setToolTip(name)
+				t.translate(self.IOFFSETX + BOXSIZE * offset, 3)
+				t = self.addText(prog_text[prog_index][:int((blockend - offset) * 3)], QtGui.QFont("", 8, 40, True))
+				t.setToolTip(prog_text[prog_index])
+				t.translate(self.IOFFSETX + BOXSIZE * offset, IOFFSETY - 25)
 		return end
 
 
 	def update(self):
-		IOFFSET = self.IOFFSET
+		IOFFSETY = self.IOFFSETY
 		BOXSIZE = self.BOXSIZE
 			
 		for x in self.items():
@@ -198,7 +258,7 @@ class MovementScene(QtGui.QGraphicsScene):
 
 		sel = self.ui.instruments.currentRow()
 		if sel != -1:
-			r = self.addRect(QtCore.QRectF(-1, sel * BOXSIZE + IOFFSET - 1, self.width(), BOXSIZE - BOXSIZE / 5 + 1), self.select_pen, self.brush_selection)
+			r = self.addRect(QtCore.QRectF(-1, sel * BOXSIZE + IOFFSETY - 1, self.width(), BOXSIZE - BOXSIZE / 5 + 1), self.select_pen, self.brush_selection)
 			r.setZValue(-50)
 
 		instr = self.main.get_instruments()
@@ -208,24 +268,41 @@ class MovementScene(QtGui.QGraphicsScene):
 				name = parts[0]
 				params = Options.parse_instrument_params(parts[1:])
 				s = self.addText(name)
-				s.translate(0, i * BOXSIZE + IOFFSET)
+				if 'midi_instr' in params:
+					s.setToolTip(self.midi_instr.names[params['midi_instr']])
+				s.translate(0, i * BOXSIZE + IOFFSETY)
+				#if 'channel' in params:
+				#	chan = self.addText(str(params['channel']))
+				#	chan.translate(self.IOFFSETX - 50, i * BOXSIZE + IOFFSETY)
 				for n in range(end + 1):
-					if self.plays(params, n):
-						b = self.brush_play
+					plays = self.plays(params, n)
+					if plays > 0:
+						if plays == 1:
+							b = self.brush_play
+						elif plays == 2:
+							b = self.brush_must_play
+
 						if 'channel' in params:
 							if params['channel'] == 9:
-								b = self.brush_percussion
+								if plays == 1:
+									b = self.brush_percussion
+								else:
+									b = self.brush_must_play_percussion
 					else:
-						b = self.brush_dont_play
-					a = self.addRect(QtCore.QRectF(200 + n * BOXSIZE, i * BOXSIZE + IOFFSET, BOXSIZE - BOXSIZE / 5, BOXSIZE - BOXSIZE / 5 ), self.box_pen,b)
+						if plays == 0:
+							b = self.brush_dont_play
+						else:
+							b = self.brush_must_not_play
+					a = self.addRect(QtCore.QRectF(self.IOFFSETX + n * BOXSIZE, i * BOXSIZE + IOFFSETY, BOXSIZE - BOXSIZE / 5, BOXSIZE - BOXSIZE / 5 ), self.box_pen,b)
 		else:
-			self.center_text("No instruments selected.")
+			self.center_text("No instruments have been added.")
 
 		self.ui.graphicsView.setScene(self)
 
 	def center_text(self,txt):
 		t = self.addText(txt)
-		t.translate(self.main.size().width() / 2 - (len(txt) * 4), self.IOFFSET)
+		t.setTextWidth(250)
+		t.translate(self.main.size().width() / 2 - (t.textWidth() / 2), self.IOFFSETY)
 
 
 class ImproviserMainWindow(QtGui.QMainWindow):

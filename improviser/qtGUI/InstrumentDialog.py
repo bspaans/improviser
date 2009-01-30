@@ -75,6 +75,11 @@ class InstrumentDialog(QtGui.QDialog):
 		res += "min_note:%d " % self.ui.minnote.currentIndex()
 		res += "max_note:%d " % self.ui.maxnote.currentIndex()
 		res += "let_ring:1 " # for backwards compatibility
+
+		if self.must_play != "":
+			res += "must_play:%s " % self.must_play
+		if self.must_not_play != "":
+			res += "must_not_play:%s " % self.must_not_play
 		res += "}"
 		self.item.setText(res)
 
@@ -120,6 +125,9 @@ class InstrumentDialog(QtGui.QDialog):
 		self.ui.maxnotes.setValue(i.params['max_notes']) if 'max_notes' in i.params else self.ui.maxnotes.setValue(-1)
 		self.ui.minnote.setCurrentIndex(i.params['min_note']) if 'min_note' in i.params else self.ui.minnote.setCurrentIndex(0)
 		self.ui.maxnote.setCurrentIndex(i.params['max_note']) if 'max_note' in i.params else self.ui.maxnote.setCurrentIndex(115)
+
+		self.must_play = i.params['must_play'] if 'must_play' in i.params else ""
+		self.must_not_play = i.params['must_not_play'] if 'must_not_play' in i.params else ""
 
 
 

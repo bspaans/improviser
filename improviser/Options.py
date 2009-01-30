@@ -145,7 +145,7 @@ def save_options(filename, options):
 
 def get_song_as_text(options):
 	res =  "# Improviser configuration\n"
-	res += "conf_version = 10\n"
+	res += "conf_version = 11\n"
 	for x in options.__dict__:
 		res += "%s = %s\n" % (x, getattr(options, x))
 	return res
@@ -176,7 +176,7 @@ def load_options_from_file(filename, option_class):
 
 				# Parse attributes
 				if attr == "conf_version":
-					if int(val) > 10 or int(val) < 0:
+					if int(val) > 11 or int(val) < 0:
 						raise OptionError, "Cannot handle version %d." % int(val)
 					else:
 						version = int(val)
@@ -380,6 +380,8 @@ def parse_instrument_params(params):
 			res[key] = int(value)
 		elif key in ["chance"]:
 			res[key] = float(value)
+		elif key in ["must_play", "must_not_play"]:
+			res[key] = value
 		else:
 			res[key] = value
 	return res

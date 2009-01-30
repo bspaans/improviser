@@ -113,7 +113,9 @@ class Sequencer:
 			sys.stdout.write(".")
 		it = self.bar
 		for i in self.instruments:
-			if it >= i.global_end and i.global_end != -1:
+			if it in i.must_play:
+				i.play(self.state)
+			elif (it >= i.global_end and i.global_end != -1) or it in i.must_not_play:
 				i.stop_playing_notes()
 				i.add_rest(self.state)
 			elif it >= i.start and (it < i.end or i.end == -1):

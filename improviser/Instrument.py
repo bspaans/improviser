@@ -20,6 +20,9 @@ class Instrument:
 	end = -1
 	step = 0
 	global_end = -1
+	must_play = []
+	must_not_play = []
+
 	midi_set = False
 	last_tick = (-1, -1) # iteration, tick
 	no_fluidsynth = True
@@ -47,6 +50,14 @@ class Instrument:
 				self.end = self.start + self.step
 		if 'global_end' in parameters:
 			self.global_end = parameters['global_end']
+
+		self.must_play = []
+		self.must_not_play = []
+		if 'must_play' in parameters:
+			self.must_play = [ int(x) for x in parameters['must_play'].split("-") ]
+
+		if 'must_not_play' in parameters:
+			self.must_not_play = [ int(x) for x in parameters['must_not_play'].split("-") ] 
 
 	def reset(self):
 		self.track = Track()
