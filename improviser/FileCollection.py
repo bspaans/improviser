@@ -134,9 +134,15 @@ class FileCollection:
 			return self.add_Instrument(id, author, title, description, content)
 
 	def add_Progression(self, id, author, title, description, content):
+		for x in self.progressions:
+			if x[0] == id:
+				return
 		self.progressions.append([id, Options.UPLOAD_PROGRESSION, author, title, description, content])
 
 	def add_Instrument(self, id, author, title, description, content):
+		for x in self.instruments:
+			if x[0] == id:
+				return
 		self.instruments.append([id, Options.UPLOAD_INSTRUMENTS, author, title, description, content])
 	def save(self):
 		if not path.exists(self.folder):
