@@ -1,3 +1,7 @@
+Version 0.8.5.3:
+	* qtGUI/qtUImain.py, qtGUI/improviser.py: Removed Visualizations
+	* Sequencer.py: Instrument (step, start, end) are now dependent on bars instead of blocks.
+
 Version 0.8.5.2:
 	* qtGUI/MainWindow.py: Added spacers and enabled clicking and double clicking in the GraphicsView
 	* qtGUI/PreferencesDialog.py: Added spacers

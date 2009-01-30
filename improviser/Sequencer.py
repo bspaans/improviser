@@ -17,6 +17,8 @@ class Sequencer:
 	refresh_function = None
 	update_function = None
 	verbose = False
+	bar = -1
+	chord_index = -1
 
 	def __init__(self, movement):
 		self.movement = movement
@@ -54,6 +56,10 @@ class Sequencer:
 		self.set_bpm(b.get_bpm(self.iterations, self.tick))
 		self.meter = b.get_meter(self.iterations, self.tick)
 		self.wild = b.get_wildness(self.iterations, self.tick)
+
+	def bar_tick(self):
+
+		self.bar += 1
 
 	def change_scale(self):
 		
@@ -105,7 +111,7 @@ class Sequencer:
 		"""they are currently enabled."""
 		if self.no_fluidsynth:
 			sys.stdout.write(".")
-		it = self.iterations -1 
+		it = self.bar
 		for i in self.instruments:
 			if it >= i.start and (it < i.end or i.end == -1):
 				i.play(self.state)
@@ -132,7 +138,10 @@ class Sequencer:
 
 				if i != 0:
 					self.tick_start = time()
-				self.chord = self.chords[ i / self.ticks ]
+				if i / self.ticks != self.chord_index:
+					self.chord_index = i / self.ticks
+					self.bar_tick()
+				self.chord = self.chords[ self.chord_index ]
 
 				if self.refresh_function != None:
 					self.refresh_function()

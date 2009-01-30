@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'preferences.ui'
+# Form implementation generated from reading ui file 'improviser/qtGUI/preferences.ui'
 #
-# Created: Mon Jan 26 19:31:55 2009
+# Created: Mon Jan 26 20:38:49 2009
 #      by: PyQt4 UI code generator 4.4.3
 #
 # WARNING! All changes made in this file will be lost!

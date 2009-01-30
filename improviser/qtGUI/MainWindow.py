@@ -21,7 +21,7 @@ class OptionClass:
 	movement = "Movement"
 	width=400
 	height=400
-	frontend="blocks"
+	frontend=None
 	ensemble=None
 	no_fluidsynth=False
 	verbose=True
@@ -237,8 +237,6 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 			self.ui.resolution.addItem(str(x))
 		for x in diatonic.basic_keys:
 			self.ui.key.addItem(x)
-		for x in ['', 'cli', 'lines', 'blocks', 'mixed']:
-			self.ui.visualization.addItem(x)
 				
 
 	def wresize(self):
@@ -886,9 +884,6 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 		self.ui.key.setCurrentIndex(self.ui.key.findText(o.key))
 		self.ui.movement.setCurrentIndex(self.ui.movement.findText(o.movement))
 
-		if hasattr(o, 'visualization'):
-			self.ui.visualization.setCurrentIndex(self.ui.visualization.findText(o.visualization))
-
 		# CheckBoxes
 		self.ui.swing.setChecked(bool(o.swing))
 
@@ -930,7 +925,6 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 		o.key = str(self.ui.key.currentText())
 		o.driver = self.driver
 		o.SF2 = self.soundfont
-		o.frontend = str(self.ui.visualization.currentText())
 		o.movement = str(self.ui.movement.currentText())
 		if o.frontend == '':
 			o.frontend = None

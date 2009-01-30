@@ -107,6 +107,9 @@
             <property name="sizeConstraint" >
              <enum>QLayout::SetMinimumSize</enum>
             </property>
+            <property name="fieldGrowthPolicy" >
+             <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+            </property>
             <property name="formAlignment" >
              <set>Qt::AlignCenter</set>
             </property>
@@ -119,6 +122,41 @@
             <property name="rightMargin" >
              <number>0</number>
             </property>
+            <item row="0" column="0" >
+             <widget class="QLabel" name="label_4" >
+              <property name="sizePolicy" >
+               <sizepolicy vsizetype="Preferred" hsizetype="Fixed" >
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text" >
+               <string>Project name</string>
+              </property>
+              <property name="buddy" >
+               <cstring>projectname</cstring>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1" >
+             <widget class="QLineEdit" name="projectname" >
+              <property name="sizePolicy" >
+               <sizepolicy vsizetype="Fixed" hsizetype="MinimumExpanding" >
+                <horstretch>20</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize" >
+               <size>
+                <width>300</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string>Untitled</string>
+              </property>
+             </widget>
+            </item>
             <item row="1" column="0" >
              <widget class="QLabel" name="label_12" >
               <property name="sizePolicy" >
@@ -148,73 +186,6 @@
                 <width>150</width>
                 <height>0</height>
                </size>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0" >
-             <widget class="QLabel" name="label_4" >
-              <property name="sizePolicy" >
-               <sizepolicy vsizetype="Preferred" hsizetype="Fixed" >
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text" >
-               <string>Project name</string>
-              </property>
-              <property name="buddy" >
-               <cstring>projectname</cstring>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="1" >
-             <widget class="QComboBox" name="visualization" >
-              <property name="sizePolicy" >
-               <sizepolicy vsizetype="Fixed" hsizetype="MinimumExpanding" >
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize" >
-               <size>
-                <width>300</width>
-                <height>0</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0" >
-             <widget class="QLabel" name="label_11" >
-              <property name="sizePolicy" >
-               <sizepolicy vsizetype="Preferred" hsizetype="Fixed" >
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text" >
-               <string>Visualization</string>
-              </property>
-              <property name="buddy" >
-               <cstring>visualization</cstring>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1" >
-             <widget class="QLineEdit" name="projectname" >
-              <property name="sizePolicy" >
-               <sizepolicy vsizetype="Fixed" hsizetype="MinimumExpanding" >
-                <horstretch>20</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize" >
-               <size>
-                <width>150</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="text" >
-               <string>Untitled</string>
               </property>
              </widget>
             </item>
