@@ -55,6 +55,8 @@ class InstrumentDialog(QtGui.QDialog):
 			res += "step:%d " % self.ui.step.value()
 		if self.ui.stepend.value() != -1:
 			res += "end:%d " % self.ui.stepend.value()
+		if self.ui.end.value() != -1:
+			res += "global_end:%d " % self.ui.end.value()
 		res += "max_velocity:%d min_velocity:%d " % (self.ui.maxvelocity.value(),
 				self.ui.minvelocity.value())
 
@@ -89,17 +91,8 @@ class InstrumentDialog(QtGui.QDialog):
 		self.ui.stepstart.setValue(i.start)
 		self.ui.stepend.setValue(i.end)
 		self.ui.step.setValue(i.step)
-		if 'max_velocity' in i.params:
-			self.ui.maxvelocity.setValue(i.params["max_velocity"])
-		else:
-			self.ui.maxvelocity.setValue(100)
-		if 'min_velocity' in i.params:
-			self.ui.minvelocity.setValue(i.params["min_velocity"])
-		else:
-			self.ui.minvelocity.setValue(50)
+		self.ui.end.setValue(i.global_end)
 
-		if 'chance' in i.params:
-			self.ui.chance.setValue(i.params['chance'])
 
 		self.ui.channel.setEnabled(True)
 		if 'channel' in i.params:
@@ -109,10 +102,6 @@ class InstrumentDialog(QtGui.QDialog):
 		else:
 			self.ui.channel.setValue(0)
 
-		if 'min_note_length' in i.params:
-			self.ui.minnoteduration.setValue(i.params['min_note_length'])
-		else:
-			self.ui.maxnotes.setValue(1)
 
 		if 'note_length' in i.params:
 			self.ui.noteduration.setValue(i.params["note_length"])
@@ -121,25 +110,16 @@ class InstrumentDialog(QtGui.QDialog):
 		else:
 			self.ui.noteduration.setValue(1)
 
-		if 'midi_instr' in i.params:
-			self.ui.midi.setCurrentIndex(i.params['midi_instr'])
-		else:
-			self.ui.midi.setCurrentIndex(0)
+		if 'chance' in i.params:
+			self.ui.chance.setValue(i.params['chance'])
 
-		if 'max_notes' in i.params:
-			self.ui.maxnotes.setValue(i.params['max_notes'])
-		else:
-			self.ui.maxnotes.setValue(-1)
-
-		if 'min_note' in i.params:
-			self.ui.minnote.setCurrentIndex(i.params['min_note'])
-		else:
-			self.ui.minnote.setCurrentIndex(0)
-
-		if 'max_note' in i.params:
-			self.ui.maxnote.setCurrentIndex(i.params['max_note'])
-		else:
-			self.ui.maxnote.setCurrentIndex(115)
+		self.ui.maxvelocity.setValue(i.params["max_velocity"]) if 'max_velocity' in i.params else self.ui.maxvelocity.setValue(100)
+		self.ui.minvelocity.setValue(i.params["min_velocity"]) if 'min_velocity' in i.params else self.ui.minvelocity.setValue(50)
+		self.ui.minnoteduration.setValue(i.params['min_note_length']) if 'min_note_length' in i.params else self.ui.maxnotes.setValue(1)
+		self.ui.midi.setCurrentIndex(i.params['midi_instr']) if 'midi_instr' in i.params else self.ui.midi.setCurrentIndex(0)
+		self.ui.maxnotes.setValue(i.params['max_notes']) if 'max_notes' in i.params else self.ui.maxnotes.setValue(-1)
+		self.ui.minnote.setCurrentIndex(i.params['min_note']) if 'min_note' in i.params else self.ui.minnote.setCurrentIndex(0)
+		self.ui.maxnote.setCurrentIndex(i.params['max_note']) if 'max_note' in i.params else self.ui.maxnote.setCurrentIndex(115)
 
 
 

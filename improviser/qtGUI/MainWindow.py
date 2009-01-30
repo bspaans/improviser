@@ -81,13 +81,18 @@ class MovementScene(QtGui.QGraphicsScene):
 		self.pressed = []
 
 	def plays(self, params, n):
-		start, end, step = -1, -1, -1
+		start, end, step, global_end = -1, -1, -1, -1
 		if 'start' in params:
 			start = params['start']
 		if 'step' in params:
 			step = params['step']
 		if 'end' in params:
 			end = params['end']
+		if 'global_end' in params:
+			global_end = params['global_end']
+
+		if global_end != -1 and n >= global_end:
+			return False
 
 		if start == -1:
 			return True

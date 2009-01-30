@@ -244,7 +244,7 @@
             </size>
            </property>
            <property name="text" >
-            <string>Step start</string>
+            <string>Start</string>
            </property>
           </widget>
          </item>
@@ -306,6 +306,35 @@
            <property name="maximum" >
             <number>10000</number>
            </property>
+           <property name="value" >
+            <number>-1</number>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0" >
+          <widget class="QLabel" name="label_15" >
+           <property name="sizePolicy" >
+            <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text" >
+            <string>End</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1" >
+          <widget class="QSpinBox" name="end" >
+           <property name="minimum" >
+            <number>-1</number>
+           </property>
+           <property name="maximum" >
+            <number>100000</number>
+           </property>
+           <property name="value" >
+            <number>-1</number>
+           </property>
           </widget>
          </item>
         </layout>
@@ -340,76 +369,6 @@
          </item>
          <item row="2" column="1" >
           <widget class="QSpinBox" name="minvelocity" >
-           <property name="sizePolicy" >
-            <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize" >
-            <size>
-             <width>75</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximum" >
-            <number>128</number>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="0" >
-          <widget class="QLabel" name="label_11" >
-           <property name="text" >
-            <string>Max simultaneous notes</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="1" >
-          <widget class="QSpinBox" name="maxnotes" >
-           <property name="sizePolicy" >
-            <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize" >
-            <size>
-             <width>75</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="minimum" >
-            <number>-1</number>
-           </property>
-           <property name="maximum" >
-            <number>128</number>
-           </property>
-           <property name="value" >
-            <number>-1</number>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0" >
-          <widget class="QLabel" name="label_8" >
-           <property name="sizePolicy" >
-            <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize" >
-            <size>
-             <width>150</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text" >
-            <string>Max velocity</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1" >
-          <widget class="QSpinBox" name="maxvelocity" >
            <property name="sizePolicy" >
             <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
              <horstretch>0</horstretch>
@@ -482,6 +441,44 @@
              <width>75</width>
              <height>0</height>
             </size>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1" >
+          <widget class="QSpinBox" name="maxvelocity" >
+           <property name="sizePolicy" >
+            <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize" >
+            <size>
+             <width>75</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximum" >
+            <number>128</number>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0" >
+          <widget class="QLabel" name="label_8" >
+           <property name="sizePolicy" >
+            <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize" >
+            <size>
+             <width>150</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string>Max velocity</string>
            </property>
           </widget>
          </item>
@@ -566,9 +563,46 @@
            </property>
           </widget>
          </item>
+         <item row="2" column="1" >
+          <widget class="QSpinBox" name="maxnotes" >
+           <property name="sizePolicy" >
+            <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize" >
+            <size>
+             <width>75</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="minimum" >
+            <number>-1</number>
+           </property>
+           <property name="maximum" >
+            <number>128</number>
+           </property>
+           <property name="value" >
+            <number>-1</number>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0" >
+          <widget class="QLabel" name="label_11" >
+           <property name="text" >
+            <string>Max simultaneous notes</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
       </layout>
+      <zorder>minnoteduration</zorder>
+      <zorder>label_12</zorder>
+      <zorder>noteduration</zorder>
+      <zorder>label_7</zorder>
+      <zorder>gridLayoutWidget</zorder>
      </widget>
     </widget>
    </item>

@@ -374,7 +374,8 @@ def parse_instrument_params(params):
 		except:
 			raise OptionError, "Syntax error in instrument parameters."
 		if key in ["max_velocity", "min_velocity", "midi_instr", "channel",
-				"let_ring", "note_length", "step", "start", "end",
+				"let_ring", "note_length", "step", "start", "end", 
+				"global_end",
 				"max_notes", "min_note_length", "min_note", "max_note"]: 
 			res[key] = int(value)
 		elif key in ["chance"]:
