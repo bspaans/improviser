@@ -34,6 +34,7 @@ class InstrumentBrowser(Browser):
 	def new_item(self):
 		i = QtGui.QListWidgetItem()
 		id = InstrumentDialog(i)
+		id.load_instrument("BassInstrument { }")
 		id.show()
 		id.exec_()
 		if i.text() != "":
