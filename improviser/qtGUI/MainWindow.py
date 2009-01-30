@@ -34,6 +34,19 @@ class MovementScene(QtGui.QGraphicsScene):
 	IOFFSETY = 50
 	BOXSIZE = 25
 
+	# Memoization
+	last_prog_block = ()
+	last_prog_block_index = ()
+	last_progressions = ()
+	last_instr = ""
+	last_instr_names = []
+	bars = {}
+	last_text = None
+	last_sel = -1
+	last_sel_item = None
+	last_blocks = []
+	last_end = -1
+
 	def __init__(self, main):
 		QtGui.QGraphicsScene.__init__(self)
 		self.main = main
@@ -51,6 +64,7 @@ class MovementScene(QtGui.QGraphicsScene):
 		self.brush_selection = QtGui.QBrush(QtGui.QColor(0, 0, 255).light(186), QtCore.Qt.SolidPattern)
 		self.box_pen = QtGui.QPen(self.brush, 2, QtCore.Qt.SolidLine, QtCore.Qt.RoundCap, QtCore.Qt.RoundJoin)
 		self.select_pen = QtGui.QPen(self.brush, 1, QtCore.Qt.SolidLine, QtCore.Qt.RoundCap, QtCore.Qt.RoundJoin)
+		self.ui.graphicsView.setScene(self)
 
 		
 
@@ -60,10 +74,10 @@ class MovementScene(QtGui.QGraphicsScene):
 	def mouseReleaseEvent(self, ev):
 		if self.pressed == ev.scenePos():
 			x, y = self.get_box_coords(ev)
-			if y >= 0:
-				self.ui.instruments.setCurrentRow(y)
-				self.update()
+			if self.ui.instruments.count() == 0 or self.ui.progressions.count() == 0:
+				return
 			if x >= 0 and y >= 0:
+				self.ui.instruments.setCurrentRow(y)
 				instrument = self.ui.instruments.item(y)
 				instr = str(instrument.text()).split()
 				params = Options.parse_instrument_params(instr[1:])
@@ -107,6 +121,9 @@ class MovementScene(QtGui.QGraphicsScene):
 						del params['must_not_play']
 				
 				instrument.setText("%s { %s }" % (instr[0], " ".join([ "%s:%s" % (str(x), str(params[x])) for x in params ]) ))
+				self.update()
+			elif y >= 0:
+				self.ui.instruments.setCurrentRow(y)
 				self.update()
 
 	def get_box_coords(self, ev):
@@ -182,27 +199,35 @@ class MovementScene(QtGui.QGraphicsScene):
 		return 0
 
 	def get_progressions(self):
+		changed = 1
 		try:
-			prog = [Options.parse_progression(x) for x in self.main.get_progressions().split(",")]
-			prog_text = [ x.split()[0] for x in self.main.get_progressions().split(",")]
-			return (prog, prog_text)
+			p = self.main.get_progressions().split(",")
+			if self.last_progressions == p:
+				changed = 0
+			self.last_progressions = p
+			prog = [Options.parse_progression(x) for x in p]
+			prog_text = [ x.split()[0] for x in p]
+			return (changed, prog, prog_text)
 		except:
-			return ([], [])
+			return (1, [], [])
 
 	def get_prog_block_index(self, prog):
 		duration = int(self.ui.duration.value())
-		prog_block_index, blocks, prog_index, offset = [], [], 0, 0
+		prog_block_index, prog_index, offset = [], 0, 0
 		if len(prog) != 0:
 			if self.ui.blocks.count() == 0:
 				search_space = ["Block"]
 			else:
 				search_space = self.main.get_blocks().split(",")
+
+			if self.last_prog_block == (prog, search_space):
+				return self.last_prog_block_index
+
+			self.last_prog_block = (prog, search_space)
 			for x in search_space:
 				parts = x.split()
 				params = Options.parse_block_params(parts[1:])
-				dur = duration
-				if 'duration' in params:
-					dur = params['duration']
+				dur = params['duration'] if 'duration' in params else duration
 				for i in range(dur):
 					prog_block_index.append((offset, parts[0], prog_index))
 					prog_offset = 0
@@ -210,14 +235,16 @@ class MovementScene(QtGui.QGraphicsScene):
 						if itk != 0:
 							offset += (tk[0] - prog_offset) * len(prog[prog_index][itk - 1][1])
 						prog_offset = tk[0]
-				prog_index += 1
+				prog_index += 1 
 				if prog_index >= len(prog):
 					prog_index =0
-		return (offset, prog_block_index)
+
+		self.last_prog_block_index = (0, offset, prog_block_index)
+		return (1, offset, prog_block_index)
 
 	def paint_prog_block_index(self):
-		prog, prog_text = self.get_progressions()
-		end, prog_block_index = self.get_prog_block_index(prog)
+		progchanged, prog, prog_text = self.get_progressions()
+		indexchanged, end, prog_block_index = self.get_prog_block_index(prog)
 		IOFFSETY = self.IOFFSETY
 		BOXSIZE = self.BOXSIZE
 
@@ -226,87 +253,161 @@ class MovementScene(QtGui.QGraphicsScene):
 
 		if len(prog) <= 0:
 			self.center_text("No progressions have been added.")
+			return None
+
+		if not progchanged and not indexchanged:
 			return end
 
+		for x in self.last_blocks:
+			self.removeItem(x)
+
+		self.last_blocks = []
 		for i, x in enumerate(prog_block_index):
 			offset, name, prog_index = x
 			blockend = end
 			if i != len(prog_block_index) - 1:
 				blockend = prog_block_index[i + 1][0]
 			if name != 'R':
-				self.addLine(QtCore.QLineF(self.IOFFSETX + offset * BOXSIZE, IOFFSETY - 10, 
+				# Block lines
+				l1 = self.addLine(QtCore.QLineF(self.IOFFSETX + offset * BOXSIZE, IOFFSETY - 10, 
 					self.IOFFSETX - 5 + blockend * BOXSIZE, IOFFSETY - 10), self.box_pen)
-				self.addLine(QtCore.QLineF(self.IOFFSETX + offset * BOXSIZE, IOFFSETY - 10, 
+				l2 = self.addLine(QtCore.QLineF(self.IOFFSETX + offset * BOXSIZE, IOFFSETY - 10, 
 					self.IOFFSETX + offset * BOXSIZE, IOFFSETY - 8), self.box_pen)
-				self.addLine(QtCore.QLineF(self.IOFFSETX - 5 + blockend * BOXSIZE, IOFFSETY - 10, 
+				l3 = self.addLine(QtCore.QLineF(self.IOFFSETX - 5 + blockend * BOXSIZE, IOFFSETY - 10, 
 					self.IOFFSETX - 5 + blockend * BOXSIZE, IOFFSETY - 8), self.box_pen)
+
+				self.last_blocks += [l1, l2, l3]
+
+				# Block text
 				t = self.addText(name[:int((blockend-offset) * 2.5)], 
 					QtGui.QFont("", 12, 80))
 				t.setToolTip(name)
 				t.translate(self.IOFFSETX + BOXSIZE * offset, 3)
+				self.last_blocks.append(t)
+
+				# Progression text
 				t = self.addText(prog_text[prog_index][:int((blockend - offset) * 3)], QtGui.QFont("", 8, 40, True))
 				t.setToolTip(prog_text[prog_index])
 				t.translate(self.IOFFSETX + BOXSIZE * offset, IOFFSETY - 25)
+				self.last_blocks.append(t)
 		return end
+
+	def paint_selector(self):
+		IOFFSETY = self.IOFFSETY
+		BOXSIZE = self.BOXSIZE
+
+		sel = self.ui.instruments.currentRow()
+		if sel != self.last_sel:
+			self.last_sel = sel
+			if self.last_sel_item is not None:
+				self.removeItem(self.last_sel_item)
+
+			if sel != -1:
+				r = self.addRect(QtCore.QRectF(-1, sel * BOXSIZE + IOFFSETY - 1, self.width(), BOXSIZE - BOXSIZE / 5 + 1), self.select_pen, self.brush_selection)
+				r.setZValue(-50)
+				self.last_sel_item = r
+			else:
+				self.last_sel_item = None
 
 
 	def update(self):
 		IOFFSETY = self.IOFFSETY
 		BOXSIZE = self.BOXSIZE
-			
-		for x in self.items():
-			self.removeItem(x)
 		
 		end = self.paint_prog_block_index()
+		if end is None:
+			return
+
+		self.paint_selector()
 	
 
-		sel = self.ui.instruments.currentRow()
-		if sel != -1:
-			r = self.addRect(QtCore.QRectF(-1, sel * BOXSIZE + IOFFSETY - 1, self.width(), BOXSIZE - BOXSIZE / 5 + 1), self.select_pen, self.brush_selection)
-			r.setZValue(-50)
+		if self.last_text is not None:
+			self.removeItem(self.last_text)
+			self.last_text = None
+
 
 		instr = self.main.get_instruments()
-		if instr is not None:
-			for i, x in enumerate(instr.split(",")):
-				parts = x.split()
-				name = parts[0]
-				params = Options.parse_instrument_params(parts[1:])
-				s = self.addText(name)
-				if 'midi_instr' in params:
-					s.setToolTip(self.midi_instr.names[params['midi_instr']])
-				s.translate(0, i * BOXSIZE + IOFFSETY)
-				#if 'channel' in params:
-				#	chan = self.addText(str(params['channel']))
-				#	chan.translate(self.IOFFSETX - 50, i * BOXSIZE + IOFFSETY)
-				for n in range(end + 1):
-					plays = self.plays(params, n)
-					if plays > 0:
-						if plays == 1:
-							b = self.brush_play
-						elif plays == 2:
-							b = self.brush_must_play
+		if self.last_instr == instr:
+			return
 
-						if 'channel' in params:
-							if params['channel'] == 9:
-								if plays == 1:
-									b = self.brush_percussion
-								else:
-									b = self.brush_must_play_percussion
-					else:
-						if plays == 0:
-							b = self.brush_dont_play
+		if instr is not None:
+			old_bars = self.bars
+			bars = {}
+			instr_lst = instr.split(",")
+			instr_parts = [ x.split() for x in instr_lst ]
+			instr_name = [ x[0] for x in instr_parts]
+			for i, x in enumerate(instr_lst):
+				parts = instr_parts[i]
+
+				if not old_bars.has_key(x) or end != self.last_end or self.last_instr_names != instr_name:
+
+					bars[x] = []
+
+					# Get instrument name and parameters
+					name = instr_name[i]
+					params = Options.parse_instrument_params(parts[1:])
+
+					# Add instrument and midi instrument tooltip
+					s = self.addText(name)
+					if 'midi_instr' in params:
+						s.setToolTip(self.midi_instr.names[params['midi_instr']])
+					s.translate(0, i * BOXSIZE + IOFFSETY)
+					bars[x].append(s)
+
+					
+					for n in range(end + 1):
+						plays = self.plays(params, n)
+						if plays > 0:
+							if plays == 1:
+								b = self.brush_play
+							elif plays == 2:
+								b = self.brush_must_play
+
+							if 'channel' in params and params['channel'] == 9:
+								b = self.brush_percussion if plays == 1	else self.brush_must_play_percussion
 						else:
-							b = self.brush_must_not_play
-					a = self.addRect(QtCore.QRectF(self.IOFFSETX + n * BOXSIZE, i * BOXSIZE + IOFFSETY, BOXSIZE - BOXSIZE / 5, BOXSIZE - BOXSIZE / 5 ), self.box_pen,b)
+							if plays == 0:
+								b = self.brush_dont_play
+							else:
+								b = self.brush_must_not_play
+						a = self.addRect(QtCore.QRectF(self.IOFFSETX + n * BOXSIZE, i * BOXSIZE + IOFFSETY, BOXSIZE - BOXSIZE / 5, BOXSIZE - BOXSIZE / 5 ), self.box_pen,b)
+						bars[x].append(a)
+				else:
+					bars[x] = old_bars[x]
+					del old_bars[x]
+			for x in old_bars:
+				for y in old_bars[x]:
+					self.removeItem(y)
+			self.bars = bars
+			self.last_instr_names = instr_name
+
 		else:
 			self.center_text("No instruments have been added.")
 
-		self.ui.graphicsView.setScene(self)
+		self.last_end = end
+
 
 	def center_text(self,txt):
+		for x in self.bars:
+			for y in self.bars[x]:
+				self.removeItem(y)
+		for x in self.last_blocks:
+			self.removeItem(x)
+		if self.last_sel_item is not None:
+			self.removeItem(self.last_sel_item)
+		self.last_sel = -1
+		self.last_sel_item = None
+		self.bars = {}
+		self.last_blocks = []
+		self.last_progressions = ()
+
+		if self.last_text is not None:
+			self.removeItem(self.last_text)
+			self.last_text = None
 		t = self.addText(txt)
 		t.setTextWidth(250)
 		t.translate(self.main.size().width() / 2 - (t.textWidth() / 2), self.IOFFSETY)
+		self.last_text = t
 
 
 class ImproviserMainWindow(QtGui.QMainWindow):
