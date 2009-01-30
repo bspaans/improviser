@@ -79,7 +79,16 @@ class Instrument:
 		if not self.params['let_ring']:
 			return 1
 		if 'note_length' in self.params:
-			return self.params["note_length"]
+			maxnl = self.params['note_length']
+			if 'min_note_length' in self.params:
+				minnl = self.params['min_note_length']
+				if minnl != maxnl + 1:
+					return randrange(min(minnl, maxnl + 1), max(minnl, maxnl + 1))
+				return maxnl
+			return maxnl
+
+		if 'min_note_length' in self.params:
+			return self.params['min_note_length']
 
 		return state["ticks"] / state["meter"][1] 
 
@@ -133,12 +142,10 @@ class Instrument:
 
 		if max_notes != -1 and n is not None and n != []:
 			curn = self.len_current_notes_playing()
-			print n,
 			if curn >= max_notes:
 				n = []
 			elif curn + len(n) > max_notes:
 				n = n[:max_notes - curn]
-			print n
 		if n is not None and n != [] and max_notes != 0:
 					
 			for note in n:
