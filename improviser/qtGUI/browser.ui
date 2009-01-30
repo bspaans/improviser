@@ -95,6 +95,19 @@
     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
   </widget>
+  <widget class="QPushButton" name="newbutton" >
+   <property name="geometry" >
+    <rect>
+     <x>160</x>
+     <y>190</y>
+     <width>91</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>New</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections>

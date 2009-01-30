@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'improviser.ui'
+# Form implementation generated from reading ui file 'improviser/qtGUI/improviser.ui'
 #
-# Created: Fri Jan 30 04:14:40 2009
+# Created: Fri Jan 30 04:50:31 2009
 #      by: PyQt4 UI code generator 4.4.3
 #
 # WARNING! All changes made in this file will be lost!

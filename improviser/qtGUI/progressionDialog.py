@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'improviser/qtGUI/progression.ui'
 #
-# Created: Mon Jan 26 20:38:49 2009
+# Created: Fri Jan 30 04:50:32 2009
 #      by: PyQt4 UI code generator 4.4.3
 #
 # WARNING! All changes made in this file will be lost!

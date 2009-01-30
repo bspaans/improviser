@@ -27,10 +27,6 @@ class InstrumentDialog(QtGui.QDialog):
 			QtCore.SIGNAL("activated(int)"),
 			lambda x: self.load_instrument(self.ui.algorithm.currentText()))
 
-		self.connect(self.ui.letring, 
-			QtCore.SIGNAL("stateChanged(int)"),
-			lambda x: self.ui.noteduration.setEnabled(x))
-
 		self.connect(self.ui.buttonBox,
 			QtCore.SIGNAL("accepted()"),
 			lambda: self.save_instrument())
@@ -55,8 +51,7 @@ class InstrumentDialog(QtGui.QDialog):
 			res += "end:%d " % self.ui.stepend.value()
 		res += "max_velocity:%d min_velocity:%d " % (self.ui.maxvelocity.value(),
 				self.ui.minvelocity.value())
-		if self.ui.letring.isChecked():
-			res += "let_ring:1 note_length:%d " % self.ui.noteduration.value()
+		res += "note_length:%d " % self.ui.noteduration.value()
 		res += "}"
 		self.item.setText(res)
 
@@ -93,16 +88,10 @@ class InstrumentDialog(QtGui.QDialog):
 		else:
 			self.ui.channel.setValue(0)
 
-		if 'let_ring' in i.params and i.params["let_ring"]:
-			self.ui.letring.setChecked(True)
-			self.ui.noteduration.setEnabled(True)
-			if 'note_length' in i.params:
-				self.ui.noteduration.setValue(i.params["note_length"])
-			else:
-				self.ui.noteduration.setValue(2)
+		if 'note_length' in i.params:
+			self.ui.noteduration.setValue(i.params["note_length"])
 		else:
-			self.ui.letring.setChecked(False)
-			self.ui.noteduration.setEnabled(False)
+			self.ui.noteduration.setValue(2)
 
 		if 'midi_instr' in i.params:
 			self.ui.midi.setCurrentIndex(i.params['midi_instr'])
