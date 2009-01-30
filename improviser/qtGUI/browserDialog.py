@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'browser.ui'
 #
-# Created: Mon Jan 26 09:52:10 2009
+# Created: Fri Jan 30 05:33:46 2009
 #      by: PyQt4 UI code generator 4.4.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -43,6 +43,9 @@ class Ui_browserDialog(object):
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
+        self.newbutton = QtGui.QPushButton(browserDialog)
+        self.newbutton.setGeometry(QtCore.QRect(160, 190, 91, 27))
+        self.newbutton.setObjectName("newbutton")
 
         self.retranslateUi(browserDialog)
         QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL("rejected()"), browserDialog.reject)
@@ -53,4 +56,5 @@ class Ui_browserDialog(object):
         self.authors.setSortingEnabled(False)
         self.content.setSortingEnabled(True)
         self.update.setText(QtGui.QApplication.translate("browserDialog", "Check for Updates", None, QtGui.QApplication.UnicodeUTF8))
+        self.newbutton.setText(QtGui.QApplication.translate("browserDialog", "New", None, QtGui.QApplication.UnicodeUTF8))
 

@@ -35,6 +35,9 @@ class Browser(QtGui.QDialog):
 		self.connect(self.ui.buttonBox,
 			QtCore.SIGNAL("accepted()"),
 			self.set_item)
+		self.connect(self.ui.newbutton,
+			QtCore.SIGNAL("clicked()"),
+			self.new_item)
 
 		self.state = DEFAULT
 		self.show_defaults()
@@ -214,3 +217,6 @@ class Browser(QtGui.QDialog):
 		self.ui.update.setText("Check for Updates")
 		self.show_defaults()
 		self.ui.authors.setCurrentRow(0)
+
+	def new_item(self):
+		pass

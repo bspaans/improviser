@@ -1,6 +1,7 @@
 
 from PyQt4 import QtGui
 from Browser import Browser
+from InstrumentDialog import InstrumentDialog
 
 DEFAULT = 1
 OWN = 2
@@ -30,5 +31,15 @@ class InstrumentBrowser(Browser):
 		self.listwidget.addItem("%s" % content)
 
 
+	def new_item(self):
+		i = QtGui.QListWidgetItem()
+		id = InstrumentDialog(i)
+		id.show()
+		id.exec_()
+		if i.text() != "":
+			self.listwidget.addItem(i)
+		self.reject()
+
 		
+
 	
