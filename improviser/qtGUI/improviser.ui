@@ -579,7 +579,11 @@
          </attribute>
          <layout class="QHBoxLayout" name="horizontalLayout_3" >
           <item>
-           <widget class="QListWidget" name="blocks" />
+           <widget class="QListWidget" name="blocks" >
+            <property name="dragDropMode" >
+             <enum>QAbstractItemView::InternalMove</enum>
+            </property>
+           </widget>
           </item>
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_3" >
@@ -651,7 +655,11 @@
          </attribute>
          <layout class="QHBoxLayout" name="horizontalLayout_4" >
           <item>
-           <widget class="QListWidget" name="instruments" />
+           <widget class="QListWidget" name="instruments" >
+            <property name="dragDropMode" >
+             <enum>QAbstractItemView::InternalMove</enum>
+            </property>
+           </widget>
           </item>
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_4" >
@@ -720,7 +728,11 @@
          </attribute>
          <layout class="QHBoxLayout" name="horizontalLayout_5" >
           <item>
-           <widget class="QListWidget" name="progressions" />
+           <widget class="QListWidget" name="progressions" >
+            <property name="dragDropMode" >
+             <enum>QAbstractItemView::InternalMove</enum>
+            </property>
+           </widget>
           </item>
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_5" >

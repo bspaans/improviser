@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'improviser/qtGUI/about.ui'
 #
-# Created: Fri Jan 30 04:50:32 2009
+# Created: Fri Jan 30 06:53:38 2009
 #      by: PyQt4 UI code generator 4.4.3
 #
 # WARNING! All changes made in this file will be lost!

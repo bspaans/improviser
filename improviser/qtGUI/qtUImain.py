@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'improviser/qtGUI/improviser.ui'
+# Form implementation generated from reading ui file 'improviser.ui'
 #
-# Created: Fri Jan 30 04:50:31 2009
+# Created: Fri Jan 30 07:01:39 2009
 #      by: PyQt4 UI code generator 4.4.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -274,6 +274,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3 = QtGui.QHBoxLayout(self.tab_3)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.blocks = QtGui.QListWidget(self.tab_3)
+        self.blocks.setDragDropMode(QtGui.QAbstractItemView.InternalMove)
         self.blocks.setObjectName("blocks")
         self.horizontalLayout_3.addWidget(self.blocks)
         self.verticalLayout_3 = QtGui.QVBoxLayout()
@@ -308,6 +309,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_4 = QtGui.QHBoxLayout(self.tab_2)
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
         self.instruments = QtGui.QListWidget(self.tab_2)
+        self.instruments.setDragDropMode(QtGui.QAbstractItemView.InternalMove)
         self.instruments.setObjectName("instruments")
         self.horizontalLayout_4.addWidget(self.instruments)
         self.verticalLayout_4 = QtGui.QVBoxLayout()
@@ -342,6 +344,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_5 = QtGui.QHBoxLayout(self.tab_4)
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
         self.progressions = QtGui.QListWidget(self.tab_4)
+        self.progressions.setDragDropMode(QtGui.QAbstractItemView.InternalMove)
         self.progressions.setObjectName("progressions")
         self.horizontalLayout_5.addWidget(self.progressions)
         self.verticalLayout_5 = QtGui.QVBoxLayout()
