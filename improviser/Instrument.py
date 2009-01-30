@@ -92,7 +92,6 @@ class Instrument:
 	
 	def len_current_notes_playing(self):
 		res = 0
-		print self.playing
 		for x in self.playing:
 			res += len(x[0])
 		return res
