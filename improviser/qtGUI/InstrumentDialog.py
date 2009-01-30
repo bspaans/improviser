@@ -53,6 +53,7 @@ class InstrumentDialog(QtGui.QDialog):
 				self.ui.minvelocity.value())
 		res += "note_length:%d " % self.ui.noteduration.value()
 		res += "max_notes:%d " % self.ui.maxnotes.value()
+		res += "let_ring:1 " # for backwards compatibility
 		res += "}"
 		self.item.setText(res)
 

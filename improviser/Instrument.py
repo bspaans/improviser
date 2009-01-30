@@ -83,6 +83,20 @@ class Instrument:
 
 		return state["ticks"] / state["meter"][1] 
 
+	def get_max_simultaneous_notes(self, state):
+
+		if 'max_notes' not in self.params:
+			return -1
+		else:
+			return self.params['max_notes']
+	
+	def len_current_notes_playing(self):
+		res = 0
+		print self.playing
+		for x in self.playing:
+			res += len(x[0])
+		return res
+	
 	def set_instrument(self):
 		if not(self.midi_set) and 'midi_instr' in self.params:
 			if not self.no_fluidsynth:
@@ -91,6 +105,7 @@ class Instrument:
 			self.track.instrument.instrument_nr = self.params["midi_instr"]
 
 	def play(self, state):
+
 
 		if not(self.midi_set):
 			self.set_instrument()
@@ -101,6 +116,9 @@ class Instrument:
 		self.stop_playing_notes()
 
 		note_length = self.get_note_length(state)
+		max_notes = self.get_max_simultaneous_notes(state)
+
+				
 
 		dur = state["resolution"]
 		if state["swing"]:
@@ -112,7 +130,18 @@ class Instrument:
 		n = self.generate_note(state)
 		v = int(self.generate_velocity(state))
 		c = self.params["channel"]
-		if n is not None and n != []:
+
+
+		if max_notes != -1 and n is not None and n != []:
+			curn = self.len_current_notes_playing()
+			print n,
+			if curn >= max_notes:
+				n = []
+			elif curn + len(n) > max_notes:
+				n = n[:max_notes - curn]
+			print n
+		if n is not None and n != [] and max_notes != 0:
+					
 			for note in n:
 				note.velocity = v
 				note.channel = c
