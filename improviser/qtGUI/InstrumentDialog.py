@@ -1,5 +1,6 @@
 from instrumentDialog import Ui_instrumentDialog
 from mingus.containers.Instrument import MidiInstrument
+from mingus.core.notes import int_to_note
 from PyQt4 import QtCore, QtGui
 import Options
 import Musicians
@@ -30,6 +31,11 @@ class InstrumentDialog(QtGui.QDialog):
 		self.connect(self.ui.buttonBox,
 			QtCore.SIGNAL("accepted()"),
 			lambda: self.save_instrument())
+
+		for x in range(116):
+			self.ui.minnote.addItem("%s-%d" % (int_to_note(x % 12), x / 12 + 1))
+			self.ui.maxnote.addItem("%s-%d" % (int_to_note(x % 12), x / 12 + 1))
+
 
 	def save_instrument(self):
 		chan = self.ui.channel.value()
@@ -64,6 +70,8 @@ class InstrumentDialog(QtGui.QDialog):
 		if min_length != max_length:
 			res += "min_note_length:%d " % self.ui.minnoteduration.value()
 		res += "max_notes:%d " % self.ui.maxnotes.value()
+		res += "min_note:%d " % self.ui.minnote.currentIndex()
+		res += "max_note:%d " % self.ui.maxnote.currentIndex()
 		res += "let_ring:1 " # for backwards compatibility
 		res += "}"
 		self.item.setText(res)
@@ -122,6 +130,16 @@ class InstrumentDialog(QtGui.QDialog):
 			self.ui.maxnotes.setValue(i.params['max_notes'])
 		else:
 			self.ui.maxnotes.setValue(-1)
+
+		if 'min_note' in i.params:
+			self.ui.minnote.setCurrentIndex(i.params['min_note'])
+		else:
+			self.ui.minnote.setCurrentIndex(0)
+
+		if 'max_note' in i.params:
+			self.ui.maxnote.setCurrentIndex(i.params['max_note'])
+		else:
+			self.ui.maxnote.setCurrentIndex(115)
 
 
 

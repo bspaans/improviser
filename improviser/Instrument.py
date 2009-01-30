@@ -98,6 +98,18 @@ class Instrument:
 			return -1
 		else:
 			return self.params['max_notes']
+
+	def get_range(self, state):
+		minr = 0
+		maxr = 115
+		if 'max_note' in self.params:
+			maxr = self.params['max_note']
+		if 'min_note' in self.params:
+			minr = self.params['min_note']
+		
+		if minr > maxr:
+			return maxr + 12, minr + 12
+		return minr + 12, maxr + 12
 	
 	def len_current_notes_playing(self):
 		res = 0
@@ -125,6 +137,7 @@ class Instrument:
 
 		note_length = self.get_note_length(state)
 		max_notes = self.get_max_simultaneous_notes(state)
+		range_min, range_max = self.get_range(state)
 
 				
 
@@ -136,21 +149,30 @@ class Instrument:
 				dur = 1.0 / (1.0 / dur * (4.0 / 3.0))
 
 		n = self.generate_note(state)
+		if n is None:
+			n = []
 		v = int(self.generate_velocity(state))
 		c = self.params["channel"]
 
 
-		if max_notes != -1 and n is not None and n != []:
+		if max_notes != -1 and n != []:
 			curn = self.len_current_notes_playing()
 			if curn >= max_notes:
 				n = []
 			elif curn + len(n) > max_notes:
 				n = n[:max_notes - curn]
-		if n is not None and n != [] and max_notes != 0:
-					
-			for note in n:
+
+		newn = []
+		for note in n:
+			if int(note) >= range_min and int(note) <= range_max:
 				note.velocity = v
 				note.channel = c
+				newn.append(note)
+
+		n = newn
+
+		if n != [] and max_notes != 0:
+					
 			
 			#if self.last_bpm != state["bpm"]:
 			#	self.last_bpm = state["bpm"]
