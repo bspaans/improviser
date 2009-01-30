@@ -25,7 +25,7 @@ class ProgressionBrowser(Browser):
 		id.exec_()
 		if i.text() != "":
 			self.listwidget.addItem(i)
-		self.reject()
+			self.reject()
 
 
 		

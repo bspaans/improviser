@@ -52,6 +52,7 @@ class InstrumentDialog(QtGui.QDialog):
 		res += "max_velocity:%d min_velocity:%d " % (self.ui.maxvelocity.value(),
 				self.ui.minvelocity.value())
 		res += "note_length:%d " % self.ui.noteduration.value()
+		res += "max_notes:%d " % self.ui.maxnotes.value()
 		res += "}"
 		self.item.setText(res)
 
@@ -97,6 +98,11 @@ class InstrumentDialog(QtGui.QDialog):
 			self.ui.midi.setCurrentIndex(i.params['midi_instr'])
 		else:
 			self.ui.midi.setCurrentIndex(0)
+
+		if 'max_notes' in i.params:
+			self.ui.maxnotes.setValue(i.params['max_notes'])
+		else:
+			self.ui.maxnotes.setValue(-1)
 
 
 def combo_index_by_text(combo, text):

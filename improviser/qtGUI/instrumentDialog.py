@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'instrument.ui'
 #
-# Created: Fri Jan 30 05:22:14 2009
+# Created: Fri Jan 30 06:03:01 2009
 #      by: PyQt4 UI code generator 4.4.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -225,6 +225,7 @@ class Ui_instrumentDialog(object):
         self.label_11.setObjectName("label_11")
         self.gridLayout.addWidget(self.label_11, 13, 0, 1, 1)
         self.maxnotes = QtGui.QSpinBox(self.frame)
+        self.maxnotes.setMinimum(-1)
         self.maxnotes.setMaximum(128)
         self.maxnotes.setProperty("value", QtCore.QVariant(1))
         self.maxnotes.setObjectName("maxnotes")
