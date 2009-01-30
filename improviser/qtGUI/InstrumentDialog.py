@@ -51,8 +51,18 @@ class InstrumentDialog(QtGui.QDialog):
 			res += "end:%d " % self.ui.stepend.value()
 		res += "max_velocity:%d min_velocity:%d " % (self.ui.maxvelocity.value(),
 				self.ui.minvelocity.value())
-		res += "note_length:%d " % self.ui.noteduration.value()
-		res += "min_note_length:%d " % self.ui.minnoteduration.value()
+
+		min_length = self.ui.minnoteduration.value()
+		max_length = self.ui.noteduration.value()
+		if min_length > max_length:
+			a = min_length
+			min_length = max_length
+			max_length = a
+
+		res += "note_length:%d " % max_length
+		
+		if min_length != max_length:
+			res += "min_note_length:%d " % self.ui.minnoteduration.value()
 		res += "max_notes:%d " % self.ui.maxnotes.value()
 		res += "let_ring:1 " # for backwards compatibility
 		res += "}"
@@ -98,6 +108,8 @@ class InstrumentDialog(QtGui.QDialog):
 
 		if 'note_length' in i.params:
 			self.ui.noteduration.setValue(i.params["note_length"])
+			if 'min_note_length' not in i.params:
+				self.ui.minnoteduration.setValue(i.params["note_length"])
 		else:
 			self.ui.noteduration.setValue(1)
 
