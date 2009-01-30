@@ -255,6 +255,15 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 		self.connect(self.ui.addblockbutton,
 			QtCore.SIGNAL("clicked()"),
 			self.add_block)
+		self.connect(self.ui.instruments,
+			QtCore.SIGNAL("currentItemChanged(QListWidgetItem*, QListWidgetItem*)"),
+			lambda x,y: self.instrument_changed())
+		self.connect(self.ui.blocks,
+			QtCore.SIGNAL("currentItemChanged(QListWidgetItem*, QListWidgetItem*)"),
+			lambda x,y: self.block_changed())
+		self.connect(self.ui.progressions,
+			QtCore.SIGNAL("currentItemChanged(QListWidgetItem*, QListWidgetItem*)"),
+			lambda x,y: self.progression_changed())
 		self.connect(self.ui.addprogressionbutton,
 			QtCore.SIGNAL("clicked()"),
 			self.add_progression)
