@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>610</width>
-    <height>231</height>
+    <width>614</width>
+    <height>241</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -15,99 +15,75 @@
   <property name="modal" >
    <bool>true</bool>
   </property>
-  <widget class="QFrame" name="frame" >
-   <property name="geometry" >
-    <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>591</width>
-     <height>171</height>
-    </rect>
-   </property>
-   <property name="frameShape" >
-    <enum>QFrame::StyledPanel</enum>
-   </property>
-   <property name="frameShadow" >
-    <enum>QFrame::Raised</enum>
-   </property>
-   <widget class="QWidget" name="horizontalLayoutWidget" >
-    <property name="geometry" >
-     <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>571</width>
-      <height>151</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout" >
-     <property name="leftMargin" >
-      <number>6</number>
+  <layout class="QVBoxLayout" name="verticalLayout" >
+   <item>
+    <widget class="QFrame" name="frame" >
+     <property name="frameShape" >
+      <enum>QFrame::StyledPanel</enum>
      </property>
+     <property name="frameShadow" >
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2" >
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout" >
+        <property name="leftMargin" >
+         <number>6</number>
+        </property>
+        <item>
+         <widget class="QListWidget" name="authors" >
+          <property name="sortingEnabled" >
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QListWidget" name="content" >
+          <property name="sortingEnabled" >
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QListWidget" name="item" />
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2" >
      <item>
-      <widget class="QListWidget" name="authors" >
-       <property name="sortingEnabled" >
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QListWidget" name="content" >
-       <property name="sortingEnabled" >
+      <widget class="QPushButton" name="update" >
+       <property name="enabled" >
         <bool>true</bool>
        </property>
+       <property name="text" >
+        <string>Check for Updates</string>
+       </property>
       </widget>
      </item>
      <item>
-      <widget class="QListWidget" name="item" />
+      <widget class="QPushButton" name="newbutton" >
+       <property name="text" >
+        <string>New</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDialogButtonBox" name="buttonBox" >
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="standardButtons" >
+        <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+       </property>
+      </widget>
      </item>
     </layout>
-   </widget>
-  </widget>
-  <widget class="QPushButton" name="update" >
-   <property name="enabled" >
-    <bool>true</bool>
-   </property>
-   <property name="geometry" >
-    <rect>
-     <x>10</x>
-     <y>190</y>
-     <width>131</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <property name="text" >
-    <string>Check for Updates</string>
-   </property>
-  </widget>
-  <widget class="QDialogButtonBox" name="buttonBox" >
-   <property name="geometry" >
-    <rect>
-     <x>158</x>
-     <y>190</y>
-     <width>441</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <property name="orientation" >
-    <enum>Qt::Horizontal</enum>
-   </property>
-   <property name="standardButtons" >
-    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="newbutton" >
-   <property name="geometry" >
-    <rect>
-     <x>160</x>
-     <y>190</y>
-     <width>91</width>
-     <height>27</height>
-    </rect>
-   </property>
-   <property name="text" >
-    <string>New</string>
-   </property>
-  </widget>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections>

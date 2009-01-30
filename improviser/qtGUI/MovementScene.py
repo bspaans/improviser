@@ -119,7 +119,7 @@ class MovementScene(QtGui.QGraphicsScene):
 	def mouseDoubleClickEvent(self, ev):
 		if self.pressed == ev.scenePos():
 			x, y = self.get_box_coords(ev)
-			if y >= 0:
+			if y >= 0 and x < 0:
 				self.ui.editinstrument.click()
 		
 		self.pressed = []
@@ -331,7 +331,7 @@ class MovementScene(QtGui.QGraphicsScene):
 					bars[x].append(s)
 
 					
-					for n in range(end + 1):
+					for n in range(end):
 						plays = self.plays(params, n)
 						if plays > 0:
 							if plays == 1:
