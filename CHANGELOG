@@ -1,3 +1,9 @@
+Version 0.8.5.5:
+	* qtGUI/MainWindow.py: Added dragging and dropping support in lists
+	* qtGUI/InstrumentDialog.py: Redone GUI (added tabs). Added widgets for note ranges, bar to end on, min and max note duration and max simultaneous notes.
+	* Instrument.py, Options.py: Implemented new parameters.
+
+
 Version 0.8.5.4:
 	* qtGUI/InstrumentDialog.py: Updated gui and added new `max simulatenous notes` box.
 	* qtGUI/Browser.py, qtGUI/InstrumentBrowser.py, qtGUI/ProgressionBrowser.py: Added and connected `new` button.
