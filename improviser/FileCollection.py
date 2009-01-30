@@ -11,6 +11,8 @@ class FileCollection:
 	credentials = {}
 	progressions = []
 	instruments = []
+	songs = []
+	blocks = []
 	checkupdates = False
 	last_ID = {}
 
@@ -152,7 +154,7 @@ class FileCollection:
 		doc = Document()
 		content = doc.createElement("content")
 		doc.appendChild(content)
-		for x in self.progressions + self.instruments:
+		for x in self.progressions + self.instruments + self.songs + self.blocks:
 			prog = doc.createElement("item")
 			prog.setAttribute("id", str(x[0]))
 			prog.setAttribute("content_type", str(x[1]))
@@ -202,14 +204,24 @@ class FileCollection:
 			description = x.getElementsByTagName("description")[0].childNodes[0].data
 			content = x.getElementsByTagName("item_content")[0].childNodes[0].data
 
-			if content_type == Options.UPLOAD_PROGRESSION:
-				self.progressions.append([id, content_type, author, title, description, content])
-				if id > self.last_ID[Options.UPLOAD_PROGRESSION]:
-					self.last_ID[Options.UPLOAD_PROGRESSION] = id
 
+			lst = None
+			if content_type == Options.UPLOAD_PROGRESSION:
+				lst = self.progressions
 			elif content_type == Options.UPLOAD_INSTRUMENTS:
-				self.instruments.append([id, content_type, author, title, description, content])
-				if id > self.last_ID[Options.UPLOAD_INSTRUMENTS]:
-					self.last_ID[Options.UPLOAD_INSTRUMENTS] = id
+				lst = self.instruments
+			elif content_type == Options.UPLOAD_SONG:
+				lst = self.songs
+			elif content_type == Options.UPLOAD_BLOCKS:
+				lst = self.blocks
+			else:
+				#warning throw exception
+				break
+
+			if lst is not None:
+				lst.append([id, content_type, author, title, description, content])
+	
+				if id > self.last_ID[content_type]:
+					self.last_ID[content_type] = id
 
 
