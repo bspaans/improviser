@@ -1,3 +1,8 @@
+Version 0.8.5.4:
+	* qtGUI/InstrumentDialog.py: Updated gui and added new `max simulatenous notes` box.
+	* qtGUI/Browser.py, qtGUI/InstrumentBrowser.py, qtGUI/ProgressionBrowser.py: Added and connected `new` button.
+	* Instrument.py: Using new max simultaneous notes parameter.
+
 Version 0.8.5.3:
 	* qtGUI/qtUImain.py, qtGUI/improviser.py: Removed Visualizations
 	* Sequencer.py: Instrument (step, start, end) are now dependent on bars instead of blocks.
