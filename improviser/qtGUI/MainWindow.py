@@ -129,8 +129,12 @@ class MovementScene(QtGui.QGraphicsScene):
 	def get_prog_block_index(self, prog):
 		duration = int(self.ui.duration.value())
 		prog_block_index, blocks, prog_index, offset = [], [], 0, 0
-		if self.ui.blocks.count() > 0 and len(prog) != 0:
-			for x in self.main.get_blocks().split(","):
+		if len(prog) != 0:
+			if self.ui.blocks.count() == 0:
+				search_space = ["Block"]
+			else:
+				search_space = self.main.get_blocks().split(",")
+			for x in search_space:
 				parts = x.split()
 				params = Options.parse_block_params(parts[1:])
 				dur = duration
@@ -154,7 +158,11 @@ class MovementScene(QtGui.QGraphicsScene):
 		IOFFSET = self.IOFFSET
 		BOXSIZE = self.BOXSIZE
 
-		if len(prog) <= 0 or self.main.get_instruments() is None:
+		if self.main.get_instruments() is None:
+			return end
+
+		if len(prog) <= 0:
+			self.center_text("No progressions selected.")
 			return end
 
 		for i, x in enumerate(prog_block_index):
@@ -210,8 +218,14 @@ class MovementScene(QtGui.QGraphicsScene):
 					else:
 						b = self.brush_dont_play
 					a = self.addRect(QtCore.QRectF(200 + n * BOXSIZE, i * BOXSIZE + IOFFSET, BOXSIZE - BOXSIZE / 5, BOXSIZE - BOXSIZE / 5 ), self.box_pen,b)
+		else:
+			self.center_text("No instruments selected.")
 
 		self.ui.graphicsView.setScene(self)
+
+	def center_text(self,txt):
+		t = self.addText(txt)
+		t.translate(self.main.size().width() / 2 - (len(txt) * 4), self.IOFFSET)
 
 
 class ImproviserMainWindow(QtGui.QMainWindow):
@@ -244,8 +258,8 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 			self.ui.key.addItem(x)
 				
 
-	def wresize(self):
-		print "resize"
+	def resizeEvent(self, ev):
+		self.scene.update()
 
 	def connect_widgets(self):
 		self.connect(self,
