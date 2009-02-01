@@ -505,6 +505,7 @@ def get_sequencer(options):
 	movement = get_movement(options)
 	movement.blocks = []
 	movement.instruments = []
+	set_ensemble(options, movement)
 	set_instrument(options, movement)
 	blocks = get_blocks(options)
 	visual = get_visualization(options)
