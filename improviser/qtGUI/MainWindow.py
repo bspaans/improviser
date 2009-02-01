@@ -773,11 +773,15 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 		s = self.statusBar()
 		s.showMessage(str(msg))
 
+	def test_refresh(self):
+		pass
+
 	def start_simulation(self):
 		o = self.get_options()
 
 		try:
 			seq = Options.get_sequencer(o)
+			seq.refresh_function = self.test_refresh
 			self.ui.stopbutton.setEnabled(True)
 			self.ui.startbutton.setEnabled(False)
 			self.lastmidi = o.midifile

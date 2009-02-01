@@ -1,0 +1,57 @@
+=== IMPROVISER ===
+
+* Goede naam: Orpheus ..iets?
+* change bar length in progression editor
+* Improve chance parameter
+* Add resolution to individual instruments. 
+* Add transpose to instruments
+* Add (min, max) budget to instruments
+* Django Accompaniment Guitarist
+* Selected item should change on copy.
+* A jukebox to play imp files in succesion.
+* Fix Visualizations and add better ones.
+* Add tags to upload window.
+* Text to speech for raps?
+* Show current roman numeral in block view. 
+* Warning for empty name in progression editor.
+* Block browser
+* Song browser
+* Progressions from chords
+* Show which bar is playing
+* Add numbers (0, 4, 8, etc.) underneath bars.
+
+========
+
+* Add buffering in MovementScene *DONE*
+* Add global end to instruments *DONE*
+* Add lowest and highest note to instruments *DONE*
+* Make list items dragable. *DONE*
+* Add min note duration to instruments *DONE*
+* Meer Movements *DONE*
+* Songs inladen en opslaan *DONE*
+* opties inladen uit environment *DONE*
+* Copy/duplicate knoppen in alle tabs. *DONE*
+* preferences dialog *DONE*
+* block editor *DONE*
+* new button *DONE*
+* change title on load and save *DONE*
+* move  up, move down button *DONE*
+* edit schermen *DONE*
+* add clear, up and down and update buttons to progression editor *DONE*
+* pygame visualization? *DONE*
+* Upload dialog maken *DONE*
+* Upload progressions *DONE*
+* Upload instruments  *DONE*
+* Upload songs *DONE*
+* Upload blocks *DONE*
+* Ensembles inladen en opslaan *DONE*
+* Simpele website in php *DONE*
+* Verhuizen naar github *DONE*
+* Preferences: default folder, log niet in checkbox, *DONE*
+* Browse progressions *DONE*
+* ProgressionBrowser: link progressionlist instead of item and let ProgressionBrowser add as much progressions as needed. *DONE*
+* ProgressionBrowser: Update highest seen IDs and use this when requesting updates. *DONE*
+* ProgressionBrowser: Show on username; show own work. *DONE*
+* Improve let_ring: add max_notes_playing_at_the_same_time *DONE*
+* Maak instrument (start, step, end) afhankelijk van bars ipv block iterations. *DONE*
+
