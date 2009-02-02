@@ -371,15 +371,16 @@ class MovementScene(QtGui.QGraphicsScene):
 		if end is None:
 			return
 
+		# Paint selector and the current bar.
+		self.paint_selector()
+		self.paint_bar_selector()
+
 		# Check if instruments need to be repainted
 		instr = self.main.get_instruments()
 		if self.last_instr == instr:
 			return
 		self.last_instr = instr
 
-		# Paint selector and the current bar.
-		self.paint_selector()
-		self.paint_bar_selector()
 
 		if instr is not None:
 			old_bars = self.bars
