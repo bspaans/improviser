@@ -10,7 +10,6 @@ from IncreasingBPMWildness import IncreasingBPMWildness
 from IncreasingBPM import IncreasingBPM
 from DecreasingBPM import DecreasingBPM
 from DecreasingBPMWildness import DecreasingBPMWildness
-from ArduinoBlock import ArduinoBlock
 
 
 __all__ = ['Block', 'MutatingBlock', 
@@ -19,4 +18,4 @@ __all__ = ['Block', 'MutatingBlock',
 	'IncreasingWildness', 'DecreasingWildness', 
 	'IncreasingBPMWildness', 
 	'DecreasingBPM', 'IncreasingBPM', 
-	'DecreasingBPMWildness', 'ArduinoBlock']
+	'DecreasingBPMWildness']
