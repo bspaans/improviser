@@ -10,18 +10,21 @@ class MovementScene(QtGui.QGraphicsScene):
 	IOFFSETY = 50
 	BOXSIZE = 25
 
-	# Memoization
+	# Memoizatio
 	last_prog_block = ()
 	last_prog_block_index = ()
 	last_progressions = ()
 	last_instr = ""
 	last_instr_names = []
 	bars = {}
+	bar_texts = []
 	last_text = None
 	last_sel = -1
 	last_sel_item = None
 	last_blocks = []
 	last_end = -1
+	last_bar = -2
+	last_bar_selector = []
 
 	def __init__(self, main):
 		QtGui.QGraphicsScene.__init__(self)
@@ -38,8 +41,10 @@ class MovementScene(QtGui.QGraphicsScene):
 		self.brush_percussion = QtGui.QBrush(QtGui.QColor(255,255,0), QtCore.Qt.SolidPattern)
 		self.brush_must_play_percussion = QtGui.QBrush(QtGui.QColor(255, 255, 0).light(80), QtCore.Qt.SolidPattern)
 		self.brush_selection = QtGui.QBrush(QtGui.QColor(0, 0, 255).light(186), QtCore.Qt.SolidPattern)
+		self.brush_bar = QtGui.QBrush(QtGui.QColor(0,255,0), QtCore.Qt.SolidPattern)
 		self.box_pen = QtGui.QPen(self.brush, 2, QtCore.Qt.SolidLine, QtCore.Qt.RoundCap, QtCore.Qt.RoundJoin)
 		self.select_pen = QtGui.QPen(self.brush, 1, QtCore.Qt.SolidLine, QtCore.Qt.RoundCap, QtCore.Qt.RoundJoin)
+		self.bar_pen = QtGui.QPen(self.brush_bar, 1, QtCore.Qt.SolidLine, QtCore.Qt.RoundCap, QtCore.Qt.RoundJoin)
 		self.ui.graphicsView.setScene(self)
 
 		
@@ -231,7 +236,7 @@ class MovementScene(QtGui.QGraphicsScene):
 			self.center_text("No progressions have been added.")
 			return None
 
-		if not progchanged and not indexchanged:
+		if not progchanged and not indexchanged and self.main.get_instruments() == self.last_instr:
 			return end
 
 		for x in self.last_blocks:
@@ -245,14 +250,19 @@ class MovementScene(QtGui.QGraphicsScene):
 				blockend = prog_block_index[i + 1][0]
 			if name != 'R':
 				# Block lines
-				l1 = self.addLine(QtCore.QLineF(self.IOFFSETX + offset * BOXSIZE, IOFFSETY - 10, 
-					self.IOFFSETX - 5 + blockend * BOXSIZE, IOFFSETY - 10), self.box_pen)
-				l2 = self.addLine(QtCore.QLineF(self.IOFFSETX + offset * BOXSIZE, IOFFSETY - 10, 
-					self.IOFFSETX + offset * BOXSIZE, IOFFSETY - 8), self.box_pen)
-				l3 = self.addLine(QtCore.QLineF(self.IOFFSETX - 5 + blockend * BOXSIZE, IOFFSETY - 10, 
-					self.IOFFSETX - 5 + blockend * BOXSIZE, IOFFSETY - 8), self.box_pen)
+				x1 = self.IOFFSETX + offset * BOXSIZE
+				y1 = IOFFSETY - 10
+				y2 = self.IOFFSETY + 3 + self.ui.instruments.count() * BOXSIZE
+				width = (blockend - offset) * BOXSIZE - 5
+				height = 4
 
-				self.last_blocks += [l1, l2, l3]
+				# Paint upper block lines
+				r1 = self.addRect(QtCore.QRectF(x1, y1, width, 4), self.select_pen)
+
+				# Paint lower block lines
+				r2 = self.addRect(QtCore.QRectF(x1, y2, width, 4), self.select_pen)
+
+				self.last_blocks += [r1, r2]
 
 				# Block text
 				t = self.addText(name[:int((blockend-offset) * 2.5)], 
@@ -285,26 +295,91 @@ class MovementScene(QtGui.QGraphicsScene):
 			else:
 				self.last_sel_item = None
 
+	def paint_bar(self, bar_number):
 
-	def update(self):
-		IOFFSETY = self.IOFFSETY
-		BOXSIZE = self.BOXSIZE
-		
-		end = self.paint_prog_block_index()
-		if end is None:
+		if self.ui.instruments.count() != len(self.last_instr_names):
+			for i, x in enumerate(self.last_bar_selector):
+				if (i + 1) % 2 != 0:
+					diff = self.ui.instruments.count() - len(self.last_instr_names)
+					x.translate(0, diff * self.BOXSIZE)
+
+		if self.last_bar == bar_number:
+			return 
+
+		if self.ui.instruments.count() == 0:
+			for x in self.last_bar_selector:
+				self.removeItem(x)
+			self.last_bar_selector = []
 			return
 
-		self.paint_selector()
-	
+		delta = bar_number - self.last_bar
+		if delta not in [0, 1]:
+			for x in self.last_bar_selector:
+				self.removeItem(x)
+			self.last_bar_selector = []
+		self.last_bar = bar_number
 
+		dx = 0
+		progchanged, prog, prog_text = self.get_progressions()
+		for i,x in enumerate(self.last_prog_block_index[2]):
+			offset, name, prog_index = x
+			if bar_number == offset - 1:
+				dx = -5
+		
+		if bar_number == self.last_end - 1:
+			dx = -5
+
+		if bar_number >= self.last_end:
+			return
+
+		x = bar_number * self.BOXSIZE + self.IOFFSETX
+		y1 = self.IOFFSETY + 3 + self.ui.instruments.count() * self.BOXSIZE
+		y2 = self.IOFFSETY - 10
+		pen = self.bar_pen
+		brush = self.brush_bar
+
+		l = self.addRect(QtCore.QRectF(x, y1, self.BOXSIZE + dx, 3), pen, brush)
+		l.setZValue(-50)
+		self.last_bar_selector.append(l)
+
+		l = self.addRect(QtCore.QRectF(x, y2, self.BOXSIZE + dx, 3), pen, brush)
+		l.setZValue(-50)
+		self.last_bar_selector.append(l)
+
+	def paint_bar_selector(self):
+		self.paint_bar(self.last_bar)
+
+
+	def update(self):
+		"""Gets called everytime something might have changed."""
+		
+		# Remove status text if there is any
 		if self.last_text is not None:
 			self.removeItem(self.last_text)
 			self.last_text = None
 
+		self.paint_instruments()
 
+	def paint_instruments(self):
+
+		IOFFSETY = self.IOFFSETY
+		BOXSIZE = self.BOXSIZE
+
+		# Paint the blocks and progressions
+		# end represents the last bar
+		end = self.paint_prog_block_index()
+		if end is None:
+			return
+
+		# Check if instruments need to be repainted
 		instr = self.main.get_instruments()
 		if self.last_instr == instr:
 			return
+		self.last_instr = instr
+
+		# Paint selector and the current bar.
+		self.paint_selector()
+		self.paint_bar_selector()
 
 		if instr is not None:
 			old_bars = self.bars
@@ -312,6 +387,15 @@ class MovementScene(QtGui.QGraphicsScene):
 			instr_lst = instr.split(",")
 			instr_parts = [ x.split() for x in instr_lst ]
 			instr_name = [ x[0] for x in instr_parts]
+
+			for x in self.bar_texts:
+				self.removeItem(x)
+			self.bar_texts = []
+			for i in range(0, end, 4):
+				t = self.addText(str(i), QtGui.QFont("", 8, 40, True))
+				t.translate(self.IOFFSETX + i * BOXSIZE, self.IOFFSETY + 9 + len(instr_lst) * self.BOXSIZE)
+				self.bar_texts.append(t)
+
 			for i, x in enumerate(instr_lst):
 				parts = instr_parts[i]
 
@@ -367,10 +451,13 @@ class MovementScene(QtGui.QGraphicsScene):
 		for x in self.bars:
 			for y in self.bars[x]:
 				self.removeItem(y)
-		for x in self.last_blocks:
+		for x in self.last_blocks + self.last_bar_selector + self.bar_texts:
 			self.removeItem(x)
 		if self.last_sel_item is not None:
 			self.removeItem(self.last_sel_item)
+		self.last_bar_selector = []
+		self.bar_texts = []
+		self.last_bar = -2
 		self.last_sel = -1
 		self.last_sel_item = None
 		self.bars = {}

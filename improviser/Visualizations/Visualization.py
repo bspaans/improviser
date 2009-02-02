@@ -11,3 +11,12 @@ class Visualization:
 
 	def update_screen(self):
 		pass
+
+	def tick(self, state):
+		self.refresh_screen()
+
+	def bar_tick(self, state):
+		pass
+
+	def block_tick(self, state):
+		pass

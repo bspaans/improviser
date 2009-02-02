@@ -533,6 +533,6 @@ def get_sequencer(options):
 	seq.output_file = options.midifile
 	if visual != None:
 		seq.paint_function = visual.paint_screen
-		seq.refresh_function = visual.refresh_screen
+		seq.tick_function = visual.tick
 		seq.update_function = visual.update_screen
 	return seq

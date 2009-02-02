@@ -14,7 +14,7 @@ class Sequencer:
 	state = {}
 	iterations = 0
 	paint_function = None
-	refresh_function = None
+	tick_function = None
 	update_function = None
 	verbose = False
 	bar = -1
@@ -59,6 +59,11 @@ class Sequencer:
 
 	def bar_tick(self):
 
+		if self.verbose:
+			if self.no_fluidsynth:
+				print "|"
+			else:
+				print "-" * 80
 		self.bar += 1
 
 	def change_scale(self):
@@ -86,16 +91,12 @@ class Sequencer:
 		self.state["wild"] = self.wild
 		self.state["paint_function"] = self.paint_function
 		self.state["bpm"] = self.bpm
+		self.state["bar"] = self.bar
 
 
 	def iteration(self):
 		"""Gets called each iteration -- when self.progression """
 		"""changes or gets repeated."""
-		if self.verbose:
-			if self.no_fluidsynth:
-				print "|"
-			else:
-				print "-" * 80
 		self.iterations += 1
 		self.play_iterations -= 1
 		self.block_iteration()
@@ -148,10 +149,10 @@ class Sequencer:
 					self.bar_tick()
 				self.chord = self.chords[ self.chord_index ]
 
-				if self.refresh_function != None:
-					self.refresh_function()
 				
 				self.change_state(i)
+				if self.tick_function != None:
+					self.tick_function(self.state)
 				self.play_instruments()
 
 				if self.update_function != None:
@@ -201,7 +202,7 @@ class Sequencer:
 			'key': self.key,
 			'scale': diatonic.get_notes(self.key), 
 			'wild': self.block.get_wildness(0,0),
-			'refresh_function': self.refresh_function,
+			'tick_function': self.tick_function,
 			'paint_function': self.paint_function,
 			'update_function': self.update_function,
 			'swing': self.block.swing,

@@ -17,11 +17,12 @@
 * Block browser
 * Song browser
 * Progressions from chords
-* Show which bar is playing
-* Add numbers (0, 4, 8, etc.) underneath bars.
+* Add progress dialog to login action.
 
 ========
 
+* Show which bar is playing *DONE*
+* Add numbers (0, 4, 8, etc.) underneath bars. *DONE*
 * Add buffering in MovementScene *DONE*
 * Add global end to instruments *DONE*
 * Add lowest and highest note to instruments *DONE*

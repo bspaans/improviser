@@ -773,15 +773,12 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 		s = self.statusBar()
 		s.showMessage(str(msg))
 
-	def test_refresh(self):
-		pass
-
 	def start_simulation(self):
 		o = self.get_options()
 
 		try:
 			seq = Options.get_sequencer(o)
-			seq.refresh_function = self.test_refresh
+			seq.tick_function = self.sequencer_tick
 			self.ui.stopbutton.setEnabled(True)
 			self.ui.startbutton.setEnabled(False)
 			self.lastmidi = o.midifile
@@ -806,6 +803,9 @@ class ImproviserMainWindow(QtGui.QMainWindow):
 		self.ui.stopbutton.setEnabled(False)
 		self.ui.startbutton.setEnabled(True)
 		del self.seqthread
+
+	def sequencer_tick(self, state):
+		self.scene.paint_bar(state["bar"])
 
 
 class SequencerThread(QtCore.QThread):
