@@ -1,11 +1,11 @@
 from threading import Thread
 from os import sys
 from time import sleep
+import serial
 
 class Arduino:
 
 	def __init__(self):
-		import serial
 		self.buf = BufferedRead()
 		self.arduino = ReadArduinoUSB(self.buf)
 		self.arduino.start()
