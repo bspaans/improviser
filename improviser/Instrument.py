@@ -24,7 +24,7 @@ class Instrument:
 	must_not_play = []
 
 	midi_set = False
-	last_tick = (-1, -1) # iteration, tick
+	last_tick = (-1, -1) # iteration,tick
 	no_fluidsynth = True
 	
 	def __init__(self, parameters):
