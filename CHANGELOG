@@ -1,3 +1,6 @@
+Version 0.8.6.2:
+	* Removed last remnants of Arduino in master branch.
+
 Version 0.8.6.1:
 	*qtGUI/Browser.py: Browser layout updated
 	*qtGUI/MovementScene.py: Show which bar is playing. Added numbers beneath bars.
