@@ -1,3 +1,9 @@
+Version 0.8.6.1:
+	*qtGUI/Browser.py: Browser layout updated
+	*qtGUI/MovementScene.py: Show which bar is playing. Added numbers beneath bars.
+	*qtImproviser.py, Options.py, Instrument.py, Visualizations/DefaultVisualization.py: Updates for the new functionality + fixes.
+	*Moved Arduino code to its own branch and out of the master branch.
+
 Version 0.8.6.0:
 	* qtGUI/MainWindow.py, qtGUI/MovementScene.py: Refactored MainWindow, extracted MovementScene	
 	* Instrument.py, Options.py, qtGUI/MovementScene.py: Clicking on a bar in the GraphicsView now toggles play.
