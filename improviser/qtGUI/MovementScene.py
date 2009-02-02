@@ -228,6 +228,7 @@ class MovementScene(QtGui.QGraphicsScene):
 		indexchanged, end, prog_block_index = self.get_prog_block_index(prog)
 		IOFFSETY = self.IOFFSETY
 		BOXSIZE = self.BOXSIZE
+		self.progchanged = progchanged
 
 		if self.main.get_instruments() is None:
 			return end
@@ -236,7 +237,7 @@ class MovementScene(QtGui.QGraphicsScene):
 			self.center_text("No progressions have been added.")
 			return None
 
-		if not progchanged and not indexchanged and self.main.get_instruments() == self.last_instr:
+		if not progchanged and not indexchanged and self.ui.instruments.count() == len(self.last_instr_names):
 			return end
 
 		for x in self.last_blocks:
@@ -306,7 +307,7 @@ class MovementScene(QtGui.QGraphicsScene):
 		if self.last_bar == bar_number:
 			return 
 
-		if self.ui.instruments.count() == 0:
+		if self.ui.instruments.count() == 0 or self.ui.progressions.count() == 0:
 			for x in self.last_bar_selector:
 				self.removeItem(x)
 			self.last_bar_selector = []
@@ -377,7 +378,7 @@ class MovementScene(QtGui.QGraphicsScene):
 
 		# Check if instruments need to be repainted
 		instr = self.main.get_instruments()
-		if self.last_instr == instr:
+		if self.last_instr == instr and end == self.last_end and not self.progchanged:
 			return
 		self.last_instr = instr
 
