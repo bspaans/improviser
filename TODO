@@ -1,9 +1,6 @@
 === IMPROVISER ===
 
-* Fix synching issues in output midi files.
-* Supply some installation scripts to make installing easier.
-* Change name to Orpheus ..something? Editor?
-* Look for alternatives to the QGraphicsView (because repaints can't be forced)
+* Goede naam: Orpheus ..iets?
 * change bar length in progression editor
 * Improve chance parameter
 * Add resolution to individual instruments. 
