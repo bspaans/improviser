@@ -1,5 +1,5 @@
 from PyQt4 import QtCore, QtGui
-from qtGUI.preferencesDialog import Ui_preferencesDialog
+from qtGUI.UI.preferencesDialog import Ui_preferencesDialog
 from os import environ, path
 import urllib
 import md5

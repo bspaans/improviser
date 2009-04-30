@@ -1,6 +1,6 @@
 from PyQt4 import QtCore, QtGui
-from qtUImain import Ui_MainWindow
-from aboutDialog import Ui_aboutDialog
+from UI.qtUImain import Ui_MainWindow
+from UI.aboutDialog import Ui_aboutDialog
 from ProgressionDialog import ProgressionDialog
 from InstrumentDialog import InstrumentDialog
 from BlockDialog import BlockDialog

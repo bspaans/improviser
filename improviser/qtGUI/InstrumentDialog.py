@@ -1,4 +1,4 @@
-from instrumentDialog import Ui_instrumentDialog
+from UI.instrumentDialog import Ui_instrumentDialog
 from mingus.containers.Instrument import MidiInstrument
 from mingus.core.notes import int_to_note
 from PyQt4 import QtCore, QtGui

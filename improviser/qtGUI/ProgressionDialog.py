@@ -1,4 +1,4 @@
-from qtGUI.progressionDialog import Ui_progressionDialog
+from qtGUI.UI.progressionDialog import Ui_progressionDialog
 from PyQt4 import QtCore, QtGui
 import Options
 from mingus.core import chords

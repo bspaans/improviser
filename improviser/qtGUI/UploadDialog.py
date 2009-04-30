@@ -1,5 +1,5 @@
 from PyQt4 import QtCore, QtGui
-from qtGUI.uploadDialog import Ui_uploadDialog
+from qtGUI.UI.uploadDialog import Ui_uploadDialog
 import urllib
 import md5
 import Options

@@ -1,5 +1,5 @@
 from PyQt4 import QtCore, QtGui
-from qtGUI.blockDialog import Ui_blockDialog
+from qtGUI.UI.blockDialog import Ui_blockDialog
 from mingus.core import diatonic
 import Options
 

@@ -1,5 +1,5 @@
 from PyQt4 import QtCore, QtGui
-from qtGUI.browserDialog import Ui_browserDialog
+from qtGUI.UI.browserDialog import Ui_browserDialog
 import feedparser
 import Options
 import urllib
