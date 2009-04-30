@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
 	name="improviser",
-	version="0.8.6.2.1",
+	version="0.8.6.3",
 	description="Automatic music generation software",
 	long_description="Experiments in musical content generation.",
 	author="Bart Spaans",
@@ -13,7 +13,7 @@ setup(
 		'improviser.Musicians.Drummers', 'improviser.Musicians.Accompaniment', 
 		'improviser.Musicians.Guitarists', 'improviser.Musicians.Soloists',
 		'improviser.Progressions', 'improviser.Visualizations',
-		'improviser.Movements', 'improviser.qtGUI'],
+		'improviser.Movements', 'improviser.qtGUI', 'improviser.qtGUI.UI'],
 	classifiers = ['Development Status :: 2 - Pre-Alpha',
 			'Environment :: Console',
 			'Environment :: X11 Applications :: Qt',

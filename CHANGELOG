@@ -1,3 +1,6 @@
+Version 0.8.6.3:
+	* Moved generated Qt code into its own directory. Windows version should work again (issue #1).
+
 Version 0.8.6.2:
 	* Removed last remnants of Arduino in master branch.
 
